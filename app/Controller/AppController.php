@@ -61,7 +61,7 @@ class AppController extends Controller {
         );
         curl_setopt_array($ch, $options);
         $response = json_decode(curl_exec($ch), true); // 第2引数をtrueにすると連想配列で返ってくる
-        //curl_close($ch);
+        curl_close($ch);
         return $response;
     } 
 }
