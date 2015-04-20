@@ -1,0 +1,142 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/*-- すごろくコマ --*/
+li#start{left:0px; top:60px;}
+li#pt1{	left:144px; top:12px;}
+li#pt2{	left:296px; top:0px;}
+li#pt3{	left:444px; top:0px;}
+li#pt4{	left:608px; top:12px;}	/*中央通*/
+li#pt5{	left:784px; top:98px;}
+li#pt6{	left:800px; top:216px;}
+li#pt7{	left:744px; top:332px;}	/*上の橋*/
+li#pt8{	left:552px; top:360px;}
+li#pt9{	left:400px; top:396px;}
+li#pt10{left:232px;	top:376px;}
+li#pt11{left:72px;	top:328px;}
+li#pt12{left:16px;	top:160px;}
+li#pt13{left:184px; top:120px;}
+li#pt14{left:324px;	top:96px;}
+li#pt15{left:484px;	top:112px;}
+li#pt16{left:552px;	top:200px;}
+li#goal{left:260px;	top:232px;}
+
+
+/*-- すごろくリード線の配置と回転 --*/
+li.lead{
+	width:50px;
+	height:50px;
+}
+
+li#pt1 + li.lead{
+	background:url(../img/kentei_public_makes/ie/lead1.png) no-repeat center top;
+	width:46px;
+	height:14px;
+	top:32px;
+	left:256px;
+}
+li#pt2 + li.lead{
+	background:url(../img/kentei_public_makes/ie/lead2.png) no-repeat center top;
+	width:47px;
+	height:10px;
+	top:16px;
+	left:400px;
+}
+li#pt3 + li.lead{
+	background:url(../img/kentei_public_makes/ie/lead3.png) no-repeat center top;
+	width:47px;
+	height:14px;
+	top:32px;
+	left:560px;
+}
+li#pt4 + li.lead{
+	background:url(../img/kentei_public_makes/ie/lead4.png) no-repeat center top;
+	width:41px;
+	height:29px;
+	top:84px;
+	left:760px;
+}
+li#pt5 + li.lead{
+	background:url(../img/kentei_public_makes/ie/lead5.png) no-repeat center top;
+	width:16px;
+	height:49px;
+	top:172px;
+	left:840px;
+}
+li#pt6 + li.lead{
+	background:url(../img/kentei_public_makes/ie/lead6.png) no-repeat center top;
+	width:20px;
+	height:47px;
+	top:296px;
+	left:828px;
+}
+li#pt7 + li.lead{
+	background:url(../img/kentei_public_makes/ie/lead7.png) no-repeat center top;
+	width:46px;
+	height:23px;
+	top:400px;
+	left:708px;
+}
+li#pt8 + li.lead{
+	background:url(../img/kentei_public_makes/ie/lead8.png) no-repeat center top;
+	width:48px;
+	height:14px;
+	top:432px;
+	left:508px;
+}
+li#pt9 + li.lead{
+	background:url(../img/kentei_public_makes/ie/lead9.png) no-repeat center top;
+	width:48px;
+	height:15px;
+	top:424px;
+	left:344px;
+}
+li#pt10 + li.lead{
+	background:url(../img/kentei_public_makes/ie/lead10.png) no-repeat center top;
+	width:47px;
+	height:20px;
+	top:388px;
+	left:176px;
+}
+li#pt11 + li.lead{
+	background:url(../img/kentei_public_makes/ie/lead11.png) no-repeat center top;
+	width:36px;
+	height:37px;
+	top:300px;
+	left:60px;
+}
+li#pt12 + li.lead{
+	background:url(../img/kentei_public_makes/ie/lead12.png) no-repeat center top;
+	width:45px;
+	height:24px;
+	top:148px;
+	left:132px;
+}
+li#pt13 + li.lead{
+	background:url(../img/kentei_public_makes/ie/lead13.png) no-repeat center top;
+	width:47px;
+	height:18px;
+	top:120px;
+	left:276px;
+}
+li#pt14 + li.lead{
+	background:url(../img/kentei_public_makes/ie/lead14.png) no-repeat center top;
+	width:49px;
+	height:11px;
+	top:124px;
+	left:436px;
+}
+li#pt15 + li.lead{
+	background:url(../img/kentei_public_makes/ie/lead15.png) no-repeat center top;
+	width:44px;
+	height:26px;
+	top:172px;
+	left:584px;
+}
+li#pt16 + li.lead{
+	background:url(../img/kentei_public_makes/ie/lead16.png) no-repeat center top;
+	width:48px;
+	height:18px;
+	top:284px;
+	left:492px;
+}

@@ -1,0 +1,1571 @@
+@charset "UTF-8";
+/*top*/
+
+/*1st first*/
+#category-link-img{
+	width:30%;
+	height:20%;
+}
+#category-main{
+	font-family:Comic Sans MS;
+	color:white;
+	font-size:20px;
+	width:100%;
+	height:100%;
+	margin-top:-520px;
+	margin-left:60px;
+}
+
+
+
+/*----------- 20110928 kiyo ------------*/
+body{ 
+	background-image:none;
+	margin:0;
+	padding:0;
+}
+
+a img{
+	border:none;
+}
+
+#container{
+	position:relative;
+	width:1070px;
+	margin:0 auto;
+}
+
+#header{
+	background:url(../img/kentei_public_answers/titleBack.png) repeat top left;
+	margin:0;
+	height:24px;
+	padding:8px;
+}
+
+#status img{
+	vertical-align:text-bottom;
+}
+
+#sub{
+	float:right;
+}
+
+#view{
+	position:relative;
+	width:1000px;
+	height:619px;
+	background:url(../img/kentei_public_answers/chalkboardh.png) no-repeat center center;
+	margin:0 auto;
+}
+
+#pane{
+	position:relative;
+	margin:0 auto;
+	width:908px;
+	height:580px;
+	padding:36px 40px;
+	color:#fff;
+}
+
+#pane h3{
+	margin-top:0;
+}
+
+#pane.qmain{
+	font-size:18px;
+}
+
+/*answer_resultページ formをtwitterとfacebookの画像に変更*/
+form.postTwitter input[type=submit]{
+	background:url(../img/kentei_public_answers/postTwitter.png) no-repeat left bottom;
+	border:none; 
+	width:256px;
+	height:36px;	
+	margin-top:36px;
+	cursor:pointer;
+}
+
+form.postFacebook input[type=submit]{
+	background:url(../img/kentei_public_answers/postFacebook.png) no-repeat left bottom;
+	border:none; 
+	width:256px;
+	height:36px;	
+	margin-top:36px;
+	cursor:pointer;
+}
+
+#logout{
+	float:right;
+}
+
+/*-- topページ --*/
+ul#level{
+	list-style-type:none;
+	padding:0;
+	margin:0;
+	height:56px;
+	background:url(../img/kentei_public_answers/levelLine.png) repeat-x bottom center;
+}
+
+ul#level li{
+	float:left;
+	margin:0 7px;
+}
+
+ul#stage{ /* 3つのステージの外枠 */
+	list-style-type:none;
+	padding:0;
+	margin:0 auto;
+	padding-top:120px;
+	/*padding-top:48px;*/
+	width:840px;
+}
+
+ul#stage li{ /* ステージボタン個別 */
+	position:relative;
+	float:left;
+	margin:0 30px;
+	/margin:0 24px;
+	text-align:center;
+	color:#fff;
+	width:220px;
+	height:260px;
+}
+
+ul#stage li.create{ /* 「問題を作る」ボタン用 */
+	width:780px;
+}
+
+/*ul#stage li img:not(.disable){ 
+	width:220px;
+	height:170px;
+}*/
+
+ul#stage li p{ /* ステージ解説の書式 */
+	font-size:18px;
+	font-weight:bold;
+	margin-top:8px;
+	margin-bottom:0;
+}
+
+ul#stage li a[href=#]{ /* 選択不可能ステージの透明処理 */
+/*	opacity:0.2;
+	filter:alpha(opacity=20); /* ie < 8 */
+	/*-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=20)"; /* ie 8*/
+}
+
+img.opacity{
+	opacity:0.2;
+	filter:alpha(opacity=20); /* ie < 8 */
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=20)"; /* ie 8*/
+}
+
+img.disable{ /* 選択不可の鍵の位置と透過 */
+	display:block;
+	position:absolute;
+	top:48px;
+	left:50%;
+	margin-left:-50px;
+	opacity:0.8;
+	filter:alpha(opacity=80);
+	/*-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";*/
+}
+
+
+/*-- firstページ --*/
+h3.h3genre{
+	margin-bottom:4px;
+}
+
+ul#qtype{
+	list-style-type:none;
+	margin:0 auto;
+	padding:0;
+	background:url(../img/kentei_public_answers/levelLine.png) repeat-x bottom center;
+	width:696px;
+	height:53px;
+}
+
+ul#qtype li{
+	float:left;
+	margin:0 16px;
+	width:316px;
+	height:53px;
+}
+
+ul#qtype li.current, ul#qtype li:hover{
+	background:url(../img/kentei_public_answers/qtypeback.png) no-repeat bottom center;
+}
+
+ul#genre, ul#genreorg{ /* ジャンルボタン外枠 */
+	list-style-type:none;
+	padding:0 24px;
+	clear:both;
+}
+
+ul#genre li, ul#genreorg li{ /* ジャンルボタン個別 */
+	float:left;
+	margin-left:48px;
+	/margin-left:24px; /* for ie <= 7 */
+	margin-top:24px;
+	margin-bottom:12px;
+	text-align:center;
+}
+
+ul#genreorg li{
+	margin-top:12px;
+	margin-bottom:12px;
+	margin-left:60px;
+	/margin-left:30px; /* for ie <= 7 */
+}
+
+ul#genre li img, ul#genreorg li img{
+	margin-top:4px;
+	margin-bottom:4px;
+}
+
+ul#genre + *, ul#genreorg + *,{ /* ul#genreの次(+)の任意の要素(*) */
+	clear:both; /* 改行みたいな役割(float解除) */
+}
+
+
+/*-- ? --*/
+#category-main{
+	margin:0 auto; /* 要素のセンタリング */
+}
+
+
+/*-- バッジ --*/
+ul.col5{ /* バッジ(一段6個表示) 名前はcol5だけど役割的にはcol6 */
+	list-style-type:none;
+	padding:0;
+	width:100%;
+	height:408px;
+	overflow:hidden;
+}
+
+ul.col5 li{ /*バッジ個別 */
+	float:left;
+/*	width:156px;
+	height:186px;
+	margin:0 0 24px 24px;*/
+	width:132px;
+	height:132px;
+	margin:0 0 24px 12px;
+	text-align:center;
+	font-size:12px;
+}
+
+ul.col5 li img{ /* バッジ画像  */
+	width:75%;
+}
+
+ul#index{ /* バッジが増えたときのページ処理 外枠 */
+	list-style-type:none;
+	width:auto;
+	margin:0 auto;
+}
+
+ul#index li{ /* ページネーション 個別 */
+	float:left;
+	width:12px;
+	margin-right:0px;
+	padding:4px;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	text-align:center;
+	border:solid 1px #ccc; /* ページの外枠の色 */
+	cursor:pointer;
+}
+
+ul#index li.prev, ul#index li.next{ /* 前へ と　次へ のセル */
+	width:48px; /* 前＆次の枠の幅 */
+}
+
+ul#index li:last-child{ /* ページネーション 最後のセル */
+	margin-right:0;
+}
+
+ul#index li.num, ul#index li.current, ul#index li.prev{ /* セル間の隙間 */
+	margin:0 5px 0 0;
+}
+
+ul#index li.num:hover, ul#index li.current, ul#index li.prev:hover, ul#index li.next:hover{ /* マウスオーバー時と現在ページのセル色 */
+	background-color:#09f; /* 現在ページとマウスオーバーの背景色 */
+	color:#fff; /* 現在ページとマウスオーバーの文字色 */
+}
+
+ul#index a{ /* アンカー書式の初期化 */
+	text-decoration:none; /* リンクの下線を消去 */
+	color:#09f; /* ページの文字色 */
+}
+
+
+/*-- ランキング --*/
+#rank-main-all{
+	float:left;
+	width:45%;
+}
+
+#rank-myself{
+	float:left;
+	width:40%;
+/* 	margin-left: 600px;
+    margin-top: -200px;*/
+}
+/*
+.rank-myself-middle{
+	color:salmon;
+	font-size:50px;
+}*/
+/*#rank-myself-top{}
+#rank-myself-middle{}
+#rank-myself-bottom{}*/	
+
+ul#rankmenu{
+	list-style-type:none;
+	padding:0;
+	width:100%;
+	height:52px;
+	background:url(../img/kentei_public_answers/levelLine.png) no-repeat center bottom;
+}
+
+ul#rankmenu li{
+	float:left;
+	margin:0 40px;
+}
+
+ul#rankmenu li.current, ul#rankmenu li:hover{
+	background:url(../img/kentei_public_makes/rankback.png) no-repeat center bottom;
+}
+
+ul#ranklist{
+	list-style-type:none; /* 箇条書き頭の○を取る */
+	margin:0 0 0 60px;
+	padding:60px 0px; /* 上下の余白120px 左右の余白80px */
+	font-size:16px;
+	letter-spacing:1px; /* 文字間の隙間 */
+	line-height:24px; /* 一行の高さ */
+}
+
+li.ranklisthead{
+	margin-bottom:12px;
+	font-weight:bold;
+}
+
+div#rank-myself{
+	float:left;
+	width:408px;
+	height:384px;
+}
+
+p.myrankhead{
+	margin-top:96px;
+}
+
+ul#showmyrank{
+	position:relative;
+	list-style-type:none;
+	width:400px;
+	height:120px;
+	padding:0;
+}
+
+ul#showmyrank li{
+	float:left;
+}
+
+li.crown{
+	padding-top:42px;
+	margin-right:24px;
+}
+
+li.myrank{
+	font-family:"Reenie Beanie", cursive;
+	font-size:120px;
+	margin-right:24px;
+}
+
+li.kurai{
+	font-size:32px;
+	padding-top:46px;
+}
+
+
+
+/*-- 戻るボタン --*/
+#back, #UserFirstForm input[type=submit]{ /* 各ページの戻るボタンと 解答結果のホームに戻るボタン */
+	display:block; /* おまじない (inlineをblockに変更) */
+	position:absolute; /* 親要素基準の絶対座標で位置を決める(下のようにleft,right,top,bottomが使える) */
+	left:40px; /* div#pane の左から40pxに配置 */
+	bottom:84px; /* div#pane の下から84pxに配置 */
+	cursor:pointer;
+}
+
+#UserFirstForm input[type=submit]{ /* フォームのsubmitを画像にする */
+	background:url(../img/kentei_public_answers/backhome.png) no-repeat center center;
+	border:none; /* 線を消す */
+	width:184px;
+	height:28px;
+	cursor:pointer;
+}
+
+/*-- 解答するボタン --*/
+#UserAnswerResultForm input[type=submit]{
+	background:url(../img/kentei_public_answers/answer.png) no-repeat left bottom;
+	border:none;
+	width:128px;
+	height:48px;
+	cursor:pointer;
+}
+
+/*-- 次の問題へボタン --*/
+#UserAnswerCountUpForm input[type=submit]{
+	background:url(../img/kentei_public_answers/next.png) no-repeat left bottom;
+	border:none;
+	width:160px;
+	height:48px;
+	cursor:pointer;
+}
+
+/*-- 結果発表ボタン --*/
+#UserAnswerRecordForm input[type=submit]{
+	background:url(../img/kentei_public_answers/result.png) no-repeat left bottom;
+	border:none;
+	width:160px;
+	height:48px;
+	cursor:pointer;
+}
+
+/*-- フッター --*/
+#footer{ /* 緑色のフッター */
+	/*background-color:#ccdd44;*/
+	background-color:#ccf044;
+	position:relative;
+	z-index:10;
+	padding:8px;
+	font-size:14px;
+	height:auto;
+}
+
+#footer p, #notice p{
+	max-width:none;
+}
+
+#notice{ /* 一番下のIS研についての情報 */
+	font-size:14px;
+}
+
+#footer a, #notice a{
+	color:#666;
+}
+
+
+/*-- 文字の装飾 --*/
+span.bold{
+	font-weight:bold;
+}
+
+span.hand{ /*手書き風フォント使用 */
+	font-family:"Reenie Beanie", cursive;
+	font-size:42px;
+	line-height:24px;
+	letter-spacing:2px;
+	vertical-align:bottom;
+}
+
+/*-- 解答時の画像位置 --*/
+img.qimage{ /*問題に画像がある場合 右端に表示 */
+	float:right;
+	margin:24px;
+}
+
+
+/*-- 成績ページのレイアウト --*/
+#pane.mypage{
+	height:540px;
+	padding:32px 20px 0 24px;
+}
+
+#pane.mypage #back{ /*成績ページ戻るの位置*/
+	position:relative;
+	display:inline;
+	float:left;
+	bottom:0;
+	left:0;
+	margin-top:24px;
+}
+
+
+/*-- スクロールが必要なページ用クラス --*/
+div#scroll{
+	width:100%;
+	height:84%;
+	overflow-y:scroll;
+	overflow-x:hidden;
+}
+
+
+/*-- 時間切れの画像表示位置 --*/
+img#timeup{
+	position:absolute;
+	top:240px;
+	left:310px;
+	visibility:hidden;
+}
+
+
+/**sugawara 2nd**/
+ul#sugoroku, ul#secondlv, ul#thirdlv{
+	position:relative;
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+
+#sugoroku3{
+	background:url(../img/kentei_public_answers/second_test.png) repeat top left;
+	float:left;
+	
+	background-color: orange;
+	width:100px;
+	height:91px;
+	margin-left:10px;
+	margin-bottom: 10px;
+}
+
+#sugoroku2{
+	float:left;
+	background-color: yellow;
+	width:100px;
+	height:91px;
+	margin-left:10px;
+	margin-bottom: 10px;
+}
+
+#sugoroku1{
+	background:url(../img/kentei_public_answers/second_test3.png) repeat top left;
+	float:left;
+	background-color: red;
+	width:100px;
+	height:91px;
+	margin-left:10px;
+	margin-bottom: 10px;
+}
+
+
+/*-- secondページ --*/
+#gradesel{
+	list-style-type:none;
+	width:100%;
+	padding:0;
+	margin-top:72px;
+}
+
+#gradesel li{
+	float:none;
+	margin:0 auto;
+}
+
+#gradesel li *{
+	margin-left:0;
+	margin-right:0;
+	padding-left:0;
+	padding-right:0;
+}
+
+#gradesel li#g3{
+	width:846px;
+}
+
+#gradesel li#g2{
+	width:668px;
+}
+
+#gradesel li#g1{
+	width:312px;
+}
+
+#gradesel li#l32{
+	width:528px;
+	padding-left:72px;
+}
+
+#gradesel li#l21{
+	width:294px;
+	padding-left:128px;
+}
+
+#gradesel li a[href=#] ~ img{
+	opacity:0.2;
+	filter:alpha(opacity=20);
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=20)";
+}
+
+/*-- second stage 解答ページ --*/
+ul#goto{
+	position:absolute;
+	top:12px;
+	right:56px;
+	width:48px;
+	padding:0;
+	list-style-type:none;
+	text-align:center;
+	background-color:rgba(0,0,0,0.6);
+	font-size:18px;
+}
+
+ul#goto li{
+	margin-bottom:0px;
+	height:24px;
+}
+
+ul#goto li:last-child{
+	margin-bottom:0;
+}
+
+ul#goto li a{
+	color:#fff;
+	text-decoration:none;
+}
+
+ul#gotl li a:hover{
+	color:#999;
+}
+
+div#scroll.q100{
+	width:94%;
+	padding-right:60px;
+}
+
+span.under{
+	text-decoration:underline;
+}
+
+
+/*-- second stage 解答結果 --*/
+
+div#scroll.result100{
+	height:58%;
+}
+
+ul#result100{
+	list-style-type:none;
+	padding:0;
+	margin:0;
+	height:724px;
+	background:url(../img/kentei_public_answers/resultPartition.png) repeat-y top left;
+}
+
+ul#result100 li{
+	float:left;
+	width:72px;
+	height:114px;
+	margin:0 0 18px 0;
+	padding:0 8px 16px 8px;
+	text-align:center;
+}
+
+ul#result100 li:line{
+	width:100%;
+}
+
+ul#result100 li p{
+	margin:0;
+}
+
+ul#result100 li a{
+	color:#fff;
+}
+
+ul#result100 li a:hover{
+	color:#cff;
+}
+
+p.result{
+	margin-top:0;
+	line-height:130px;
+}
+
+p.result img{
+	vertical-align:middle;
+}
+
+/*-- second create --*/
+h2{
+	margin-top:0;
+}
+
+
+/*-- setting --*/
+ul#setting{
+	list-style-type:none;
+	padding:0;
+	height:80%;
+}
+
+ul#setting li{
+	position:relative;
+	float:left;
+	width:400px;
+	height:176px;
+	padding-top:28px;
+	padding-left:16px;
+	display:table-cell;
+	vertical-align:middle;
+}
+
+
+ul#setting li.row2{
+	position:relative;
+	padding-top:72px;
+	height:392px;
+}
+
+ul#setting li img.setpartv{
+	position:absolute;
+	top:0;
+	right:0;
+}
+
+ul#setting li img.setparth{
+	position:absolute;
+	bottom:0;
+	left:0;
+}
+
+form.setting{
+	width:304px;
+	text-align:right;
+}
+
+form.setting *{
+	margin-bottom:12px;
+}
+
+form.setting input[type=text]{
+	width:216px;
+	margin-left:16px;
+}
+
+a.alter{
+	color:#ff6;
+}
+
+a.alter + img{
+	vertical-align:bottom;
+}
+
+a.alter:hover{
+	color:#f90;
+}
+
+p.connect{
+	line-height:32px;
+	vertical-align:middle;
+}
+
+p.connect img{
+	vertical-align:middle;
+}
+
+p.connect a{
+	color:#f90;
+}
+
+a.connect{
+	color:#f90;
+	vertical-align:middle;
+}
+
+a.connect img{
+	vertical-align:middle;
+}
+
+
+/*-- 問題作成 双六 --*/
+img#sgrough{
+	text-align:center;
+	margin-left:12px;
+	margin-top:-36px;
+}
+
+
+a.complete{
+	position:relative;
+}
+
+img.clear{
+	position:absolute;
+	bottom:0;
+	left:0;
+}
+
+img.clearIcon{
+	position:absolute;
+	bottom:0;
+	left:0;
+}
+
+form legend{
+	color:#fff;
+}
+
+div.medal{
+	position:absolute;
+	display:none;
+	top:36px;
+	right:-128px;
+	width:136px;
+	height:48px;
+	padding:2px 10px;
+	background:url(../img/kentei_public_makes/sugorokuGetMedal.png) no-repeat left top;
+	z-index:2;
+}
+
+div.medal img{
+	float:left;
+	width:52px;
+}
+
+div.medal p{
+	float:left;
+	color:black;
+	margin:0;
+	font-size:12px;
+	width:6em;
+	height:4em;
+	overflow:hidden;
+}
+
+ul#sugoroku li{
+	position:absolute;
+}
+
+/*-- すごろくコマ --*/
+li#start{left:0px; top:60px;}
+li#pt1{	left:144px; top:12px;}
+li#pt2{	left:296px; top:0px;}
+li#pt3{	left:444px; top:0px;}
+li#pt4{	left:608px; top:12px;}	/*中央通*/
+li#pt5{	left:784px; top:98px;}
+li#pt6{	left:800px; top:216px;}
+li#pt7{	left:744px; top:332px;}	/*上の橋*/
+li#pt8{	left:552px; top:360px;}
+li#pt9{	left:400px; top:396px;}
+li#pt10{left:232px;	top:376px;}
+li#pt11{left:72px;	top:328px;}
+li#pt12{left:16px;	top:160px;}
+li#pt13{left:184px; top:120px;}
+li#pt14{left:324px;	top:96px;}
+li#pt15{left:484px;	top:112px;}
+li#pt16{left:552px;	top:200px;}
+li#goal{left:260px;	top:232px;}
+
+
+/*-- すごろくリード線の配置と回転 --*/
+li.lead{
+	background:url(../img/kentei_public_answers/leadShort.png) no-repeat center top;
+	width:46px;
+	height:8px;
+}
+
+li#pt1 + li.lead{
+	transform:rotate(170deg);
+	-ms-transform:rotate(170deg);
+	-moz-transform:rotate(170deg);
+	-webkit-transform:rotate(170deg);
+	top:32px;
+	left:256px;
+}
+li#pt2 + li.lead{
+	transform:rotate(180deg);
+	-ms-transform:rotate(180deg);
+	-moz-transform:rotate(180deg);
+	-webkit-transform:rotate(180deg);
+	top:16px;
+	left:400px;
+}
+li#pt3 + li.lead{
+	transform:rotate(190deg);
+	-ms-transform:rotate(190deg);
+	-moz-transform:rotate(190deg);
+	-webkit-transform:rotate(190deg);
+	top:32px;
+	left:560px;
+}
+li#pt4 + li.lead{
+	transform:rotate(215deg);
+	-ms-transform:rotate(215deg);
+	-moz-transform:rotate(215deg);
+	-webkit-transform:rotate(215deg);
+	top:84px;
+	left:760px;
+}
+li#pt5 + li.lead{
+	transform:rotate(260deg);
+	-ms-transform:rotate(260deg);
+	-moz-transform:rotate(260deg);
+	-webkit-transform:rotate(260deg);
+	top:190px;
+	left:840px;
+}
+li#pt6 + li.lead{
+	transform:rotate(290deg);
+	-ms-transform:rotate(290deg);
+	-moz-transform:rotate(290deg);
+	-webkit-transform:rotate(290deg);
+	top:312px;
+	left:828px;
+}
+li#pt7 + li.lead{
+	transform:rotate(340deg);
+	-ms-transform:rotate(340deg);
+	-moz-transform:rotate(340deg);
+	-webkit-transform:rotate(340deg);
+	top:400px;
+	left:708px;
+}
+li#pt8 + li.lead{
+	transform:rotate(355deg);
+	-ms-transform:rotate(355deg);
+	-moz-transform:rotate(355deg);
+	-webkit-transform:rotate(355deg);
+	top:432px;
+	left:508px;
+}
+li#pt9 + li.lead{
+	transform:rotate(10deg);
+	-ms-transform:rotate(10deg);
+	-moz-transform:rotate(10deg);
+	-webkit-transform:rotate(10deg);
+	top:424px;
+	left:344px;
+}
+li#pt10 + li.lead{
+	transform:rotate(20deg);
+	-ms-transform:rotate(20deg);
+	-moz-transform:rotate(20deg);
+	-webkit-transform:rotate(20deg);
+	top:388px;
+	left:176px;
+}
+li#pt11 + li.lead{
+	transform:rotate(50deg);
+	-ms-transform:rotate(50deg);
+	-moz-transform:rotate(50deg);
+	-webkit-transform:rotate(50deg);
+	top:312px;
+	left:48px;
+}
+li#pt12 + li.lead{
+	transform:rotate(160deg);
+	-ms-transform:rotate(160deg);
+	-moz-transform:rotate(160deg);
+	-webkit-transform:rotate(160deg);
+	top:148px;
+	left:132px;
+}
+li#pt13 + li.lead{
+	transform:rotate(170deg);
+	-ms-transform:rotate(170deg);
+	-moz-transform:rotate(170deg);
+	-webkit-transform:rotate(170deg);
+	top:120px;
+	left:276px;
+}
+li#pt14 + li.lead{
+	transform:rotate(185deg);
+	-ms-transform:rotate(185deg);
+	-moz-transform:rotate(185deg);
+	-webkit-transform:rotate(185deg);
+	top:124px;
+	left:436px;
+}
+li#pt15 + li.lead{
+	transform:rotate(210deg);
+	-ms-transform:rotate(210deg);
+	-moz-transform:rotate(210deg);
+	-webkit-transform:rotate(210deg);
+	top:172px;
+	left:584px;
+}
+li#pt16 + li.lead{
+	transform:rotate(350deg);
+	-ms-transform:rotate(350deg);
+	-moz-transform:rotate(350deg);
+	-webkit-transform:rotate(350deg);
+	top:284px;
+	left:492px;
+}
+
+
+/*-- 選択問題作成 --*/
+h2{
+	margin-bottom:12px;
+}
+
+div.top4{
+	position:relative;
+	width:96%;
+	height:128px;
+	margin: 0 auto 4px auto;
+	border-bottom:solid 1px rgba(255,255,255,0.3);
+	border-bottom:solid 1px #fff\9;
+	line-height:16px;
+}
+
+div.top4 p{
+	margin: 0 0 4px 0;
+}
+
+div.left4{
+	float:left;
+	width:220px;
+	height:296px;
+	border-right:solid 1px rgba(255,255,255,0.3);
+	border-right:solid 1px #fff\9;
+	margin-left:20px;
+}
+
+div.right4{
+	float:right;
+	width:580px;
+	height:332px;
+	margin-right:32px;
+}
+
+div.right4 input[type=submit]{
+	margin-top:16px;
+}
+
+div.top4 textarea{
+	font-size:14px;
+	height:3em;
+}
+
+div.left4 textarea, div.right4 textarea{
+	font-size:14px;
+	height:2.2em;
+}
+
+div.right4 textarea{
+	width:540px;
+}
+
+h4{
+	font-size:16px;
+	margin:12px 0 2px 0;
+}
+
+span.small{
+	font-size:12px;
+}
+
+span.pointrate{
+	color:#FF0;
+}
+
+form#UserMakeCheckForm div.submit input[type=submit]{
+	background:url(../img/kentei_public_makes/postq.png) no-repeat left bottom;
+	border:none;
+	width:284px;
+	height:36px;
+	cursor:pointer;
+}
+
+
+/*-- 作問履歴 --*/
+div#scroll.myqlist, div#scroll.evallist{
+	height:68%;
+}
+
+ul#type{
+	list-style-type:none;
+	margin:0;
+	padding:8px 0;
+	height:24px;
+	background:url(../img/kentei_public_answers/levelLine.png) repeat-x bottom center;
+}
+
+ul#type li{
+	float:left;
+	margin-right:24px;
+}
+
+ul#type a{
+	color:#fff;
+	text-decoration:none;
+}
+
+ul#type a:hover{
+	color:#ccc;
+}
+
+ul#type a:active{
+	color:rgba(255,255,255,0.2);
+}
+
+span.water{
+	font-size:20px;
+	color:#6cf;
+}
+
+span.green{
+	font-size:20px;
+	color:#9f0;
+}
+
+span.yellow{
+	font-size:20px;
+	color:#ff0;
+}
+
+span.magenta{
+	font-size:20px;
+	color:#f9f;
+}
+
+
+/*-- 作成履歴ボタン --*/
+input.doedit{
+	background:url(../img/kentei_public_makes/doedit.png) no-repeat top left;
+	border:none;
+	width:133px;
+	height:28px;
+	margin-top:16px;
+	cursor:pointer;
+}
+
+input.dopost{
+	background:url(../img/kentei_public_makes/dopost.png) no-repeat top left;
+	border:none;
+	width:133px;
+	height:28px;
+	margin-top:16px;
+	cursor:pointer;
+}
+
+input.doeval{
+	background:url(../img/kentei_public_evaluates/doeval.png) no-repeat top left;
+	border:none;
+	width:133px;
+	height:28px;
+	margin-top:16px;
+	cursor:pointer;
+}
+
+
+input.caneval{
+	background:url(../img/kentei_public_evaluates/caneval.png) no-repeat top left;
+	border:none;
+	width:133px;
+	height:28px;
+	margin-top:16px;
+	cursor:pointer;
+} 
+
+/*-- 問題評価ページ --*/
+ul#makeqcheck, ul#evalqcheck{
+	list-style-type:none;
+	padding:0;
+	margin-right:0;
+	margin-left:0;
+	width:100%;
+	height:360px;
+}
+
+ul#makeqcheck li, ul#evalqcheck li{
+	height:436px;
+	padding:12px;
+}
+
+li.qcheck1{
+	float:left;
+	width:376px;
+	background:url(../img/kentei_public_users/settingPartitionV.png) no-repeat right top;
+}
+
+li.qcheck1 img{
+	max-width:180px;
+	max-height:180px;
+	height:50px;
+}
+
+li.qcheck2{
+	float:left;
+	width:296px;
+	padding:12px;
+}
+
+li.qcheck3{
+	float:right;
+	width:136px;
+	background-color:rgba(0,0,0,0.5);
+}
+
+/*-- バリデーション --*/
+.error {
+	min-width:60px;
+    background-color:#FC0;
+    padding:4px;    
+    color:#000;
+    -webkit-box-shadow: #000 0 0 12px; 
+    -moz-box-shadow: #000 0 0 12px;         
+    border-radius: 5px; 
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    -o-border-radius: 5px; 
+    -khtml-border-radius: 5px; 
+	z-index:9999;
+}
+
+/* バリデーションバルーン矢印 */
+.error em {
+    border:10px solid;
+    border-color:#fc0 transparent transparent;
+    bottom:-17px;
+    display:block;
+    height:0;
+    left:10px;
+    position:absolute;
+    width:0;        
+}
+
+.error p {
+	margin:4px 0;
+}
+
+
+/* 2012/04/27 m180design kiyo */
+/* 新トップ画面 */
+ul#usermenu{
+	list-style-type:none;
+	width:924px;;
+	height:60px;
+	margin:-6px 0 0 -10px;
+	padding:0;
+	background-color:rgba(0, 0, 0, 0.5);
+}
+
+ul#usermenu li{
+	position:relative;
+	float:left;
+	width:229px;
+	height:51px;
+	margin:4px 0;
+	padding:0;
+	overflow:hidden;
+	background:none;
+	opacity:0.2;
+}
+
+ul#usermenu li:not(:first-child){
+	border-left:solid 1px #000;
+}
+
+ul#usermenu li:not(:last-child){
+	border-right:solid 1px #fff;
+}
+
+ul#usermenu li.current{
+	background:url(../img/kentei_public_users/menuCurrent.png) no-repeat center 10px;
+}
+
+ul#usermenu li img{
+	position:absolute;
+	top:-52px;
+	left:0px;
+}
+
+ul#usermenu li.en:hover img, ul#usermenu li.current img{
+	top:0px;
+}
+
+ul#usermenu li.en{
+	cursor:pointer;
+	opacity:1;
+}
+
+ul#status, ul#badge, ul#achieve, ul#edit, ul#activity{
+	position:relative;
+	float:left;
+	list-style-type:none;
+	width:262px;
+	height:318px;
+	margin:12px 16px;
+	padding:3px;
+	background:url(../img/kentei_public_users/chalkbox.png) no-repeat center top;
+}
+
+ul#status li, ul#badge li, ul#achieve li{
+	float:left;
+	width:254px;
+	height:38px;
+	padding:4px;
+}
+
+ul#status li.profL img{
+	margin:8px 0;
+}
+
+ul#status li.idimg{
+	width:84px;
+	height:84px;
+	background-color:rgba(0, 0, 0, 0.5);
+}
+
+ul#status li.name{
+	width:162px;
+	font-size:20px;
+	letter-spacing:1px;
+}
+
+ul#status li.profL{
+	width:84px;
+	padding:14px 4px;
+}
+
+ul#status li.profR{
+	width:162px;
+	text-align:center;
+	padding:14px 4px;
+}
+
+img.dis{
+	opacity:0.2;
+}
+
+ul#badge li.bdgL{
+	width:72px;
+	height:72px;
+	padding:4px 4px;
+}
+
+ul#badge li.bdgR{
+	width:162px;
+	height:72px;
+	padding:4px 4px;
+	line-height:72px;
+}
+
+ul#badge li.bdgL img{
+	width:72px;
+}
+
+ul#achieve li.rank{
+	text-align:center;
+	font-size:24px;
+}
+
+ul#achieve li.achL{
+	width:98px;
+	height:54px;
+	padding:2px 0px 2px 16px;
+	line-height:54px;
+}
+
+ul#achieve li.achR{
+	width:130px;
+	height:54px;
+	text-align:right;
+	padding:2px 16px 2px 0px;
+	line-height:54px;
+}
+
+ul#badge /*li.more,*/ ul#achieve li.more{
+	height:28px;
+	position:absolute;
+	bottom:0;
+	right:0;
+	text-align:right;
+}
+
+li.more a{
+	color:#f96;
+}
+
+li.more a:hover{
+	color:#fff;
+}
+
+li.nobadge{
+	width:100%;
+	height:240px;
+	line-height:240px;
+	text-align:center;
+}
+
+ul#status li.part, ul#achieve li.part{
+	width:100%;
+	height:4px;
+	padding:0;
+	background:url(../img/kentei_public_users/partH.png) no-repeat center top;
+}
+
+div#userpanes, div#profile, div#answer, div#make, div#evaluate{
+	float:left;
+/*	width:600px;
+	height:444px;*/
+	width:100%;
+	height:396px;
+	overflow:hidden;
+}
+
+/*プロフィール ヘッダーに表示*/
+div#profile_head{
+	position:relative;
+	float:left;
+	width:100%;
+	height:64px;
+	margin-top:12px;
+}
+
+div#profile_head li.prof_name{
+	width:160px;
+}
+
+div#profile_head li, div#achieve li, li.more{
+	list-style-type:none;
+	float:left;
+	margin:0 8px;
+}
+
+div#profile_head li.row2{
+	height:50px;
+	padding:6px;
+}
+
+div#profile_head li.grant_head{
+	margin-right:2px;
+}
+
+div#profile_head li.grant_3{
+	margin-left:2px;
+}
+
+li.grant_head img{
+	margin-top:16px;
+}
+
+li.grant_3 img{
+	width:39px;
+	height:39px;
+	margin-top:8px;
+}
+
+img.chalk_head{
+	width:892px;
+	height:4px;
+	opacity:0.7;
+}
+
+/*コメント スクロール表示 */
+div#prof_footer{
+	position:relative;
+	float:left;
+	width:100%;
+	height:32px;
+	margin-top:12px;
+}
+
+li.footerl{
+	list-style-type:none;
+	float:left;
+	padding:0 8px;
+}
+
+li.footerr{
+	list-style-type:none;
+	float:right;
+	padding:0 8px;
+}
+	
+div#prof_footer div#commentline{
+	position:absolute;
+	left:128px;
+	bottom:0;
+	width:620px;
+	height:32px;
+	overflow:hidden;
+	margin:0;
+}
+
+div#commentline ul.comments{
+	list-style-type:none;
+	padding:0;
+	margin:0;
+	height:32px;
+}
+
+ul.comments li{
+	float:left;
+	margin:0 80px 0 0;
+	padding:0;
+	height:32px;
+}
+
+/* 解答・作文・評価それぞれのページ */
+div#answer, div#make, div#evaluate{
+	display:none;
+}
+
+ul.stage{
+	position:relative;
+	list-style-type:none;
+	width:auto;
+	height:240px;
+	margin:60px auto 0 auto;
+	padding:0;
+}
+	
+ul.stage li{
+	position:/*absolute*/relative;
+	width:192px;
+	margin:0 52px;
+	text-align:center;
+	
+	float:left;
+}
+
+/*ul.stage li:first-child{
+	margin-left:0;
+}*/
+
+div#answer ul.stage li img{
+	width:100%;
+}
+
+div#make ul.stage li img{
+	width:96%;
+}
+
+/*
+ul.stage li.fst{
+	top:0;
+	left:0;
+}
+
+ul.stage li.trd{
+	top:0;
+	right:0;
+}
+
+ul.stage li.snd{
+	bottom:0;
+	left:50%;
+	margin:-96px;
+}
+*/
+
+ul.stage li p{
+	width:100%;
+	text-align:center;
+	font-weight:bold;
+	margin:0;
+	
+}
+
+div#evaluate ul#type{
+	margin-top:22px;
+}

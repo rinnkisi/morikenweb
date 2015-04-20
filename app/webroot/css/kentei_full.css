@@ -1,0 +1,104 @@
+/* ==================== ���C�A�E�g ==================== */ 
+#container	{width: 100%;
+	margin: auto;}
+	
+#main	{width: 100%;
+	float: left;
+	margin-right: -200px;}
+ 
+#content	{width: 100%;
+	float: right;
+	margin: 30px 0;
+	margin-left: -200px;}
+ 
+#content_inner	{margin-left: 230px;
+	margin-right: 230px;}
+ 
+#sidebar01	{width: 200px;
+	float: left;
+	margin: 30px 0;}
+ 
+#sidebar02	{width: 200px;
+	float: right;
+	margin: 30px 0;}
+ 
+#foot	{clear: both;}
+ 
+/* ==================== �w�b�_�[ ==================== */
+ 
+#header	{width: 100%;
+	height: 135px;
+	//background-image: url(moriken_logo.gng);
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	text-align: right;
+	border: solid 1px gray;}
+ 
+#header_inner	{padding: 20px;}
+ 
+#header h1	{margin: 0;
+	font-size: 2em;
+	font-family: Verdana, Helvetica, sans-serif;}
+ 
+#header p	{margin: 0;
+	margin-top: 8px;
+	font-size: 1em;}
+ 
+ 
+/* ==================== �R���e���c ==================== */
+ 
+.post	{width: auto;}
+ 
+.post h2	{font-size: 1em;
+	margin: 0;
+	margin-bottom: 15px;
+	background-color: #ded217;
+	line-height: 32px;
+	padding-left: 10px;}
+ 
+.posttext	{font-size: 0.875em;
+	line-height: 1.5}
+ 
+.posttext p	{margin: 0;
+	margin-bottom: 20px;}
+ 
+ 
+/* ==================== �T�C�h�o�[ ==================== */
+ 
+.menu	{width: auto;
+	overflow: hidden;}
+ 
+.menu li	{margin-bottom: 0;
+	list-style-type: none;
+	line-height: 0;
+	border-bottom: solid 1px #ffffff;}
+ 
+.menu li a	{display: block;
+	line-height: 30px;
+	padding-left: 10px;
+	background-color: #719a18;
+	color: #ffffff;
+	font-size: 0.75em;
+	text-decoration: none;}
+ 
+.menu li a:hover	{background-color: #0ce0c0}
+ 
+.menu ul	{margin: 0;
+	padding: 0;
+	border-top: solid 1px #ffffff;}
+	
+.menu_inner	{padding: 20px;
+	font-size:12px;
+	border: solid 2px #b8e964;}
+ 
+/* ==================== �t�b�^�[ ==================== */
+ 
+#footer	{width: auto;
+	border-top: solid 5px #719a18;
+	padding-top: 10px;
+	padding-bottom: 20px;}
+ 
+#footer p	{color: #000000;
+	font-size: 0.75em;
+	margin: 0;}
+ 

@@ -1,0 +1,81 @@
+
+/* Not required for Tabs, just to make this demo look better... */
+body, h1, h2 {
+	font-family: "Trebuchet MS", Trebuchet, Verdana, Helvetica, Arial, sans-serif;
+}
+h1 {
+	margin: 1em 0 1.5em;
+	font-size: 18px;
+}
+h2 {
+	margin: 2em 0 1.5em;
+	font-size: 16px;
+}
+p {
+	margin: 0;
+	padding: 0 0 .5em;
+	/*max-width: 40em;*/
+}
+#header{
+	background:url(../../img/kentei_public_answers/titleBack.png) repeat top left;
+	margin-bottom:-30px;
+	padding-top:10px;
+	font-size: 0px;
+}
+#left{
+	width:500px;
+	float:left;
+}
+#right{
+	width:200px;
+	float:left;   
+}
+/*#footer{
+	background-color: HoneyDew;
+	width:100%;
+	clear:left;
+	height: 150px;
+}*/
+#container {
+	position:relative;
+	width:1070px;
+	margin:0 auto;
+}
+#main{
+	width:100%;
+	clear:left;
+	height: 500px;
+}
+img.center1{
+	text-align:center;
+}
+#inleft{
+	width:600px;
+	float:left;
+}
+#inright{
+	width:300px;
+	float:left;
+	margin-left: 10px;
+	margin-top: 90px; 
+}
+#footleft{
+	width:300px;
+	float:left;
+}
+#footright {
+	border: 2px solid #B8E964;
+	float: left;
+	font-size: 22px;
+	margin-top: 10px;
+	width: 720px;
+}
+
+/* 2013/10/11
+	important 追加 
+	jQuery-ui 導入して文字色変わったため。
+	@author furudate
+*/
+a.newsLink{/*リンクが見づらかったので*/
+	color: #FF9900 !important;
+}
