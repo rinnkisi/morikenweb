@@ -5,7 +5,7 @@
 	echo $this->Form->create('csv', array( 'type'=>'> text', 'enctype' => 'multipart/form-data', 'url'=>'/makes/make3'));
 ?>
 <input type="hidden" name="ID" value="1"></input>
-	[選択式問題作成] *は必須です記述式問題作成に切替</BR>
+	[記述式問題作成] *は必須です記述式問題作成に切替</BR>
 	カテゴリ*
 	<select id="ID" name="データ１" required="requied">
 		<option value=""></option>
@@ -27,36 +27,14 @@
 	</BR>
 	<textarea id="ProblemSentence" name = "mondai" cols="90" rows="2"></textarea>
 	</BR>
-選択肢の設定*
-	</BR>
+解答*
 	<p>
-１<textarea id="ProblemSentence" name = "choice1"rows="2" cols="90"></textarea>
+<textarea id="ProblemSentence" name = "choice1"rows="2" cols="90"></textarea>
 	</p>
 	<p>
-２<textarea id="ProblemSentence" name = "choice2"rows="2" cols="90"></textarea>
+その他の解答<textarea id="ProblemSentence" name = "choice2"rows="2" cols="90"></textarea>
 	</p>
-	<p>
-３<textarea id="ProblemSentence" name = "choice3"rows="2" cols="90"></textarea>
-	</p>
-	<p>
-４<textarea id="ProblemSentence" name = "choice4"rows="2" cols="90"></textarea>
-	</p>
-正解番号*
-<select id="ProblemAnswerChoice" name="answerChoice" required="required">
-    <option value=""></option>
-    <option value="1">
-        1
-    </option>
-    <option value="2">
-        2
-    </option>
-    <option value="3">
-        3
-    </option>
-    <option value="4">
-        4
-    </option>
-</select>
+
 </BR>
     写真を載せる場合は以下から登録 (200kb以下、JPEG および PNG画像)
 <input id="ProblemImage" type="file" name="image"></input>
