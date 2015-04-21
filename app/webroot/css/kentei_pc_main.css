@@ -1,0 +1,121 @@
+/***外側***/
+#all{
+	width:100%;
+	height:500px;
+	margin-left:auto;
+	margin-right:auto;
+	//border: medium outset Silver;
+	//font-size:20px;
+}
+#header{
+	border: thin dashed activecaption;
+  //  text-align: center;
+    width: 99%;
+	background-color: MintCream;
+}
+#content{
+	text-align:center;
+}
+#container{//スライド部分
+	height:600px;
+	width:100%;
+}
+#footer{
+	float: left;
+    margin-top: 40px;
+    width: 100%;
+}
+img.top{
+ width:200px;
+ height:60px;
+ text-align:left;
+}
+/**内側**/
+#left{
+//	width:300px;
+ 	float:left;
+	text-align:center;
+}
+img.map{
+	width:200px;
+ 	float:left;
+}
+
+#right {
+    border: medium outset Silver;
+    float: left;
+    font-size: 12px;
+    text-align: center;
+    width: 600px;
+}
+#assess{
+	width:300px;
+ 	float:left;
+	text-align:center;
+}
+/*findアクションで指定*/
+#number{
+    float: left;
+    font-weight: bolder;
+    width: 100%;
+}
+#sentence{
+	float: left;
+	font-size:14px;
+    width: 500px;
+}
+#choice{
+    float: left;
+    text-align: left;
+    width: 400px;
+}
+#answer{
+	float: left;
+    width: 400px;
+}
+#next{
+	float:left;
+	width:100%;
+}
+#findCategory{
+//	background-color:red;
+}
+
+#findKeyword{
+//	background-color:red;
+}
+#findTagging{
+//	background-color:red;
+}
+
+/**discussionアクション **/
+#innerTop{
+	float: left;
+    width: 100%;
+	margin-bottom: 20px;
+}
+#innerLeft{
+	border: medium outset Silver;
+	float: left;
+    width: 38%;
+}
+#innerRight{
+	float: left;
+    width: 60%;
+}
+#innerBottom{
+		background-color: MintCream;
+	float: left;
+    width: 100%;
+}
+/*twitter風*/
+.speech-bubble p { position : relative; padding : 20px; color : #000; width : 80%; margin : 1px auto 0; /* css3 */ -webkit-border-radius : 10px 32px 32px 10px; -moz-border-radius : 10px 32px 32px 10px; border-radius 32px 32px 10px: 10px; background-color: #87e0fd; background-image: -moz-linear-gradient(top,#87e0fd 0%, #53cbf1 40%, #05abe0 100%); /* FF3.6 */ background-image:-o-linear-gradient(top, #87e0fd 0%, #53cbf1 40%, #05abe0 100%); /* Opera11.10+ */ background-image: -webkit-gradient(linear,left top,leftbottom,from(#87e0fd),color-stop(0.4, #53cbf1),to(#05abe0)); /* Saf4+, Chrome*/ background-image: -webkit-linear-gradient(top, #87e0fd 0%, #53cbf1 40%,#05abe0 100%); /* Chrome 10+, Saf5.1+ */ background-image:linear-gradient(top, #87e0fd 0%, #53cbf1 40%, #05abe0 100%); filter:progid:DXImageTransform.Microsoft.gradient(startColorStr='#87e0fd',EndColorStr='#53cbf1'); /* IE6-IE9 */} /* 三角形部分 */ .speech-bubble p:after { content : ""; position : absolute; bottom : -30px; /*三角形の上下位置*/ left : 50px;　/*三角形の左右位置*/ right : auto; width : 0; height : 0; border-width : 15px 15px 15px 15px; border-style : solid; border-color : #05abe0 transparent transparent transparent; } .speech-bubble.top p:after { top : -30px; /*三角形の上下位置*/ right : 50px;　/*三角形の左右位置*/ border-width : 15px 15px 15px 15px; border-color : transparent transparent #87e0fd transparent; } .speech-bubble.right p:after { top : 10px; /*三角形の上下位置*/ left : -30px;　/*三角形の左右位置*/ border-width : 15px 15px 15px 15px; border-color : transparent #47c6ee transparent transparent; }
+#image{
+ width:10%;
+ float:left;
+ margin-right:1%;
+}
+#tweet{
+ width:89%;
+ float:left;
+}
