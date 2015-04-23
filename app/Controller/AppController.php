@@ -50,7 +50,7 @@ class AppController extends Controller {
  */
     public function api_rest($method, $uri, $query = null, $data = null){
         $ch = curl_init();
-        $basic_url = "http://localhost/LK_API/";
+        $basic_url = "http://sakumon.jp/app/LK_API/";
         $options = array(
             CURLOPT_URL => $basic_url.$uri.'?'.$query,
             CURLOPT_HEADER => false,
