@@ -12,6 +12,15 @@ class MakesController extends AppController {
                 $this->set('sbctInfo',"サブカテゴリ"); //連プル
                 $ptData = "ポイントに関する情報"; //ポイントに関する情報
                 $this->set('rate',1); //ポイントのレート情報
+                //api_rest($method, $uri, $query = null, $data = null)
+                $name = array("kentei_id"=>1,"user_id"=>1);
+
+                $url = $this->api_rest("POST","problems/add.json","",$name);
+                //$url = 'http://sakumon.jp/app/LK_API/evaluateComments/index.json';
+                //$url = json_decode($url,true);
+                             //APIの実行
+                //var_dump($url);
+                debug($url);
         }
         function make1(){//記述式作問入力
             //APIができたら差し替える
