@@ -31,5 +31,37 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-	public $components = array('DebugKit.Toolbar'); // この行を追加
+    public $components = array('DebugKit.Toolbar');
+    public $helpers = array(
+      'Session',
+//      'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),
+//      'Form' => array('className' => 'TwitterBootstrap.BootstrapForm'),
+//      'Paginator' => array('className' => 'TwitterBootstrap.BootstrapPaginator'),
+    );
+
+/**
+ * request login API
+ *
+ * @param $method GET or POST or PUT or DELETE
+ * @param $uri json file name(Example Users.json, Problems.json)
+ * @param $query If GET method, set query or null
+ * @param $data data for push to api or null
+ * @return $response response data from api
+ */
+    public function api_rest($method, $uri, $query = null, $data = null){
+        $ch = curl_init();
+        $basic_url = "http://sakumon.jp/app/LK_API/";
+        $options = array(
+            CURLOPT_URL => $basic_url.$uri.'?'.$query,
+            CURLOPT_HEADER => false,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 120, // タイムアウトは2分にしています
+            CURLOPT_CUSTOMREQUEST => $method,
+            CURLOPT_POSTFIELDS => http_build_query($data), // URLエンコードして application/x-www-form-urlencoded でエンコード。URLエンコードしないとmultipart/form-dataになる
+        );
+        curl_setopt_array($ch, $options);
+        $response = json_decode(curl_exec($ch), true); // 第2引数をtrueにすると連想配列で返ってくる
+        curl_close($ch);
+        return $response;
+    } 
 }
