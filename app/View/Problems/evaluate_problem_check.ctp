@@ -4,6 +4,7 @@
 	echo $this->Form->create('Problems',array(
 		'type' => 'post',
 		'action' => 'evaluate_pre_check',
+		// 'action' => 'index'
 	));
 	// 評価項目とチェック・コメントフォームのリスト
 	foreach ($data['evaluate_items']['response']['EvaluateItems'] as $key => $value) {
@@ -29,7 +30,7 @@
 		echo $this->html->tag('hr');
 		echo $this->html->tag('br');
 	}
-	echo $this->Form->input("problem.id",array(
+	echo $this->Form->input("Problem_info.id",array(
 		'type'	=> 'hidden',
 		'value'	=> $data['problem_id']
 		));

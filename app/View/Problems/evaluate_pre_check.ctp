@@ -3,12 +3,15 @@
 <?php
 echo $this->Form->create('Problems',array(
 	'type' => 'post',
-	'action' => 'evaluate_add_check',
+	// 'action' => 'evaluate_add_check',
+	'action' => 'index'
 ));
 ?>
 
 <table>
-	<?php foreach ($arrange_eval_data as $item_id => $eval_value): ?>
+	<?php foreach ($arrange_eval_data['Problems'] as $item_id => $eval_value): ?>
+		<?php //debug($item_id); ?>
+		<?php //debug($eval_value); ?>
 	<tr>
 		<td rowspan="4">
 			<?php echo 'No '.'['.$eval_value['row_num'].'] '; ?>
@@ -48,6 +51,10 @@ echo $this->Form->create('Problems',array(
 </table>
 
 <?php
+	echo $this->Form->input("Problem_info.id",array(
+		'type'	=> 'hidden',
+		'value'	=> $arrange_eval_data['Problem_info']['id']
+		));
 	echo $this->Form->submit('確定する');
 ?>
 
