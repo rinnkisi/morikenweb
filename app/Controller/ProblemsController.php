@@ -3,17 +3,7 @@ class ProblemsController extends AppController{
 	public $name = "Problems";
 	public $uses = array('Evaluate');
 	public function index(){
-		// $this->redirect('problem_show');
-		// $result = $this->api_rest('POST','evaluateComments/add.json',null,'evaluate_item_id=1&problem_id=1&user_id=1&evaluate_comment=いのうえ');
-		// $this->set('data',$result);
-		// $data['evaluate_item_id'] = 1;
-		// $data['problem_id'] = 1;
-		// $data['user_id'] = 1;
-		// $data['evaluate_comment'] = 'いのうえ';
-
-		$data = $this->api_rest('GET','evaluateComments/index.json','user_id=7',array());
-
-		$this->set('data',$data);
+		$this->redirect('problem_show');
 	}
 	// ユーザが作問した問題を一覧表示
 	public function problem_show(){
@@ -48,23 +38,19 @@ class ProblemsController extends AppController{
 		$eval_data = $this->request->data;
 		foreach ($eval_data['Problems'] as $eval_id => $eval_value) {
 			// user_idは、後でログイン機能から受け取る
-			// $add_api_pram = 'evaluate_item_id='.$eval_key.
-			// 				'&problem_id='.$problem_id.
-			// 				'&user_id=1'.
-			// 				'&evaluate_comment='.$value['comment'];
-
-			$add_api_pram[$eval_id] = 'evaluate_item_id='.$eval_id.
-							'&problem_id='.$eval_data['Problem_info']['id'].
-							'&user_id=7'.
-							'&evaluate_comment='.$eval_value['comment'];
-			$result[$eval_id] = $this->api_rest('POST','evaluateComments/add.json',array(),$add_api_pram[$eval_id]);
+			$add_api_pram[$eval_id]['evaluate_item_id'] = $eval_id;
+			$add_api_pram[$eval_id]['problem_id'] = $eval_data['Problem_info']['id'];
+			$add_api_pram[$eval_id]['user_id'] = 7;
+			$add_api_pram[$eval_id]['evaluate_comment'] = $eval_value['comment'];
+						
+			$result[$eval_id] = $this->api_rest('POST','evaluateComments/add.json',null,$add_api_pram[$eval_id]);
 		}
 		// $this->set('data',$add_api_pram);
 		$this->set('data',$result);
-		// $this->set('data',$this->request->data);
+		$this->redirect('problem_show');
 	}
 	// 評価履歴表示
-	public function evaluate_record(){
+	public function evaliuate_record(){
 		$eval_record = $this->api_rest('GET','evaluateComments/index.json','user_id=7',array());
 		$arrange_eval_data = $this->Evaluate->eval_record_arrange($eval_record);
 		// $this->set('arrange_eval_data',$arrange_eval_data);
