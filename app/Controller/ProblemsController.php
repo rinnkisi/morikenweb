@@ -56,14 +56,5 @@ class ProblemsController extends AppController{
 		// $this->set('arrange_eval_data',$arrange_eval_data);
 		$this->set('arrange_eval_data',$arrange_eval_data);
 	}
-
-	// public function evaluate(){
-	// 	$data['judge_flg'] = $this->ApiMakingQuestion->evaluate_judge($this->request->data);
-	// 	$data['question_id'] = $this->request->data['question']['id'];
-	// 	$data['question'] = $this->ApiMakingQuestion->findById($data['question_id']);
-	// 	$this->set('data',$data);
-	// 	// question.id
-	// 	// $this->set('data',$this->request->data);
-	// }
 }
 ?>
