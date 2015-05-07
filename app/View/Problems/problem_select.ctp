@@ -27,15 +27,16 @@
 		<option value="選択肢3">選択肢3</option>
 	</select>
 	*/
-	var_dump($data_category);
+	debug($data_subcategory);
+	foreach ($data_category as $key => $value) {
+		# code...
+	}
 	echo "[この投稿で◯ポイント獲得] / サブカテゴリ";
 	echo $this->Form->input('カテゴリ', array(
-		'name' =>'category',
-	    'options' => array(1, 2, 3, 4, 5),
+	    'options' => array($data_category[0], $data_category[1], $data_category[2], $data_category[3], $data_category[4],$data_category[5],$data_category[6],$data_category[7]),
 	    'empty' => ''
 	));
 	echo $this->Form->input('サブカテゴリ', array(
-		'name' =>'subcategory',
 	    'options' => array(1, 2, 3, 4, 5),
 	    'empty' => ''
 	));
@@ -48,7 +49,6 @@
 	echo $this->Html->para(null, "誤答選択肢２".$this->Form->textarea('wrong_answer2'));
 	echo $this->Html->para(null, "誤答選択肢３".$this->Form->textarea('wrong_answer3'));
     echo "写真を載せる場合は以下から登録 (200kb以下、JPEG および PNG画像)";
-    echo $this->Html->image('cake_logo.png', array('alt' => 'CakePHP'));
     echo $this->Form->input('',array(
     'type' => 'file',
     'name' => 'image'
