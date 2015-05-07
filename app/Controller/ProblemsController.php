@@ -32,7 +32,7 @@ class ProblemsController extends AppController{
 		$arrange_eval_data['Problem_info']['id'] = $eval_cont['Problem_info']['id']; 
 		$this->set('arrange_eval_data',$arrange_eval_data);
 	}
-	// 評価登録
+	// 評価登録機能
 	public function evaluate_add_check(){
 		// ログイン機能とは未連結、ユーザIDはダミー
 		$eval_data = $this->request->data;
