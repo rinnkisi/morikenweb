@@ -6,11 +6,11 @@ class ProblemsController extends AppController{
 		$this->redirect('problem_show');
 	}
 	// ユーザが作問した問題を一覧表示
-	public function problem_show(){
+	public function evaluate_problem_show(){
 		// 非公開問題
 		$priv_api_pram = 'kentei_id=3&employ=0&public_flag=0&category_id=0&item=100';
 		$show_obj['priv'] = $this->api_rest('GET','problems/index.json',$priv_api_pram,array());
-		
+
 		// 公開問題
 		$publ_api_pram = 'kentei_id=3&employ=0&public_flag=1&category_id=0&item=100';
 		$show_obj['publ'] = $this->api_rest('GET','problems/index.json',$publ_api_pram,array());
@@ -29,7 +29,7 @@ class ProblemsController extends AppController{
 	public function evaluate_pre_check(){
 		$eval_cont = $this->request->data;
 		$arrange_eval_data['Problems'] = $this->Evaluate->eval_cont_arrange($eval_cont);
-		$arrange_eval_data['Problem_info']['id'] = $eval_cont['Problem_info']['id']; 
+		$arrange_eval_data['Problem_info']['id'] = $eval_cont['Problem_info']['id'];
 		$this->set('arrange_eval_data',$arrange_eval_data);
 	}
 	// 評価登録機能
@@ -42,7 +42,7 @@ class ProblemsController extends AppController{
 			$add_api_pram[$eval_id]['problem_id'] = $eval_data['Problem_info']['id'];
 			$add_api_pram[$eval_id]['user_id'] = 7;
 			$add_api_pram[$eval_id]['evaluate_comment'] = $eval_value['comment'];
-						
+
 			$result[$eval_id] = $this->api_rest('POST','evaluateComments/add.json',null,$add_api_pram[$eval_id]);
 		}
 		// $this->set('data',$add_api_pram);
