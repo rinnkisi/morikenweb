@@ -3,7 +3,9 @@ class ProblemsController extends AppController{
 	public $name = "Problems";
 	public $uses = array('Evaluate');
 	public function index(){
-		$this->redirect('problem_show');
+		// $this->redirect('problem_show');
+		$this->set('test',$this->request->data);
+		// $this->set('test',"test");
 	}
 	// ユーザが作問した問題を一覧表示
 	public function evaluate_problem_show(){
@@ -27,10 +29,25 @@ class ProblemsController extends AppController{
 	}
 	// 登録前に評価・コメントの内容を確認
 	public function evaluate_pre_check(){
+		// $evaluate_content = $this->request->data;
+		// $arrange_evaluate_data['Problems'] = $this->Evaluate->evaluate_content_arrange($evaluate_content);
+		// $arrange_evaluate_data['Problem_info']['id'] = $evaluate_content['Problem_info']['id'];
+		// $this->set('arrange_evaluate_data',$arrange_evaluate_data);
+
 		$eval_cont = $this->request->data;
 		$arrange_eval_data['Problems'] = $this->Evaluate->eval_cont_arrange($eval_cont);
 		$arrange_eval_data['Problem_info']['id'] = $eval_cont['Problem_info']['id'];
 		$this->set('arrange_eval_data',$arrange_eval_data);
+
+		// if($this->Evaluate->validates()){ //エラーがなければ
+		// 	$eval_cont = $this->request->data;
+		// 	$arrange_eval_data['Problems'] = $this->Evaluate->eval_cont_arrange($eval_cont);
+		// 	$arrange_eval_data['Problem_info']['id'] = $eval_cont['Problem_info']['id'];
+		// 	$this->set('arrange_eval_data',$arrange_eval_data);
+		// }else{
+		// 		$this->render('evaluate_problem_check');
+		// }
+
 	}
 	// 評価登録機能
 	public function evaluate_add_check(){
@@ -47,7 +64,7 @@ class ProblemsController extends AppController{
 		}
 		// $this->set('data',$add_api_pram);
 		$this->set('data',$result);
-		$this->redirect('problem_show');
+		$this->redirect('evaluate_problem_show');
 	}
 	// 評価履歴表示
 	public function evaluate_history(){
@@ -56,5 +73,17 @@ class ProblemsController extends AppController{
 		// $this->set('arrange_eval_data',$arrange_eval_data);
 		$this->set('arrange_eval_data',$arrange_eval_data);
 	}
+
+
+	public function evaluate_notice(){
+
+	}
+	public function evaluate_confirm(){
+
+	}
+
+
+
+
 }
 ?>

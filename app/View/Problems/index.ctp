@@ -1,3 +1,3 @@
 <?php
-	pr($data);
+	debug($test);
 ?>

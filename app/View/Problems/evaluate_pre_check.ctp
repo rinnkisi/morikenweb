@@ -1,10 +1,10 @@
 <h3>評価内容確認</h3>
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
 echo $this->Form->create('Problems',array(
 	'type' => 'post',
-	// 'action' => 'evaluate_add_check',
-	'action' => 'index'
+	'action' => 'evaluate_add_check',
+	// 'action' => 'index'
 ));
 ?>
 
@@ -32,7 +32,7 @@ echo $this->Form->create('Problems',array(
 			<?php echo 'コメント：'.$eval_value['comment']; ?>
 		</td>
 	</tr>
-	
+
 	<!-- 登録データ -->
 	<?php
 	echo $this->Form->hidden("$item_id.name",array(
