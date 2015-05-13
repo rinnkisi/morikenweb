@@ -32,6 +32,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
+	<?php echo $this->Html->script('jquery-1.11.3.min.js'); ?>
 </head>
 <body>
 	<div id="container">

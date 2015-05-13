@@ -1,5 +1,5 @@
 <?php
-	echo $this->Form->create('csv', array( 'type'=>'> text', 'enctype' => 'multipart/form-data', 'url'=>'/makes/problemcheck'));
+	echo $this->Form->create('tmp', array( 'type'=>'> text', 'enctype' => 'multipart/form-data', 'url'=>'/Problems/select_check'));
 	echo $this->Form->hidden('kentei_id', array('value'=>'1'));
 	//kentei_idにはWebなので１を代入
 	echo $this->Form->hidden('user_id', array('value'=>'12'));
@@ -9,39 +9,37 @@
 	echo $this->Form->hidden('number', array('value'=>'0'));
 	echo $this->Form->hidden('public_flag', array('value'=>'0'));
 	//オリジナル問題の為初期値を０に設定
-	echo $this->Form->hidden('type', array('value'=>"<?php echo $type;?>"));
+	echo $this->Form->hidden('type', array('value'=>"$type"));
 	//type送信
-	echo $this->Form->hidden('category_id', array('value'=>"1"));
-	//カテゴリid送信
 	echo $this->Form->hidden('item', array('value'=>"1"));
 	//item送信
+
 	echo "[選択式問題作成] *は必須項目です";
 	echo $this->Html->link('記述式問題作成に切り替え',
-		array('controller' => 'Problems', 'action' => 'make1', 'full_base' => true)
+		array('controller' => 'Problems', 'action' => 'problem_descriptive', 'full_base' => true)
 	);
 	echo "</br>カテゴリ*";
-	/*
-	<select name="category" required="requied">
-		<option value=""></option>
-		<option value="選択肢2">選択肢2</option>
-		<option value="選択肢3">選択肢3</option>
-	</select>
-	*/
-	debug($data_subcategory);
-	foreach ($data_category as $key => $value) {
-		# code...
-	}
+	echo $this->Form->select('category_id',$data_category,array('id'=>'category'));
 	echo "[この投稿で◯ポイント獲得] / サブカテゴリ";
-	echo $this->Form->input('カテゴリ', array(
-	    'options' => array($data_category[0], $data_category[1], $data_category[2], $data_category[3], $data_category[4],$data_category[5],$data_category[6],$data_category[7]),
-	    'empty' => ''
-	));
-	echo $this->Form->input('サブカテゴリ', array(
-	    'options' => array(1, 2, 3, 4, 5),
-	    'empty' => ''
-	));
+	foreach ($data_subcategory as $key => $value){
+		$subcategory[$key] = $data_subcategory[$key];
+		foreach ($subcategory[$key] as $i => $v) {
+			$subcategory_id[$key][$i]= $subcategory[$key][$i]['name'];
+		}
+	}
+	//連動プルダウン用
+	?>
+<script type="text/javascript">ConnectedSelect(["category","sub_category");</script>
+<?php
+
+$options = array($subcategory_id);
+ 	echo $this->Form->input('sub_category',array('type'=>'select','options'=>$options,'label'=>'サブカテゴリ'));
+
 	echo "</br>(カテゴリがわからないときは「その他」を選択してください)</br>";
 	echo "問題文* [ 最大70 文字 ]</br>";
+	?>
+	<?php
+	echo $this->Html->para(null,'70',array('id' => 'num'));
 	echo $this->Form->textarea('sentence');
 	echo "</br></br>選択肢の設定*</br></br>";
 	echo $this->Html->para(null, "正解選択肢１".$this->Form->textarea('right_answer'));
@@ -60,6 +58,23 @@
     echo $this->Form->end();
     echo "</br>";
 	echo $this->Html->link('戻る',
-		array('controller' => 'Problems', 'action' => 'top', 'full_base' => true)
+	array('controller' => 'Problems', 'action' => 'top', 'full_base' => true)
 	);
 ?>
+<script>//プルダウンのjavascript
+$(function(){
+ $("#category").bind("change keyup",function(){
+  	var id = $("#category").val();
+  });
+});
+</script>
+<script>//文字数のjavascript
+$(function(){
+	$("#tmpSentence").bind("change keyup",function(){
+	var count = $(this).val().length;
+	var max = 70;//maxの文字数
+		$("#num").text(max-count);
+	});
+});
+</script>
+

@@ -1,68 +1,78 @@
-<?php //echo $this->form($type,$form,$ctInfo,$sbctInfo,$users,null);?>
-
-<div id ="view">
-	<?php
-	echo $this->Form->create('csv', array( 'type'=>'> text', 'enctype' => 'multipart/form-data', 'url'=>'/makes/makecheck'));
-?>
-	<input type="hidden" name="kentei_id" value="1"></input>
-	<!-- この部分は変える必要あり。 -->
-	<input type="hidden" name="user_id" value="12"></input>
-	<!-- 特にuser_idはその人によって変更しなければいけない。 -->
-	<input type="hidden" name="grade" value="0"></input>
-	<!-- 変更余地あり。 -->
-	<input type="hidden" name="number" value="0"></input>
-	<!-- 変更余地あり -->
-	<input type="hidden" name="public_flag" value="0"></input>
-	<!-- オリジナル問題の為初期値を０に設定 -->
-	<input type="hidden" name="type" value="<?php echo $type;?>"></input>
-	<!-- type送信 -->
-	<input type="hidden" name="category_id" value="1"></input>
-	<!-- カテゴリid送信 -->
-	<input type="hidden" name="item" value="1"></input>
-	<!-- item送信 -->
-	[記述式問題作成] *は必須項目です
-		<a href="make1">選択式問題作成に切替</a>
-	</BR>
-	カテゴリ*
-	<select name="category" required="requied">
-		<option value=""></option>
-		<option value="選択肢2">選択肢2</option>
-		<option value="選択肢3">選択肢3</option>
-	</select>
-	[この投稿で
-	◯
-	ポイント獲得] / サブカテゴリ
-	<select  name="subcategory" required="requied">
-		<option value=""></option>
-		<option value="選択肢2">選択肢2</option>
-		<option value="選択肢3">選択肢3</option>
-	</select>
-	</BR>
-	(カテゴリがわからないときは「その他」を選択してください)
-	</BR>
-	問題文* [ 最大70 文字 ]
-	</BR>
-	<textarea name = "sentence" cols="90" rows="2"></textarea>
-	</BR>
-解答*
-	<p>
-<textarea  name = "right_answer"rows="2" cols="90"></textarea>
-	</p>
-	<p>
-その他の解答<textarea  name = "other_answer"rows="2" cols="90"></textarea>
-	</p>
-</BR>
-    写真を載せる場合は以下から登録 (200kb以下、JPEG および PNG画像)
-<input type="file" name="image"></input>
-    タグ(複数タグは半角「/」で区切り 例:盛岡/岩手/川)
-<input type="text" name="tag"></input>
-解説* (メモ、参考URL、文献等)
-<textarea required="required" cols="80" rows="4" name="description"></textarea>
 <?php
-    echo $this->Form->submit( ('この内容で送信する'));
+	echo $this->Form->create('tmp', array( 'type'=>'> text', 'enctype' => 'multipart/form-data', 'url'=>'/Problems/descriptive_check'));
+	echo $this->Form->hidden('kentei_id', array('value'=>'1'));
+	//kentei_idにはWebなので１を代入
+	echo $this->Form->hidden('user_id', array('value'=>'12'));
+	//特にuser_idはその人によって変更しなければいけない。
+	echo $this->Form->hidden('grade', array('value'=>'0'));
+	//変更余地あり。
+	echo $this->Form->hidden('number', array('value'=>'0'));
+	echo $this->Form->hidden('public_flag', array('value'=>'0'));
+	//オリジナル問題の為初期値を０に設定
+	echo $this->Form->hidden('type', array('value'=>"$type"));
+	//type送信
+	echo $this->Form->hidden('item', array('value'=>"1"));
+	//item送信
+	echo $this->Form->hidden('', array('value'=>"1"));
+	//right_anser送信
+	echo "[記述式問題作成] *は必須項目です";
+	echo $this->Html->link('選択式問題作成に切り替え',
+		array('controller' => 'Problems', 'action' => 'problem_select', 'full_base' => true)
+	);
+	echo "</br>カテゴリ*";
+	echo $this->Form->select('category_id',$data_category,array('id'=>'category'));
+	echo "[この投稿で◯ポイント獲得] / サブカテゴリ";
+	foreach ($data_subcategory as $key => $value){
+		$subcategory[$key] = $data_subcategory[$key];
+		foreach ($subcategory[$key] as $i => $v) {
+			$subcategory_id[$key][$i]= $subcategory[$key][$i]['name'];
+		}
+	}
+	//連動プルダウン用
+	?>
+<script type="text/javascript">ConnectedSelect(["category","sub_category");</script>
+<?php
+
+$options = array($subcategory_id);
+ 	echo $this->Form->input('sub_category',array('type'=>'select','options'=>$options,'label'=>'サブカテゴリ'));
+
+	echo "</br>(カテゴリがわからないときは「その他」を選択してください)</br>";
+	echo "問題文* [ 最大70 文字 ]</br>";
+	?>
+	<?php
+	echo $this->Html->para(null,'70',array('id' => 'num'));
+	echo $this->Form->textarea('sentence');
+	echo $this->Html->para(null, "解答".$this->Form->textarea('right_answer'));
+	echo $this->Html->para(null, "その他の解答".$this->Form->textarea('another_answer'));
+    echo "写真を載せる場合は以下から登録 (200kb以下、JPEG および PNG画像)";
+    echo $this->Form->input('',array(
+    'type' => 'file',
+    'name' => 'image'
+	));
+    echo "タグ(複数タグは半角「/」で区切り 例:盛岡/岩手/川)";
+	echo $this->Form->text('tag');
+	echo $this->Html->para(null, "</br>解説* (メモ、参考URL、文献等)".$this->Form->textarea('description'));
+    echo $this->Form->submit(('この内容で送信する'));
     echo $this->Form->end();
-    echo "<br />";
+    echo "</br>";
+	echo $this->Html->link('戻る',
+	array('controller' => 'Problems', 'action' => 'top', 'full_base' => true)
+	);
 ?>
-<a id="back" href="top">戻る</a>
-</div>
+<script>//プルダウンのjavascript
+$(function(){
+ $("#category").bind("change keyup",function(){
+  	var id = $("#category").val();
+  });
+});
+</script>
+<script>//文字数のjavascript
+$(function(){
+	$("#tmpSentence").bind("change keyup",function(){
+	var count = $(this).val().length;
+	var max = 70;//maxの文字数
+		$("#num").text(max-count);
+	});
+});
+</script>
 
