@@ -50,7 +50,7 @@ class ProblemsController extends AppController{
 		$this->redirect('problem_show');
 	}
 	// 評価履歴表示
-	public function evaluate_record(){
+	public function evaluate_history(){
 		$eval_record = $this->api_rest('GET','evaluateComments/index.json','user_id=7',array());
 		$arrange_eval_data = $this->Evaluate->eval_record_arrange($eval_record);
 		// $this->set('arrange_eval_data',$arrange_eval_data);
