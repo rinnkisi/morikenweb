@@ -18,7 +18,7 @@ class ProblemsController extends AppController{
 		$this->set('data',$show_obj);
 	}
 	// 選択した問題への評価とコメント
-	public function evaluate_problem_check($id){ //making question ID
+	public function check_evaluation_problem($id){ //making question ID
 		// 選択した問題のID
 		$check_obj['problem_id'] = $id;
 		// 評価項目呼び出し

@@ -4,7 +4,7 @@
 	<?php foreach ($data['publ']['response']['Problems'] as $key => $value): ?>
 	<tr>
 		<td><?php echo "[".$i."] "; ?></td>
-		<td><?php echo $this->Html->link($value['Problem']['sentence'],array('action' => 'evaluate_problem_check',$value['Problem']['id'])); ?></td>
+		<td><?php echo $this->Html->link($value['Problem']['sentence'],array('action' => 'check_evaluation_problem',$value['Problem']['id'])); ?></td>
 	</tr>
 	<?php $i++; ?>
 	<?php endforeach; ?>
@@ -15,7 +15,7 @@
 	<?php foreach ($data['priv']['response']['Problems'] as $key => $value): ?>
 	<tr>
 		<td><?php echo "[".$i."] "; ?></td>
-		<td><?php echo $this->Html->link($value['Problem']['sentence'],array('action' => 'evaluate_problem_check',$value['Problem']['id'])); ?></td>
+		<td><?php echo $this->Html->link($value['Problem']['sentence'],array('action' => 'check_evaluation_problem',$value['Problem']['id'])); ?></td>
 	</tr>
 	<?php $i++; ?>
 	<?php endforeach; ?>
