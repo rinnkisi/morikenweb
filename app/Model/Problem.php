@@ -1,7 +1,6 @@
 <?php
 class Problem extends AppModel{
     public $useTable = 'problems';
-
     public function category_sort($categories){//カテゴリの分類
     	foreach ($categories['response']['Categories'] as $key => $value) {
             //配列の一次元目は+1をする(optgroupがlabel0ではだめなため)

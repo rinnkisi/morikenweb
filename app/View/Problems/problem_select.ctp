@@ -1,8 +1,11 @@
 <?php
-	echo $this->Form->create('problem_selectdata', array( 'type'=>'text', 'enctype' => 'multipart/form-data', 'url'=>'/Problems/select_check'));
+		//jsのライブラリを使用
+	echo $this->Html->script('ConnectedSelect.js');
+	//formをcreate
+	echo $this->Form->create('problem_selectdata', array('type'=>'text', 'enctype' => 'multipart/form-data', 'url'=>'/Problems/select_check'));
 	echo $this->Form->hidden('type', array('value'=>"$type"));
 	//type送信
-	echo $this->Form->hidden('kentei_id', array('value'=>'$kentei_id'));
+	echo $this->Form->hidden('kentei_id', array('value'=>"$kentei_id"));
 	//kentei_idにはWebなので１を代入
 	echo $this->Form->hidden('user_id', array('value'=>'12'));
 	//特にuser_idはその人によって変更しなければいけない。
@@ -25,9 +28,6 @@
 	//連動プルダウン用
 	echo $this->Form->select('subcategory_id',$subcategory_options,
 		array('id'=>'subcategory_id','empty'=>'選んでください'));
-	//jsのライブラリを使用
-	echo $this->Html->script('ConnectedSelect.js');
-
 	echo "<br />(カテゴリがわからないときは「その他」を選択してください)<br />";
 	echo "問題文* [ 最大200 文字 ]<br />";
 	//paraは<p>タグである
@@ -64,5 +64,6 @@ $(function(){
 });
 </script>
 <script type="text/javascript">
+//条件付きプルダウン用のライブラリ
 ConnectedSelect(['category_id','subcategory_id']);
 </script>
