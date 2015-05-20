@@ -1,4 +1,4 @@
-<h3>評価内容確認</h3>
+<h3>投稿前に評価内容を確認</h3>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <?php
 echo $this->Form->create('Problems',array(

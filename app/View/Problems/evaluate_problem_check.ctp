@@ -37,4 +37,4 @@
 	echo $this->Form->submit('評価する');
 ?>
 
-<?php pr($data)?>
+<?php //pr($data)?>

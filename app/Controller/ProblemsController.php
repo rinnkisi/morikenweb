@@ -8,15 +8,13 @@ class ProblemsController extends AppController{
 		// $this->set('test',"test");
 	}
 	// ユーザが作問した問題を一覧表示
-	public function evaluate_problem_show(){
+	public function show_evaluation_problem(){
 		// 非公開問題
 		$priv_api_pram = 'kentei_id=3&employ=0&public_flag=0&category_id=0&item=100';
 		$show_obj['priv'] = $this->api_rest('GET','problems/index.json',$priv_api_pram,array());
-
 		// 公開問題
 		$publ_api_pram = 'kentei_id=3&employ=0&public_flag=1&category_id=0&item=100';
 		$show_obj['publ'] = $this->api_rest('GET','problems/index.json',$publ_api_pram,array());
-
 		$this->set('data',$show_obj);
 	}
 	// 選択した問題への評価とコメント
@@ -64,7 +62,7 @@ class ProblemsController extends AppController{
 		}
 		// $this->set('data',$add_api_pram);
 		$this->set('data',$result);
-		$this->redirect('evaluate_problem_show');
+		$this->redirect('show_evaluation_problem');
 	}
 	// 評価履歴表示
 	public function evaluate_history(){
