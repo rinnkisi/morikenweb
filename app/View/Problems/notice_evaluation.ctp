@@ -16,4 +16,7 @@
   <hr />
 <?php endforeach ;?>
 
+<?php echo $this->Html->link('戻る','show_evaluation_problem', array('class' => 'button'));
+ ?>
+
 <?php pr($notice_data); ?>

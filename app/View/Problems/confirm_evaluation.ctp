@@ -18,6 +18,7 @@
 <?php foreach($confirm_data['Evaluate'] as $evaluate_num => $evaluate_value): ?>
 	<?php echo "【評価者※ID】 ".$evaluate_value['evaluator_id'] ?>
 	<?php echo $this->html->tag('br') ?>
+	<?php echo $this->html->tag('br') ?>
 	<?php foreach($evaluate_value['evaluate_data'] as $comment_num => $comment_value): ?>
 		<?php echo "【評価項目】".$comment_value['evaluate_item_name'] ?>
 		<?php echo $this->html->tag('br') ?>
@@ -25,8 +26,9 @@
 		<?php echo $this->html->tag('br') ?>
 		<?php echo "【投稿日】".$comment_value['created'] ?>
 		<?php echo $this->html->tag('br') ?>
+		<?php echo $this->html->tag('br') ?>
 	<?php endforeach ;?>
 	<?php echo $this->html->tag('hr') ?>
 <?php endforeach ;?>
-
+<?php echo $this->Html->link('戻る','notice_evaluation', array('class' => 'button')); ?>
 <?php //debug($confirm_data); ?>

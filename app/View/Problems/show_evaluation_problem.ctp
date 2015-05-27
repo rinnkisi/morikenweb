@@ -21,4 +21,4 @@
 	<?php endforeach; ?>
 </table>
 
-<?php pr($data) ?>
+<?php //pr($data) ?>
