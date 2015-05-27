@@ -4,13 +4,15 @@ class ProblemsController extends AppController {
 
     public $name = 'Problems'; //クラス名
     public $components = array('Session');//componetsのsessionを用いる
-    function problem_select(){//選択式作問入力
+    function problem_select($type = null){//選択式作問入力
         //api_rest($method, $uri, $query = null, $data = null)
         //typeを追加する。１は選択式問題。初期は選択式問題
         $this->set('type','1');
         //Webの場合は１を代入する
         $this->set('kentei_id','1');
+        $this->Session->write('type','1');
         $category_api_pram = 'kentei_id=1';
+        $this->request->data = $this->Session->read('check_data');
         //カテゴリーAPIを使用,dataに送るのは空の配列
         $categories = $this->api_rest("GET","categories/index.json",$category_api_pram,array());
         //カテゴリをわかりやすくするためにモデルで処理
@@ -21,10 +23,11 @@ class ProblemsController extends AppController {
         $this->set('category_options',$category_data);
         $this->set('subcategory_options',$subcategory_data);
     }
-    function problem_descriptive(){//記述式作問入力
+    function problem_discription($type = null){//記述式作問入力
         //2は記述式問題
         $this->set('type','2');
         $this->set('kentei_id','1');
+        $this->Session->write('type','2');
         $category_api_pram = 'kentei_id=1';
         //カテゴリーAPIを使用,dataに送るのは空の配列
         $categories = $this->api_rest("GET","categories/index.json",$category_api_pram,array());
@@ -36,63 +39,81 @@ class ProblemsController extends AppController {
         $this->set('category_options',$category_data);
         $this->set('subcategory_options',$subcategory_data);
     }
-    function select_check(){
+    function problem_check(){
         //選択問題の確認用ページ
         $check_tmp=$this->request->data;
-        $check_data = $check_tmp['problem_selectdata'];
-        //前にカテゴリーidを足していたものを元に戻す処理
-        $check_data['category_id'] = $check_data['category_id']-1;
+        $check_data = $check_tmp['problem_data'];
         //セッション書き込み
         $this->Session->write('check_data',$check_data);
         debug($check_data);
         $this->set('check_data',$check_data);
         $category_data=$this->Session->read('category_options');
         $subcategory_data=$this->Session->read('subcategory_options');
-        $this->set('category_options',$category_data);
-        $this->set('subcategory_options',$subcategory_data);
+        //debug($category_data[$check_data['category_id']]);
+        $category_id=$check_data['category_id'];
+        $this->set('category_id',$category_id);
+        //カテゴリが入力されていない場合の条件文
+        if(!empty($category_data[$category_id])){//カテゴリが空でないとき
+            $this->set('category',$category_data[$category_id]);
+            if(!empty($check_data['subcategory_id'])){//サブカテゴリが空でないとき
+                debug($subcategory_data[$category_id]);
+                $this->set('subcategory_id',$check_data['subcategory_id']);
+                $this->set('subcategory',$subcategory_data[$category_id][$check_data['subcategory_id']]);
+            }else{
+                $this->set('subcategory',"");
+            }
+        }else{
+            $this->set('category',"");
+            $this->set('subcategory',"");
+        }
         //問題作成確認にapiにて成功のときのレスポンスデータを送っている
+        if("1"== $check_data['type']){//適切なviewをレンダー
+            $this->render('select_check');
+        }else{
+            $this->render('discriptive_check');
+        }
     }
-    function descriptive_check(){
-        //記述問題の確認用ページ
-        $check_tmp=$this->request->data;
-        $check_data = $check_tmp['problem_descriptivedata'];
-        //前にカテゴリーidを足していたものを元に戻す処理
-        $check_data['category_id'] = $check_data['category_id']-1;
-        //セッション書き込み
-        $this->Session->write('check_data',$check_data);
-        debug($check_data);
-        $this->set('check_data',$check_data);
-        $category_data=$this->Session->read('category_options');
-        $subcategory_data=$this->Session->read('subcategory_options');
-        $this->set('category_options',$category_data);
-        $this->set('subcategory_options',$subcategory_data);
-        //問題作成確認にapiにて成功のときのレスポンスデータを送っている
-    }
-    function select_record(){
+    function problem_record(){
         //選択問題の登録用ページ
         //セッションデータを呼び出し
-        $record_data=$this->Session->read('check_data');
-        //query は送らないので空にしている
-        debug($record_data);        //デバック用
-        $url = $this->api_rest("POST","problems/add.json","",$record_data);
-        debug($url);
-        $this->Session->delete('check_data');
-        //API経由でDBに格納を行う
-        $this->set('select_record_data',$url['response']['Problem']);
-        //問題作成登録にapiにて成功のときのレスポンスデータを送っている
-    }
-    function descriptive_record(){
-        //記述問題の登録用ページ
-       //セッションデータを呼び出し
-        $record_data=$this->Session->read('check_data');
-        //query は送らないので空にしている
-        debug($record_data);        //デバック用
-        $url = $this->api_rest("POST","problems/add.json","",$record_data);
-        debug($url);
-        $this->Session->delete('check_data');
-        //API経由でDBに格納を行う
-        $this->set('descriptive_record_data',$url['response']['Problem']);
-        //問題作成登録にapiにて成功のときのレスポンスデータを送っている
+        if(!empty($this->Session->read('check_data'))){
+            $record_data=$this->Session->read('check_data');
+            //query は送らないので空にしている
+            //前にカテゴリーidを足していたものを元に戻す処理
+            if(!empty($record_data['category_id'])){
+                $record_data['category_id'] = $record_data['category_id']-1;
+            }
+            $url = $this->api_rest("POST","problems/add.json","",$record_data);
+            //debug($url['error']);
+            if(!isset($url['error']) && isset($url['response'])){//エラー処理
+                $this->set('record_data',$url['response']['Problem']);
+                $this->Session->delete('check_data');
+                //問題作成登録にapiにて成功のときのレスポンスデータを送っている
+                $category = $this->api_rest("GET","categories/index.json","kentei_id=".$record_data['kentei_id'],array());
+                $category = $category['response']['Categories'][$record_data['category_id']];
+                $this->set('category',$category['Category']['name']);
+                if(isset($record_data['subcategory_id'])){
+                    $subcategory = $category['Subcategory'][$record_data['subcategory_id']];
+                    $this->set('subcategory',$subcategory['name']);
+                }else{
+                    $this->set('subcategory',"");
+                }
+            }
+            if("1"== $record_data['type']){//適切なviewをレンダー
+                $this->render('select_record');
+            }else{
+                $this->render('descriptive_record');
+            }
+            //API経由でDBに格納を行う
+        }else{
+            $this->set('category',"");
+            $this->set('subcategory',"");
+            if("1"== $this->Session->read('type')){
+                $this->render('select_record');
+            }else{
+                $this->render('descriptive_record');
+            }
+        }
     }
 }
 ?>

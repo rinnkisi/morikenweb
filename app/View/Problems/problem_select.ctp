@@ -2,7 +2,7 @@
 		//jsのライブラリを使用
 	echo $this->Html->script('ConnectedSelect.js');
 	//formをcreate
-	echo $this->Form->create('problem_selectdata', array('type'=>'text', 'enctype' => 'multipart/form-data', 'url'=>'/Problems/select_check'));
+	echo $this->Form->create('problem_data', array('type'=>'text', 'enctype' => 'multipart/form-data', 'url'=>'/Problems/problem_check'));
 	echo $this->Form->hidden('type', array('value'=>"$type"));
 	//type送信
 	echo $this->Form->hidden('kentei_id', array('value'=>"$kentei_id"));
@@ -19,7 +19,7 @@
 	//本文
 	echo "[選択式問題作成] *は必須項目です";
 	echo $this->Html->link('記述式問題作成に切り替え',
-		array('controller'=>'Problems','action'=>'problem_descriptive','full_base'=>true)
+		array('controller'=>'Problems','action'=>'problem_descriptive',"$type=2",'full_base'=>true)
 	);
 	echo "<br /><br />カテゴリ*";
 	echo $this->Form->select('category_id',$category_options,
@@ -56,7 +56,7 @@
 ?>
 <script>//文字数のjavascript
 $(function(){
-	$("#problem_selectdataSentence").bind("change keyup",function(){
+	$("#problem_dataSentence").bind("change keyup",function(){
 	var count = $(this).val().length;
 	var max = 200;//maxの文字数
 		$("#num").text(max-count);

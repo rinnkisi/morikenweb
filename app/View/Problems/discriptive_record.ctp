@@ -6,7 +6,7 @@
 	echo "[その他の解答]-".$descriptive_record_data['another_answer']."<br />";
 	echo "[タグ]：".$descriptive_record_data['tag']."<br />";
 	echo "[解説]：".$descriptive_record_data['description']."<br /><br />";
-	echo $this->Html->link('選択式問題作成ページに戻る',
+	echo $this->Html->link('記述式問題作成ページに戻る',
 	array('controller'=>'Problems','action'=>'problem_descriptive','full_base'=>true));
 	echo "<br /><br />";
 	echo $this->Html->link('トップページに戻る',
