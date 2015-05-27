@@ -45,9 +45,30 @@ class ProblemsController extends AppController{
 			$result[$eval_id] = $this->api_rest('POST','evaluateComments/add.json',null,$add_api_pram[$eval_id]);
 		}
 		// $this->set('data',$add_api_pram);
-		$this->set('data',$result);
-		$this->redirect('show_evaluation_problem');
+		// $this->set('data',$result);
+		// $this->redirect('show_evaluation_problem');
+		foreach($result as $evaluate_item_id => $evaluate_value){
+			if(!empty($evaluate_value['error']['code'])){
+				$error_list[] = $evaluate_item_id;
+			}
+		}
+		if(!empty($error_list)){
+			$this->redirect(array('action' => 'precheck_again_evaluation_problem',$error_list));
+		}else{
+			$this->redirect('show_evaluation_problem');
+		}
+		// $this->set('data',$error_list);
 	}
+
+	// add_ecaluatetion_problemからerror_listを受け渡し、コメントを催促・入力したい
+	public function precheck_again_evaluation_problem(){
+		// $this->set('data',$error_list);
+	}
+	// error_listにある評価項目に対してのコメントを再登録したい
+	public function add_again_evaluation_problem(){
+	}
+
+
 	// 評価履歴表示
 	public function show_evaluation_history(){
 		$eval_record = $this->api_rest('GET','evaluateComments/index.json','user_id=7',array());
