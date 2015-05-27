@@ -4,14 +4,11 @@ class ProblemsController extends AppController {
 
     public $name = 'Problems'; //クラス名
     public $components = array('Session');//componetsのsessionを用いる
-    function problem_select($type = null){//選択式作問入力
-        //api_rest($method, $uri, $query = null, $data = null)
-        //typeを追加する。１は選択式問題。初期は選択式問題
-        $this->set('type','1');
-        //Webの場合は１を代入する
+    function problem_makes($type = null){//選択式作問入力
         $this->set('kentei_id','1');
-        $this->Session->write('type','1');
+        //Webの場合は１を代入する
         $category_api_pram = 'kentei_id=1';
+        //api_rest($method, $uri, $query = null, $data = null)
         $this->request->data = $this->Session->read('check_data');
         //カテゴリーAPIを使用,dataに送るのは空の配列
         $categories = $this->api_rest("GET","categories/index.json",$category_api_pram,array());
@@ -22,22 +19,18 @@ class ProblemsController extends AppController {
         $this->Session->write('subcategory_options',$subcategory_data);
         $this->set('category_options',$category_data);
         $this->set('subcategory_options',$subcategory_data);
-    }
-    function problem_discription($type = null){//記述式作問入力
-        //2は記述式問題
-        $this->set('type','2');
-        $this->set('kentei_id','1');
-        $this->Session->write('type','2');
-        $category_api_pram = 'kentei_id=1';
-        //カテゴリーAPIを使用,dataに送るのは空の配列
-        $categories = $this->api_rest("GET","categories/index.json",$category_api_pram,array());
-        //カテゴリをわかりやすくするためにモデルで処理
-        $category_data = $this->Problem->category_sort($categories);
-        $subcategory_data = $this->Problem->subcategory_sort($categories);
-        $this->Session->write('category_options',$category_data);
-        $this->Session->write('subcategory_options',$subcategory_data);
-        $this->set('category_options',$category_data);
-        $this->set('subcategory_options',$subcategory_data);
+        //typeを追加する。１は選択式問題。初期は選択式問題
+        if($type == 1 || $type == null){
+            debug($type);
+            $this->set('type','1');
+            $this->Session->write('type','1');
+            $this->render('problem_select');
+        }else{
+            debug($type);
+            $this->set('type',$type);
+            $this->Session->write('type',$type);
+            $this->render('problem_descriptive');
+        }
     }
     function problem_check(){
         //選択問題の確認用ページ
@@ -70,7 +63,7 @@ class ProblemsController extends AppController {
         if("1"== $check_data['type']){//適切なviewをレンダー
             $this->render('select_check');
         }else{
-            $this->render('discriptive_check');
+            $this->render('descriptive_check');
         }
     }
     function problem_record(){
