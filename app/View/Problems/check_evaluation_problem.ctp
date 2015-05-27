@@ -3,7 +3,7 @@
 <?php
 	echo $this->Form->create('Problems',array(
 		'type' => 'post',
-		'action' => 'evaluate_pre_check',
+		'action' => 'precheck_evaluation_problem',
 		// 'action' => 'index'
 	));
 	// 評価項目とチェック・コメントフォームのリスト
