@@ -22,5 +22,4 @@ class Problem extends AppModel{
         }
         return $subcategory_data;
     }
-
 }
