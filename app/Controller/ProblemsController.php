@@ -21,12 +21,10 @@ class ProblemsController extends AppController {
         $this->set('subcategory_options',$subcategory_data);
         //typeを追加する。１は選択式問題。初期は選択式問題
         if($type == 1 || $type == null){
-            debug($type);
             $this->set('type','1');
             $this->Session->write('type','1');
             $this->render('problem_select');
         }else{
-            debug($type);
             $this->set('type',$type);
             $this->Session->write('type',$type);
             $this->render('problem_descriptive');
