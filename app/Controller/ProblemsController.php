@@ -106,5 +106,16 @@ class ProblemsController extends AppController {
             }
         }
     }
+    function problem_show(){
+        //未投稿画面
+        $show_api_pram = "kentei_id=1&item=100&grade=0&public_flag=0&employ=0";
+        $show_api_pram=$show_api_pram."&user_id=12";
+        $url = $this->api_rest("GET","problems/index.json",$show_api_pram,array());
+        //debug($url);
+        $this->set('show_data',$url['response']['Problems']);
+        }
+        //評価待ち
+        //調整中
+        //公開済み
 }
 ?>
