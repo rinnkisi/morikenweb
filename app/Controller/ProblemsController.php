@@ -1,7 +1,6 @@
 <?php
 
 class ProblemsController extends AppController {
-
     public $name = 'Problems'; //クラス名
     public $components = array('Session');//componetsのsessionを用いる
     function problem_makes($type = null){//選択式作問入力
@@ -36,7 +35,6 @@ class ProblemsController extends AppController {
         $check_data = $check_tmp['problem_data'];
         //セッション書き込み
         $this->Session->write('check_data',$check_data);
-        debug($check_data);
         $this->set('check_data',$check_data);
         $category_data=$this->Session->read('category_options');
         $subcategory_data=$this->Session->read('subcategory_options');
@@ -47,7 +45,7 @@ class ProblemsController extends AppController {
         if(!empty($category_data[$category_id])){//カテゴリが空でないとき
             $this->set('category',$category_data[$category_id]);
             if(!empty($check_data['subcategory_id'])){//サブカテゴリが空でないとき
-                debug($subcategory_data[$category_id]);
+                //debug($subcategory_data[$category_id]);
                 $this->set('subcategory_id',$check_data['subcategory_id']);
                 $this->set('subcategory',$subcategory_data[$category_id][$check_data['subcategory_id']]);
             }else{
@@ -106,13 +104,14 @@ class ProblemsController extends AppController {
             }
         }
     }
-    function problem_show(){
+    function show_problem(){
         //未投稿画面
         $show_api_pram = "kentei_id=1&item=100&grade=0&public_flag=0&employ=0";
-        $show_api_pram=$show_api_pram."&user_id=12";
+        //$show_api_pram=$show_api_pram."&user_id=2";
         $url = $this->api_rest("GET","problems/index.json",$show_api_pram,array());
         //debug($url);
         $this->set('show_data',$url['response']['Problems']);
+        debug($url['response']['Problems']);
         }
         //評価待ち
         //調整中
