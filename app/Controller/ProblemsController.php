@@ -3,7 +3,7 @@
 class ProblemsController extends AppController {
     public $name = 'Problems'; //クラス名
     public $components = array('Session');//componetsのsessionを用いる
-    function make_problem($type = null){//選択式作問入力
+    function make_problem($type = null){//初期は選択式作問入力
         $this->set('kentei_id','1');
         //Webの場合は１を代入する
         $category_api_pram = 'kentei_id=1';
@@ -12,26 +12,24 @@ class ProblemsController extends AppController {
         //カテゴリーAPIを使用,dataに送るのは空の配列
         $categories = $this->api_rest("GET","categories/index.json",$category_api_pram,array());
         //カテゴリをわかりやすくするためにモデルで処理、セッション管理
-        $this->Session->write('category_data',$this->Problem->category_sort($categories));
-        $this->Session->write('subcategory_data',$this->Problem->subcategory_sort($categories));
-        $this->Session->write('category_options',$category_data);
-        $this->Session->write('subcategory_options',$subcategory_data);
-        $this->set('category_options',$this->Session->read('category_data'));
-        $this->set('subcategory_options',$this->Session->read('subcategory_data'));
+        $this->Session->write('category_options',$this->Problem->category_sort($categories));
+        $this->Session->write('subcategory_options',$this->Problem->subcategory_sort($categories));
+        $this->set('category_options',$this->Session->read('category_options'));
+        $this->set('subcategory_options',$this->Session->read('subcategory_options'));
         //typeを追加する。１は選択式問題。初期は選択式問題
         if($type == 1 || $type == null){
-            $this->set('type','1');
             $this->Session->write('type','1');
+            $this->set('type','1');
             $this->render('select_problem');
         }else{
-            $this->set('type',$type);
             $this->Session->write('type',$type);
+            $this->set('type',$type);
             $this->render('descriptive_problem');
         }
     }
     function check_problem(){
         //選択問題の確認用ページ
-        $check_tmp=$this->request->data;
+        $check_tmp = $this->request->data;
         $check_data = $check_tmp['problem_data'];
         //セッション書き込み
         $this->Session->write('check_data',$check_data);
@@ -105,6 +103,7 @@ class ProblemsController extends AppController {
         }
     }
     function show_problem(){
+        //問題作成の作った問題の編集画面
         //未投稿画面
         $show_api_pram = "kentei_id=1&item=100&grade=0&public_flag=0&employ=0";
         //$show_api_pram=$show_api_pram."&user_id=2";
