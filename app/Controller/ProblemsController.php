@@ -3,7 +3,7 @@
 class ProblemsController extends AppController {
     public $name = 'Problems'; //クラス名
     public $components = array('Session');//componetsのsessionを用いる
-    function problem_makes($type = null){//選択式作問入力
+    function make_problem($type = null){//選択式作問入力
         $this->set('kentei_id','1');
         //Webの場合は１を代入する
         $category_api_pram = 'kentei_id=1';
@@ -11,25 +11,25 @@ class ProblemsController extends AppController {
         $this->request->data = $this->Session->read('check_data');
         //カテゴリーAPIを使用,dataに送るのは空の配列
         $categories = $this->api_rest("GET","categories/index.json",$category_api_pram,array());
-        //カテゴリをわかりやすくするためにモデルで処理
-        $category_data = $this->Problem->category_sort($categories);
-        $subcategory_data = $this->Problem->subcategory_sort($categories);
+        //カテゴリをわかりやすくするためにモデルで処理、セッション管理
+        $this->Session->write('category_data',$this->Problem->category_sort($categories));
+        $this->Session->write('subcategory_data',$this->Problem->subcategory_sort($categories));
         $this->Session->write('category_options',$category_data);
         $this->Session->write('subcategory_options',$subcategory_data);
-        $this->set('category_options',$category_data);
-        $this->set('subcategory_options',$subcategory_data);
+        $this->set('category_options',$this->Session->read('category_data'));
+        $this->set('subcategory_options',$this->Session->read('subcategory_data'));
         //typeを追加する。１は選択式問題。初期は選択式問題
         if($type == 1 || $type == null){
             $this->set('type','1');
             $this->Session->write('type','1');
-            $this->render('problem_select');
+            $this->render('select_problem');
         }else{
             $this->set('type',$type);
             $this->Session->write('type',$type);
-            $this->render('problem_descriptive');
+            $this->render('descriptive_problem');
         }
     }
-    function problem_check(){
+    function check_problem(){
         //選択問題の確認用ページ
         $check_tmp=$this->request->data;
         $check_data = $check_tmp['problem_data'];
@@ -57,12 +57,12 @@ class ProblemsController extends AppController {
         }
         //問題作成確認にapiにて成功のときのレスポンスデータを送っている
         if("1"== $check_data['type']){//適切なviewをレンダー
-            $this->render('select_check');
+            $this->render('check_select');
         }else{
-            $this->render('descriptive_check');
+            $this->render('check_descriptive');
         }
     }
-    function problem_record(){
+    function record_problem(){
         //選択問題の登録用ページ
         //セッションデータを呼び出し
         if(!empty($this->Session->read('check_data'))){
@@ -89,18 +89,18 @@ class ProblemsController extends AppController {
                 }
             }
             if("1"== $record_data['type']){//適切なviewをレンダー
-                $this->render('select_record');
+                $this->render('record_select');
             }else{
-                $this->render('descriptive_record');
+                $this->render('record_descriptive');
             }
             //API経由でDBに格納を行う
         }else{
             $this->set('category',"");
             $this->set('subcategory',"");
             if("1"== $this->Session->read('type')){
-                $this->render('select_record');
+                $this->render('record_select');
             }else{
-                $this->render('descriptive_record');
+                $this->render('record_descriptive');
             }
         }
     }
@@ -112,9 +112,9 @@ class ProblemsController extends AppController {
         //debug($url);
         $this->set('show_data',$url['response']['Problems']);
         debug($url['response']['Problems']);
-        }
+    }
         //評価待ち
         //調整中
         //公開済み
-}
+    }
 ?>
