@@ -22,65 +22,13 @@ class Problem extends AppModel{
         }
         return $subcategory_data;
     }
-    public function validation_category($record_data){
-        if(!$record_data['category_id']){
-            return null;
-        }else{
-            return 1;
-        }
-    }
-    public function validation_subcategory($record_data){
-        if(!$record_data['subcategory_id']){
-            return null;
-        }else{
-            return 1;
-        }
-    }
-    public function validation_sentence($record_data){
-        if(!$record_data['sentence']){
-            return null;
-        }else{
-            return 1;
-        }
-    }
-    public function validation_right_answer($record_data){
-        if(!$record_data['right_answer']){
-            return null;
-        }else{
-            return 1;
-        }
-    }
-    public function validation_wrong_answer1($record_data){
-        if(!$record_data['wrong_answer1']){
-            return null;
-        }else{
-            return 1;
-        }
-    }
-    public function validation_wrong_answer2($record_data){
-        if(!$record_data['wrong_answer2']){
-            return null;
-        }else{
-            return 1;
-        }
-    }
-    public function validation_wrong_answer3($record_data){
-        if(!$record_data['wrong_answer3']){
-            return null;
-        }else{
-            return 1;
-        }
-    }
-    public function validation_tag($record_data){
-        if(!$record_data['tag']){
-            return null;
-        }else{
-            return 1;
-        }
-    }
-    public function validation_description($record_data){
-        if(!$record_data['description']){
-            return null;
+    public function validation($url){//エラー処理
+        //debug($url['error']['validation']['Problem']);
+        if(!empty($url['error'])){
+            foreach ($url['error']['validation']['Problem'] as $key => $value) {
+                $message[] = $value;
+            }
+            return $message;
         }else{
             return 1;
         }

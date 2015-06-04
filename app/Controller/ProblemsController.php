@@ -67,13 +67,18 @@ class ProblemsController extends AppController {
             //query は送らないので空にしている
             //前にカテゴリーidを足していたものを元に戻す処理
             debug($record_data);
-            $tmp=$this->Problem->validation_category($record_data);
+            //$tmp=$this->Problem->validation_category($record_data);
 
             if(!empty($record_data['category_id'])){//category_idを戻す処理
                 $record_data['category_id'] = $record_data['category_id']-1;
             }
             $url = $this->api_rest("POST","problems/add.json","",$record_data);
             //debug($url['error']);
+            //debug($tmp);
+            $tmp = $this->Problem->validation($url);
+            if($tmp != 1){
+                $this->set('error',$tmp);
+            }
             debug($tmp);
             if(!isset($url['error']) && isset($url['response'])){//エラー処理
                 $this->set('record_data',$url['response']['Problem']);
