@@ -73,17 +73,14 @@ class ProblemsController extends AppController {
                 $record_data['category_id'] = $record_data['category_id']-1;
             }
             $url = $this->api_rest("POST","problems/add.json","",$record_data);
-            //debug($url['error']);
             //debug($tmp);
             $tmp = $this->Problem->validation($url);
-            if($tmp != 1){
-                $this->set('error',$tmp);
-            }
-            debug($tmp);
+            $this->set('error',$tmp);
+            //debug($tmp);
             if(!isset($url['error']) && isset($url['response'])){//エラー処理
                 $this->set('record_data',$url['response']['Problem']);
-                $this->Session->delete('check_data');
                 //問題作成登録にapiにて成功のときのレスポンスデータを送っている
+                $this->Session->delete('check_data');//セッションの破棄
                 $category = $this->api_rest("GET","categories/index.json","kentei_id=".$record_data['kentei_id'],array());
                 $category = $category['response']['Categories'][$record_data['category_id']];
                 $this->set('category',$category['Category']['name']);
@@ -101,6 +98,7 @@ class ProblemsController extends AppController {
             }
             //API経由でDBに格納を行う
         }else{
+            $this->set('error',array());
             $this->set('category',"");
             $this->set('subcategory',"");
             if("1"== $this->Session->read('type')){

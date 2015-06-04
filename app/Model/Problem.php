@@ -12,7 +12,7 @@ class Problem extends AppModel{
     	foreach ($categories['response']['Categories'] as $key => $value) {
             $subcategory_tmp[]=$value['Subcategory'];
         }
-            //サブカテゴリをだしている
+        //サブカテゴリをだしている
         foreach ($subcategory_tmp as $key => $value){
             $subcategories[$key] = $subcategory_tmp[$key];
             foreach ($subcategories[$key] as $i => $v) {
