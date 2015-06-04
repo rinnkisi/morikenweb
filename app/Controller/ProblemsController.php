@@ -29,8 +29,7 @@ class ProblemsController extends AppController {
     }
     function check_problem(){
         //選択問題の確認用ページ
-        $check_tmp = $this->request->data;
-        $check_data = $check_tmp['problem_data'];
+        $check_data = $this->request->data['problem_data'];
         //セッション書き込み
         $this->Session->write('check_data',$check_data);
         $this->set('check_data',$check_data);
@@ -42,7 +41,7 @@ class ProblemsController extends AppController {
         //カテゴリが入力されていない場合の条件文
         if(!empty($category_data[$category_id])){//カテゴリが空でないとき
             $this->set('category',$category_data[$category_id]);
-            if(!empty($check_data['subcategory_id'])){//サブカテゴリが空でないとき
+            if(!($check_data['subcategory_id'] == '')){//サブカテゴリが空でないとき
                 //debug($subcategory_data[$category_id]);
                 $this->set('subcategory_id',$check_data['subcategory_id']);
                 $this->set('subcategory',$subcategory_data[$category_id][$check_data['subcategory_id']]);
@@ -67,11 +66,15 @@ class ProblemsController extends AppController {
             $record_data=$this->Session->read('check_data');
             //query は送らないので空にしている
             //前にカテゴリーidを足していたものを元に戻す処理
-            if(!empty($record_data['category_id'])){
+            debug($record_data);
+            $tmp=$this->Problem->validation_category($record_data);
+
+            if(!empty($record_data['category_id'])){//category_idを戻す処理
                 $record_data['category_id'] = $record_data['category_id']-1;
             }
             $url = $this->api_rest("POST","problems/add.json","",$record_data);
             //debug($url['error']);
+            debug($tmp);
             if(!isset($url['error']) && isset($url['response'])){//エラー処理
                 $this->set('record_data',$url['response']['Problem']);
                 $this->Session->delete('check_data');
@@ -103,7 +106,7 @@ class ProblemsController extends AppController {
         }
     }
     function show_problem(){
-        //問題作成の作った問題の編集画面
+        //問題履歴ページの編集投稿機能
         //未投稿画面
         $show_api_pram = "kentei_id=1&item=100&grade=0&public_flag=0&employ=0";
         //$show_api_pram=$show_api_pram."&user_id=2";

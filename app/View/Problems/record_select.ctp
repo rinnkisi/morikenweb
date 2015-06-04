@@ -12,7 +12,7 @@
 		echo "[タグ]：".$record_data['tag']."<br />";
 		echo "[解説]：".$record_data['description']."<br /><br />";
 		echo $this->Html->link('選択式問題作成ページに戻る',
-			array('controller'=>'Problems','action'=>'problem_select','full_base'=>true,"1"));
+			array('controller'=>'Problems','action'=>'select_problem','full_base'=>true,"1"));
 		echo "<br /><br />";
 	}else{
 		echo "登録できませんでした<br />";
