@@ -16,12 +16,6 @@ class ProblemsController extends AppController{
 		$show_obj['publ'] = $this->get_problems_api($publ_api_pram);
 		$this->set('show_obj',$show_obj);
 	}
-	// パラメータの内容でProblems APIを叩く
-	public function get_problems_api($api_pram){
-		$problems_api_obj = $this->api_rest('GET','problems/index.json',$api_pram,array());
-		return $problems_api_obj;
-	}
-
 	// 選択した問題への評価とコメント
 	public function check_evaluation_problem($id){ //making question ID
 		// 選択した問題のID
@@ -50,9 +44,6 @@ class ProblemsController extends AppController{
 
 			$result[$eval_id] = $this->api_rest('POST','evaluateComments/add.json',null,$add_api_pram[$eval_id]);
 		}
-		// $this->set('data',$add_api_pram);
-		// $this->set('data',$result);
-		// $this->redirect('show_evaluation_problem');
 		foreach($result as $evaluate_item_id => $evaluate_value){
 			if(!empty($evaluate_value['error']['code'])){
 				$error_list[] = $evaluate_item_id;
@@ -85,40 +76,39 @@ class ProblemsController extends AppController{
 
 	// 作問者に対しての評価機能
 	public function notice_evaluation(){
-		// // user_idのパラメータは後ほど変更
+		// user_idのパラメータは後ほど変更
 		$problem_api_pram = 'kentei_id=1&employ=0&user_id=6&item=100&public_flag=1';
-		$problem_api_value = $this->api_rest('GET','problems/index.json',$problem_api_pram,array());
-		// // view用に連想配列の中身を整える
+		$problem_api_value = $this->get_problems_api($problem_api_pram);
+		// view用に連想配列の中身を整える
 		$arrange_notice_data = $this->Evaluate->arrange_notice_info($problem_api_value);
-		// $this->Session->write('arrange_notice_data',$arrange_notice_data);
 		if(empty($arrange_notice_data['not_found_flug'])){
 			$this->set('notice_data',$arrange_notice_data);
 		}else{
 			$this->redirect('not_found_data');
 		}
-		// $arrange_notice_data = $this->Evaluate->arrange_notice_info($problem_api_value);
-		// $this->set('notice_data',$arrange_notice_data);
 	}
-
+	// notice_evaluation()で選択した問題・評価の詳細を見る
 	public function confirm_evaluation($problem_id){
 		if(!empty($problem_id)){
 			// user_idのパラメータは後ほど変更
 			$problem_api_pram = 'kentei_id=1&employ=0&user_id=6&item=100&public_flag=1';
-			$problem_api_value = $this->api_rest('GET','problems/index.json',$problem_api_pram,array());
+			$problem_api_value = $this->get_problems_api($problem_api_pram);
 			$arrange_notice_data = $this->Evaluate->arrange_notice_info($problem_api_value);
-
 			$evaluate_item = $this->api_rest('GET','evaluateItems/index.json','kentei_id=1',array());
-
 			// view用に連想配列の中身を整える
 			$arrange_confirm_data = $this->Evaluate->arrange_confirm_info($arrange_notice_data,$problem_id,$evaluate_item);
 			$this->set('confirm_data',$arrange_confirm_data);
-			// $this->set('data',$problem_id);
 		}else{
 			$this->redirect('not_found_data');
 		}
 	}
-	// $data = $this->Session->read('arrange_notice_data');
-	// $this->set('data',$data);
+
+
+	// パラメータの内容でProblems APIを叩く
+	public function get_problems_api($api_pram){
+		$problems_api_obj = $this->api_rest('GET','problems/index.json',$api_pram,array());
+		return $problems_api_obj;
+	}
 
 
 
