@@ -52,11 +52,8 @@
 						$evaluator_id[] = $evaluate_value['user_id'];
 						$created_time[] = $evaluate_value['created'];
 					}
-					$evaluator_unique_id = array_unique($evaluator_id);
-					$notice_data[$problem_row_num]['EvaluatorIdList'] = $evaluator_unique_id;
-					$last_crelated_time = max($created_time);
-					$notice_data[$problem_row_num]['LastCreatedTime'] = $last_crelated_time;
-
+					$notice_data[$problem_row_num]['EvaluatorIdList'] = array_unique($evaluator_id);
+					$notice_data[$problem_row_num]['LastCreatedTime'] = max($created_time);
 					$problem_row_num++;
 				}
 			}
