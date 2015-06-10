@@ -48,7 +48,7 @@
 					$notice_data[$problem_row_num]['Problem'] = $notice_value['Problem'];
 					$notice_data[$problem_row_num]['EvaluateComment'] = $notice_value['EvaluateComment'];
 
-					foreach($notice_value['EvaluateComment'] as $evaluate_num => $evaluate_value){
+					foreach($notice_value['EvaluateComment'] as $evaluate_value){
 						$evaluator_id[] = $evaluate_value['user_id'];
 						$created_time[] = $evaluate_value['created'];
 					}
