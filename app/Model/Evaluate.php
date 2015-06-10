@@ -41,7 +41,7 @@
 			return $arrange_data;
 		}
 
-		public function arrange_notice($problem_api_value){
+		public function arrange_notice_info($problem_api_value){
 			$problem_row_num = 0;
 			foreach($problem_api_value['response']['Problems'] as $notice_value){
 				if(!empty($notice_value['EvaluateComment'])){
@@ -65,7 +65,7 @@
 			}
 		}
 
-		public function arrange_confirm($arrange_notice_data,$problem_id,$evaluate_item){
+		public function arrange_confirm_info($arrange_notice_data,$problem_id,$evaluate_item){
 			foreach($arrange_notice_data as $notice_num => $notice_value){
 				// 対象の問題情報を格納
 				if($notice_value['Problem']['id'] == $problem_id){

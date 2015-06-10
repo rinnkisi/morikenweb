@@ -89,7 +89,7 @@ class ProblemsController extends AppController{
 		$problem_api_pram = 'kentei_id=1&employ=0&user_id=6&item=100&public_flag=1';
 		$problem_api_value = $this->api_rest('GET','problems/index.json',$problem_api_pram,array());
 		// view用に連想配列の中身を整える
-		$arrange_notice_data = $this->Evaluate->arrange_notice($problem_api_value);
+		$arrange_notice_data = $this->Evaluate->arrange_notice_info($problem_api_value);
 		if(empty($arrange_notice_data['not_found_flug'])){
 			$this->set('notice_data',$arrange_notice_data);
 		}else{
@@ -102,12 +102,12 @@ class ProblemsController extends AppController{
 			// user_idのパラメータは後ほど変更
 			$problem_api_pram = 'kentei_id=1&employ=0&user_id=6&item=100&public_flag=1';
 			$problem_api_value = $this->api_rest('GET','problems/index.json',$problem_api_pram,array());
-			$arrange_notice_data = $this->Evaluate->arrange_notice($problem_api_value);
+			$arrange_notice_data = $this->Evaluate->arrange_notice_info($problem_api_value);
 
 			$evaluate_item = $this->api_rest('GET','evaluateItems/index.json','kentei_id=1',array());
 
 			// view用に連想配列の中身を整える
-			$arrange_confirm_data = $this->Evaluate->arrange_confirm($arrange_notice_data,$problem_id,$evaluate_item);
+			$arrange_confirm_data = $this->Evaluate->arrange_confirm_info($arrange_notice_data,$problem_id,$evaluate_item);
 			$this->set('confirm_data',$arrange_confirm_data);
 			// $this->set('data',$problem_id);
 		}else{
