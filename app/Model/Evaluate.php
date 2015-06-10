@@ -101,12 +101,7 @@
 					}
 				}
 			}
-			// $arrange_confirm_data['problem']
-			// $data["a"] = $arrange_notice_data;
-			// $data["b"] = $problem_id;
-			// $data["c"] = $evaluate_item;
 			return $confirm_data;
-			// return $data;
 		}
 	}
 ?>
