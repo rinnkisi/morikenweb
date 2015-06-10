@@ -23,19 +23,19 @@
 			// $row_num = 1;
 			foreach ($eval_cont['response']['EvaluateComments'] as $item_id => $eval_value){
 				// $arrange_data[$item_id]['row_num'] = $row_num;
-				$arrange_data[$item_id]['eval_item_id'] 				= $eval_value['EvaluateComment']['evaluate_item_id'];
-				$arrange_data[$item_id]['eval_commnent'] 				= $eval_value['EvaluateComment']['evaluate_comment'];
+				$arrange_data[$item_id]['eval_item_id'] = $eval_value['EvaluateComment']['evaluate_item_id'];
+				$arrange_data[$item_id]['eval_commnent'] = $eval_value['EvaluateComment']['evaluate_comment'];
 				$arrange_data[$item_id]['eval_confirm_comment'] = $eval_value['EvaluateComment']['confirm_comment'];
-				$arrange_data[$item_id]['eval_confirm_flag'] 		= $eval_value['EvaluateComment']['confirm_flag'];
-				$arrange_data[$item_id]['eval_created'] 				= $eval_value['EvaluateComment']['created'];
+				$arrange_data[$item_id]['eval_confirm_flag'] = $eval_value['EvaluateComment']['confirm_flag'];
+				$arrange_data[$item_id]['eval_created'] = $eval_value['EvaluateComment']['created'];
 
-				$arrange_data[$item_id]['prob_sentence'] 			= $eval_value['Problem']['sentence'];
-				$arrange_data[$item_id]['prob_right_answer'] 	= $eval_value['Problem']['right_answer'];
+				$arrange_data[$item_id]['prob_sentence'] = $eval_value['Problem']['sentence'];
+				$arrange_data[$item_id]['prob_right_answer'] = $eval_value['Problem']['right_answer'];
 				$arrange_data[$item_id]['prob_wrong_answer1'] = $eval_value['Problem']['wrong_answer1'];
 				$arrange_data[$item_id]['prob_wrong_answer2'] = $eval_value['Problem']['wrong_answer2'];
 				$arrange_data[$item_id]['prob_wrong_answer3'] = $eval_value['Problem']['wrong_answer3'];
-				$arrange_data[$item_id]['prob_created'] 			= $eval_value['Problem']['created'];
-				$arrange_data[$item_id]['prob_modified'] 			= $eval_value['Problem']['modified'];
+				$arrange_data[$item_id]['prob_created'] = $eval_value['Problem']['created'];
+				$arrange_data[$item_id]['prob_modified'] = $eval_value['Problem']['modified'];
 				// $row_num++;
 			}
 			return $arrange_data;
@@ -72,13 +72,13 @@
 			foreach($arrange_notice_data as $notice_num => $notice_value){
 				// 対象の問題情報を格納
 				if($notice_value['Problem']['id'] == $problem_id){
-					$confirm_data['Problem']['sentence']			= $notice_value['Problem']['sentence'];
-					$confirm_data['Problem']['right_answer']	= $notice_value['Problem']['right_answer'];
+					$confirm_data['Problem']['sentence'] = $notice_value['Problem']['sentence'];
+					$confirm_data['Problem']['right_answer'] = $notice_value['Problem']['right_answer'];
 					$confirm_data['Problem']['wrong_answer1']	= $notice_value['Problem']['wrong_answer1'];
 					$confirm_data['Problem']['wrong_answer2']	= $notice_value['Problem']['wrong_answer2'];
 					$confirm_data['Problem']['wrong_answer3']	= $notice_value['Problem']['wrong_answer3'];
-					$confirm_data['Problem']['created']				= $notice_value['Problem']['created'];
-					$confirm_data['Problem']['modified']			= $notice_value['Problem']['modified'];
+					$confirm_data['Problem']['created'] = $notice_value['Problem']['created'];
+					$confirm_data['Problem']['modified'] = $notice_value['Problem']['modified'];
 
 					// 評価者ごとに各コメント情報を表示できるように調節
 					$row_num = 0;
@@ -88,7 +88,7 @@
 								$confirm_data['Evaluate'][$row_num]['evaluator_id'] = $list_value;
 								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['evaluate_item_id'] = $evaluate_value['evaluate_item_id'];
 								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['evaluate_comment'] = $evaluate_value['evaluate_comment'];
-								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['created'] 					= $evaluate_value['created'];
+								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['created'] = $evaluate_value['created'];
 
 								foreach($evaluate_item['response']['EvaluateItems'] as $item_num => $item_value){
 									if($evaluate_value['evaluate_item_id'] == $item_value['EvaluateItem']['id']){
