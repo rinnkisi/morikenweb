@@ -85,16 +85,19 @@ class ProblemsController extends AppController{
 
 	// 作問者に対しての評価機能
 	public function notice_evaluation(){
-		// user_idのパラメータは後ほど変更
+		// // user_idのパラメータは後ほど変更
 		$problem_api_pram = 'kentei_id=1&employ=0&user_id=6&item=100&public_flag=1';
 		$problem_api_value = $this->api_rest('GET','problems/index.json',$problem_api_pram,array());
-		// view用に連想配列の中身を整える
+		// // view用に連想配列の中身を整える
 		$arrange_notice_data = $this->Evaluate->arrange_notice_info($problem_api_value);
+		// $this->Session->write('arrange_notice_data',$arrange_notice_data);
 		if(empty($arrange_notice_data['not_found_flug'])){
 			$this->set('notice_data',$arrange_notice_data);
 		}else{
 			$this->redirect('not_found_data');
 		}
+		// $arrange_notice_data = $this->Evaluate->arrange_notice_info($problem_api_value);
+		// $this->set('notice_data',$arrange_notice_data);
 	}
 
 	public function confirm_evaluation($problem_id){
@@ -114,6 +117,9 @@ class ProblemsController extends AppController{
 			$this->redirect('not_found_data');
 		}
 	}
+	// $data = $this->Session->read('arrange_notice_data');
+	// $this->set('data',$data);
+
 
 
 	public function not_found_data(){
