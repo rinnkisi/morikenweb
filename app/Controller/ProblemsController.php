@@ -10,12 +10,18 @@ class ProblemsController extends AppController{
 	public function show_evaluation_problem(){
 		// 非公開問題
 		$priv_api_pram = 'kentei_id=1&employ=0&public_flag=0&category_id=0&item=100';
-		$show_obj['priv'] = $this->api_rest('GET','problems/index.json',$priv_api_pram,array());
+		$show_obj['priv'] = $this->get_problems_api($priv_api_pram);
 		// 公開問題
 		$publ_api_pram = 'kentei_id=1&employ=0&public_flag=1&category_id=0&item=100';
-		$show_obj['publ'] = $this->api_rest('GET','problems/index.json',$publ_api_pram,array());
-		$this->set('data',$show_obj);
+		$show_obj['publ'] = $this->get_problems_api($publ_api_pram);
+		$this->set('show_obj',$show_obj);
 	}
+	// パラメータの内容でProblems APIを叩く
+	public function get_problems_api($api_pram){
+		$problems_api_obj = $this->api_rest('GET','problems/index.json',$api_pram,array());
+		return $problems_api_obj;
+	}
+
 	// 選択した問題への評価とコメント
 	public function check_evaluation_problem($id){ //making question ID
 		// 選択した問題のID
