@@ -43,7 +43,7 @@
 
 		public function arrange_notice($problem_api_value){
 			$problem_row_num = 0;
-			foreach($problem_api_value['response']['Problems'] as $notice_num => $notice_value){
+			foreach($problem_api_value['response']['Problems'] as $notice_value){
 				if(!empty($notice_value['EvaluateComment'])){
 					$notice_data[$problem_row_num]['Problem'] = $notice_value['Problem'];
 					$notice_data[$problem_row_num]['EvaluateComment'] = $notice_value['EvaluateComment'];
@@ -88,7 +88,7 @@
 								$confirm_data['Evaluate'][$row_num]['evaluator_id'] = $list_value;
 								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['evaluate_item_id'] = $evaluate_value['evaluate_item_id'];
 								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['evaluate_comment'] = $evaluate_value['evaluate_comment'];
-								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['created'] = $evaluate_value['created'];
+								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['created'] 					= $evaluate_value['created'];
 
 								foreach($evaluate_item['response']['EvaluateItems'] as $item_num => $item_value){
 									if($evaluate_value['evaluate_item_id'] == $item_value['EvaluateItem']['id']){
