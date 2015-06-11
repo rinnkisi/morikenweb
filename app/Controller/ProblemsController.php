@@ -21,7 +21,7 @@ class ProblemsController extends AppController{
 		// 選択した問題のID
 		$check_obj['problem_id'] = $id;
 		// 評価項目呼び出し
-		$check_obj['evaluate_items'] = $this->api_rest('GET','evaluateItems/index.json','kentei_id=1',array());
+		$check_obj['evaluate_items'] = $this->get_evaluateItems_api('kentei_id=1');
 		$this->set('data',$check_obj);
 	}
 	// 登録前に評価・コメントの内容を確認
@@ -31,7 +31,7 @@ class ProblemsController extends AppController{
 		$arrange_eval_data['Problem_info']['id'] = $eval_cont['Problem_info']['id'];
 		$this->set('arrange_eval_data',$arrange_eval_data);
 	}
-	// 評価登録機能
+	// 評価登録機能'kentei_id=1'
 	public function add_evaluation_problem(){
 		// ログイン機能とは未連結、ユーザIDはダミー
 		$eval_data = $this->request->data;
@@ -41,8 +41,7 @@ class ProblemsController extends AppController{
 			$add_api_pram[$eval_id]['problem_id'] = $eval_data['Problem_info']['id'];
 			$add_api_pram[$eval_id]['user_id'] = 12;
 			$add_api_pram[$eval_id]['evaluate_comment'] = $eval_value['comment'];
-
-			$result[$eval_id] = $this->api_rest('POST','evaluateComments/add.json',null,$add_api_pram[$eval_id]);
+			$result[$eval_id] = $this->post_evaluateComments_api($add_api_pram[$eval_id]);
 		}
 		foreach($result as $evaluate_item_id => $evaluate_value){
 			if(!empty($evaluate_value['error']['code'])){
@@ -54,7 +53,6 @@ class ProblemsController extends AppController{
 		}else{
 			$this->redirect('show_evaluation_problem');
 		}
-		// $this->set('data',$error_list);
 	}
 
 	// add_ecaluatetion_problemからerror_listを受け渡し、コメントを催促・入力したい
@@ -64,16 +62,12 @@ class ProblemsController extends AppController{
 	// error_listにある評価項目に対してのコメントを再登録したい
 	public function add_again_evaluation_problem(){
 	}
-
-
-	// 評価履歴表示
+	// 評価履歴の一覧を表示
 	public function show_evaluation_history(){
-		$eval_record = $this->api_rest('GET','evaluateComments/index.json','user_id=7',array());
+		$eval_record = $this->get_evaluateComments_api('user_id=7');
 		$arrange_eval_data = $this->Evaluate->eval_record_arrange($eval_record);
-		// $this->set('arrange_eval_data',$arrange_eval_data);
 		$this->set('arrange_eval_data',$arrange_eval_data);
 	}
-
 	// 作問者に対しての評価機能
 	public function notice_evaluation(){
 		// user_idのパラメータは後ほど変更
@@ -94,7 +88,7 @@ class ProblemsController extends AppController{
 			$problem_api_pram = 'kentei_id=1&employ=0&user_id=6&item=100&public_flag=1';
 			$problem_api_value = $this->get_problems_api($problem_api_pram);
 			$arrange_notice_data = $this->Evaluate->arrange_notice_info($problem_api_value);
-			$evaluate_item = $this->api_rest('GET','evaluateItems/index.json','kentei_id=1',array());
+			$evaluate_item = $this->get_evaluateItems_api('kentei_id=1');
 			// view用に連想配列の中身を整える
 			$arrange_confirm_data = $this->Evaluate->arrange_confirm_info($arrange_notice_data,$problem_id,$evaluate_item);
 			$this->set('confirm_data',$arrange_confirm_data);
@@ -104,11 +98,32 @@ class ProblemsController extends AppController{
 	}
 
 
-	// パラメータの内容でProblems APIを叩く
+	// パラメータの内容で problems/index.json API を叩く
 	public function get_problems_api($api_pram){
 		$problems_api_obj = $this->api_rest('GET','problems/index.json',$api_pram,array());
 		return $problems_api_obj;
 	}
+	// パラメータの内容で 	evaluateComments/index.json API を叩く
+	public function get_evaluateComments_api($api_pram){
+		$evaluateComments_api_obj = $this->api_rest('GET','evaluateComments/index.json','user_id=7',array());
+		return $evaluateComments_api_obj;
+	}
+
+	// パラメータの内容で evaluateItems/index.json API を叩く
+	public function get_evaluateItems_api($api_pram){
+		$evaluateItems_obj_api = $this->api_rest('GET','evaluateItems/index.json','kentei_id=1',array());
+		return $evaluateItems_obj_api;
+	}
+	// パラメータの内容で evaluateComments/add.json API にpostする
+	public function post_evaluateComments_api($api_pram){
+		$api_result = $this->api_rest('POST','evaluateComments/add.json',null,$api_pram);
+		return $api_result;
+	}
+
+	// public function evaluateComments/add($value='')
+	// {
+	// 	# code...
+	// }
 
 
 
