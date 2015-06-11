@@ -118,15 +118,10 @@ class ProblemsController extends AppController {
         $this->set('show_data',$url['response']['Problems']);
         debug($url['response']['Problems']);
     }
-    function view_problem($id= null){
+    function view_problem($id= null){//問題表示画面
         $view_api_pram = "kentei_id=1&item=1&grade=0&public_flag=0&employ=0&id=".$id;
         $url = $this->api_rest("GET","problems/index.json",$view_api_pram,array());
-        debug($url);
-        //$this->set();
+        $this->set('view_data',$url['response']['Problems']['0']);
     }
-
-        //評価待ち
-        //調整中
-        //公開済み
-    }
+}
 ?>

@@ -1,5 +1,5 @@
 <?php
-
+debug($view_data['Problem']);
 echo "問題の詳細".$this->Html->tag('br');
 echo "[作成者]".$this->Html->tag('br');
 echo "[作成日時]".$this->Html->tag('br');
