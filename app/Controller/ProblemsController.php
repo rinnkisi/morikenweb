@@ -96,8 +96,6 @@ class ProblemsController extends AppController{
 			$this->redirect('not_found_data');
 		}
 	}
-
-
 	// パラメータの内容で problems/index.json API を叩く
 	public function get_problems_api($api_pram){
 		$problems_api_obj = $this->api_rest('GET','problems/index.json',$api_pram,array());
@@ -105,13 +103,12 @@ class ProblemsController extends AppController{
 	}
 	// パラメータの内容で 	evaluateComments/index.json API を叩く
 	public function get_evaluateComments_api($api_pram){
-		$evaluateComments_api_obj = $this->api_rest('GET','evaluateComments/index.json','user_id=7',array());
+		$evaluateComments_api_obj = $this->api_rest('GET','evaluateComments/index.json',$api_pram,array());
 		return $evaluateComments_api_obj;
 	}
-
 	// パラメータの内容で evaluateItems/index.json API を叩く
 	public function get_evaluateItems_api($api_pram){
-		$evaluateItems_obj_api = $this->api_rest('GET','evaluateItems/index.json','kentei_id=1',array());
+		$evaluateItems_obj_api = $this->api_rest('GET','evaluateItems/index.json',$api_pram,array());
 		return $evaluateItems_obj_api;
 	}
 	// パラメータの内容で evaluateComments/add.json API にpostする
@@ -119,14 +116,6 @@ class ProblemsController extends AppController{
 		$api_result = $this->api_rest('POST','evaluateComments/add.json',null,$api_pram);
 		return $api_result;
 	}
-
-	// public function evaluateComments/add($value='')
-	// {
-	// 	# code...
-	// }
-
-
-
 	public function not_found_data(){
 	}
 }

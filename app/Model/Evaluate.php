@@ -45,16 +45,27 @@
 			$problem_row_num = 0;
 			foreach($problem_api_value['response']['Problems'] as $notice_value){
 				if(!empty($notice_value['EvaluateComment'])){
-					$notice_data[$problem_row_num]['Problem'] = $notice_value['Problem'];
-					$notice_data[$problem_row_num]['EvaluateComment'] = $notice_value['EvaluateComment'];
-
-					foreach($notice_value['EvaluateComment'] as $evaluate_value){
-						$evaluator_id[] = $evaluate_value['user_id'];
-						$created_time[] = $evaluate_value['created'];
+					foreach($notice_value['EvaluateComment'] as $evaluate_num => $evaluate_value){
+						// confirm_flugが未確認(=1)のものだけ、
+						if($evaluate_value['confirm_flag'] == 1){
+							// 評価内容を入れる
+							$notice_data[$problem_row_num]['EvaluateComment'][] = $evaluate_value;
+							// 評価者のID（被っているものも全て）
+							$evaluator_id[] = $evaluate_value['user_id'];
+							// 評価した日時
+							$created_time[] = $evaluate_value['created'];
+						}
 					}
-					$notice_data[$problem_row_num]['EvaluatorIdList'] = array_unique($evaluator_id);
-					$notice_data[$problem_row_num]['LastCreatedTime'] = max($created_time);
-					$problem_row_num++;
+					// 未確認の評価が１つ以上あるとき
+					if(!empty($notice_data[$problem_row_num]['EvaluateComment'])){
+						// 問題情報を入れる
+						$notice_data[$problem_row_num]['Problem'] = $notice_value['Problem'];
+						// 被っている評価者IDを除去
+						$notice_data[$problem_row_num]['EvaluatorIdList'] = array_unique($evaluator_id);
+						// 最終更新時間を求める
+						$notice_data[$problem_row_num]['LastCreatedTime'] = max($created_time);
+						$problem_row_num++;
+					}
 				}
 			}
 			if(!empty($notice_data)){
@@ -76,21 +87,19 @@
 					$confirm_data['Problem']['wrong_answer3']	= $notice_value['Problem']['wrong_answer3'];
 					$confirm_data['Problem']['created'] = $notice_value['Problem']['created'];
 					$confirm_data['Problem']['modified'] = $notice_value['Problem']['modified'];
-
 					// 評価者ごとに各コメント情報を表示できるように調節
 					$row_num = 0;
-					foreach($notice_value['EvaluatorIdList'] as $list_num => $list_value){
+					foreach($notice_value['EvaluatorIdList'] as $list_value){
 						foreach($notice_value['EvaluateComment'] as $evaluate_num => $evaluate_value){
 							if($evaluate_value['user_id'] == $list_value){
 								$confirm_data['Evaluate'][$row_num]['evaluator_id'] = $list_value;
 								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['evaluate_item_id'] = $evaluate_value['evaluate_item_id'];
 								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['evaluate_comment'] = $evaluate_value['evaluate_comment'];
-								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['created'] 					= $evaluate_value['created'];
-
-								foreach($evaluate_item['response']['EvaluateItems'] as $item_num => $item_value){
-									if($evaluate_value['evaluate_item_id'] == $item_value['EvaluateItem']['id']){
+								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['created'] = $evaluate_value['created'];
+								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['confirm_flag'] = $evaluate_value['created'];
+								foreach($evaluate_item['response']['EvaluateItems'] as $item_value){
+									if($evaluate_value['evaluate_item_id'] == $item_value['EvaluateItem']['id'])
 										$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['evaluate_item_name'] = $item_value['EvaluateItem']['name'];
-									}
 								}
 							}
 						}
