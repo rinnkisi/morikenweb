@@ -31,4 +31,4 @@
 	<?php echo $this->html->tag('hr') ?>
 <?php endforeach ;?>
 <?php echo $this->Html->link('戻る','notice_evaluation', array('class' => 'button')); ?>
-<?php //debug($confirm_data); ?>
+<?php debug($confirm_data); ?>
