@@ -75,7 +75,9 @@ class ProblemsController extends AppController{
 	}
 	// 評価履歴の一覧を表示
 	public function show_evaluation_history(){
-		$eval_record = $this->get_evaluateComments_api('user_id=7');
+		// $eval_record = $this->get_evaluateComments_api('user_id=7');
+		$api_url = 'evaluateComments/index.json';
+		$eval_record = $this->get_api_data($api_url,'user_id=7');
 		$arrange_eval_data = $this->Evaluate->eval_record_arrange($eval_record);
 		$this->set('arrange_eval_data',$arrange_eval_data);
 	}
@@ -97,11 +99,10 @@ class ProblemsController extends AppController{
 	public function confirm_evaluation($problem_id){
 		if(!empty($problem_id)){
 			// user_idのパラメータは後ほど変更
-			$problem_api_pram = 'kentei_id=1&employ=0&user_id=6&item=100&public_flag=1';
+			$problem_api_pram = 'kentei_id=1&employ=0&user_id=12&item=100&public_flag=0';
 			$api_url = 'problems/index.json';
-			// $problem_api_value = $this->get_problems_api($problem_api_pram);
 			$problem_api_value = $this->get_api_data($api_url,$problem_api_pram);
-
+			// notice_evaluation()で用いたデータを再現
 			$arrange_notice_data = $this->Evaluate->arrange_notice_info($problem_api_value);
 			$evaluate_item = $this->get_evaluateItems_api('kentei_id=1');
 			// view用に連想配列の中身を整える
@@ -112,10 +113,10 @@ class ProblemsController extends AppController{
 		}
 	}
 	// パラメータの内容で problems/index.json API を叩く
-	public function get_problems_api($api_pram){
-		$problems_api_obj = $this->api_rest('GET','problems/index.json',$api_pram,array());
-		return $problems_api_obj;
-	}
+	// public function get_problems_api($api_pram){
+	// 	$problems_api_obj = $this->api_rest('GET','problems/index.json',$api_pram,array());
+	// 	return $problems_api_obj;
+	// }
 	// パラメータの内容で 	evaluateComments/index.json API を叩く
 	public function get_evaluateComments_api($api_pram){
 		$evaluateComments_api_obj = $this->api_rest('GET','evaluateComments/index.json',$api_pram,array());
