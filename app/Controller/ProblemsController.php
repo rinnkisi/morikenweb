@@ -3,8 +3,17 @@ class ProblemsController extends AppController{
 	public $name = "Problems";
 	public $uses = array('Evaluate');
 	public function index(){
-		$this->set('test',$this->request->data);
-		// $this->set('test',"test");
+		// $problem_api_pram = 'kentei_id=1&employ=0&user_id=12&item=100&public_flag=0';
+		// $api_url = 'problems/index.json';
+		// $problem_api_value = $this->get_api_data($api_url,$problem_api_pram);
+		// // view用に連想配列の中身を整える
+		// // $arrange_notice_data = $this->Evaluate->arrange_notice_info($problem_api_value);
+		// // if(empty($arrange_notice_data['not_found_flug'])){
+		// // 	$this->set('notice_data',$arrange_notice_data);
+		// // }else{
+		// // 	$this->redirect('not_found_data');
+		// // }
+		// 	$this->set('test',$problem_api_value);
 	}
 	// ユーザが作問した問題を一覧表示
 	public function show_evaluation_problem(){
@@ -73,9 +82,8 @@ class ProblemsController extends AppController{
 	// 作問者に対しての評価機能
 	public function notice_evaluation(){
 		// user_idのパラメータは後ほど変更
-		$problem_api_pram = 'kentei_id=1&employ=0&user_id=6&item=100&public_flag=1';
+		$problem_api_pram = 'kentei_id=1&employ=0&user_id=12&item=100&public_flag=0';
 		$api_url = 'problems/index.json';
-		// $problem_api_value = $this->get_problems_api($problem_api_pram);
 		$problem_api_value = $this->get_api_data($api_url,$problem_api_pram);
 		// view用に連想配列の中身を整える
 		$arrange_notice_data = $this->Evaluate->arrange_notice_info($problem_api_value);
