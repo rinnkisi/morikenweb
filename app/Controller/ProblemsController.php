@@ -17,6 +17,7 @@ class ProblemsController extends AppController{
 	}
 	// ユーザが作問した問題を一覧表示
 	public function show_evaluation_problem(){
+		// $api_urlは後に定数化
 		$api_url = 'problems/index.json';
 		// 非公開問題
 		$priv_api_pram = 'kentei_id=1&employ=0&public_flag=0&category_id=0&item=100';
@@ -31,6 +32,7 @@ class ProblemsController extends AppController{
 		// 選択した問題のID
 		$check_obj['problem_id'] = $id;
 		// 評価項目呼び出し
+		// $api_urlは後に定数化
 		$api_url = 'evaluateItems/index.json';
 		$check_obj['evaluate_items'] = $this->get_api_data($api_url,'kentei_id=1');
 		$this->set('data',$check_obj);
@@ -75,7 +77,7 @@ class ProblemsController extends AppController{
 	}
 	// 評価履歴の一覧を表示
 	public function show_evaluation_history(){
-		// $eval_record = $this->get_evaluateComments_api('user_id=7');
+		// $api_urlは後に定数化
 		$api_url = 'evaluateComments/index.json';
 		$eval_record = $this->get_api_data($api_url,'user_id=7');
 		$arrange_eval_data = $this->Evaluate->eval_record_arrange($eval_record);
@@ -85,6 +87,7 @@ class ProblemsController extends AppController{
 	public function notice_evaluation(){
 		// user_idのパラメータは後ほど変更
 		$problem_api_pram = 'kentei_id=1&employ=0&user_id=12&item=100&public_flag=0';
+		// $api_urlは後に定数化
 		$api_url = 'problems/index.json';
 		$problem_api_value = $this->get_api_data($api_url,$problem_api_pram);
 		// view用に連想配列の中身を整える
@@ -100,11 +103,15 @@ class ProblemsController extends AppController{
 		if(!empty($problem_id)){
 			// user_idのパラメータは後ほど変更
 			$problem_api_pram = 'kentei_id=1&employ=0&user_id=12&item=100&public_flag=0';
+			// $api_urlは後に定数化
 			$api_url = 'problems/index.json';
 			$problem_api_value = $this->get_api_data($api_url,$problem_api_pram);
 			// notice_evaluation()で用いたデータを再現
 			$arrange_notice_data = $this->Evaluate->arrange_notice_info($problem_api_value);
-			$evaluate_item = $this->get_evaluateItems_api('kentei_id=1');
+
+			// $api_urlは後に定数化
+			$api_url = 'evaluateItems/index.json';
+			$evaluate_item = $this->get_api_data($api_url,'kentei_id=1');
 			// view用に連想配列の中身を整える
 			$arrange_confirm_data = $this->Evaluate->arrange_confirm_info($arrange_notice_data,$problem_id,$evaluate_item);
 			$this->set('confirm_data',$arrange_confirm_data);
@@ -112,34 +119,17 @@ class ProblemsController extends AppController{
 			$this->redirect('not_found_data');
 		}
 	}
-	// パラメータの内容で problems/index.json API を叩く
-	// public function get_problems_api($api_pram){
-	// 	$problems_api_obj = $this->api_rest('GET','problems/index.json',$api_pram,array());
-	// 	return $problems_api_obj;
-	// }
-	// パラメータの内容で 	evaluateComments/index.json API を叩く
-	public function get_evaluateComments_api($api_pram){
-		$evaluateComments_api_obj = $this->api_rest('GET','evaluateComments/index.json',$api_pram,array());
-		return $evaluateComments_api_obj;
-	}
-	// パラメータの内容で evaluateItems/index.json API を叩く
-	public function get_evaluateItems_api($api_pram){
-		$evaluateItems_obj_api = $this->api_rest('GET','evaluateItems/index.json',$api_pram,array());
-		return $evaluateItems_obj_api;
-	}
 	// どのAPIメソッドを使うかは$urlで判断する
 	// $api_pramのパラメータでAPIを叩く
 	public function get_api_data($url,$api_pram){
 		$api_obj = $this->api_rest('GET',$url,$api_pram,array());
 		return $api_obj;
 	}
-
 	// パラメータの内容で evaluateComments/add.json API にpostする
 	public function post_evaluateComments_api($api_pram){
 		$api_result = $this->api_rest('POST','evaluateComments/add.json',null,$api_pram);
 		return $api_result;
 	}
-	public function not_found_data(){
-	}
+	public function not_found_data(){}
 }
 ?>
