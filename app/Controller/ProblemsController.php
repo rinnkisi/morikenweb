@@ -8,12 +8,13 @@ class ProblemsController extends AppController{
 	}
 	// ユーザが作問した問題を一覧表示
 	public function show_evaluation_problem(){
+		$api_url = 'problems/index.json';
 		// 非公開問題
 		$priv_api_pram = 'kentei_id=1&employ=0&public_flag=0&category_id=0&item=100';
-		$show_obj['priv'] = $this->get_problems_api($priv_api_pram);
+		$show_obj['priv'] = $this->get_api_data($api_url,$priv_api_pram);
 		// 公開問題
 		$publ_api_pram = 'kentei_id=1&employ=0&public_flag=1&category_id=0&item=100';
-		$show_obj['publ'] = $this->get_problems_api($publ_api_pram);
+		$show_obj['publ'] = $this->get_api_data($api_url,$publ_api_pram);
 		$this->set('show_obj',$show_obj);
 	}
 	// 選択した問題への評価とコメント
@@ -111,6 +112,13 @@ class ProblemsController extends AppController{
 		$evaluateItems_obj_api = $this->api_rest('GET','evaluateItems/index.json',$api_pram,array());
 		return $evaluateItems_obj_api;
 	}
+	// どのAPIメソッドを使うかは$urlで判断する
+	// $api_pramのパラメータでAPIを叩く
+	public function get_api_data($url,$api_pram){
+		$api_obj = $this->api_rest('GET',$url,$api_pram,array());
+		return $api_obj;
+	}
+
 	// パラメータの内容で evaluateComments/add.json API にpostする
 	public function post_evaluateComments_api($api_pram){
 		$api_result = $this->api_rest('POST','evaluateComments/add.json',null,$api_pram);
