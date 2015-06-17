@@ -22,7 +22,8 @@ class ProblemsController extends AppController{
 		// 選択した問題のID
 		$check_obj['problem_id'] = $id;
 		// 評価項目呼び出し
-		$check_obj['evaluate_items'] = $this->get_evaluateItems_api('kentei_id=1');
+		$api_url = 'evaluateItems/index.json';
+		$check_obj['evaluate_items'] = $this->get_api_data($api_url,'kentei_id=1');
 		$this->set('data',$check_obj);
 	}
 	// 登録前に評価・コメントの内容を確認
@@ -73,7 +74,9 @@ class ProblemsController extends AppController{
 	public function notice_evaluation(){
 		// user_idのパラメータは後ほど変更
 		$problem_api_pram = 'kentei_id=1&employ=0&user_id=6&item=100&public_flag=1';
-		$problem_api_value = $this->get_problems_api($problem_api_pram);
+		$api_url = 'problems/index.json';
+		// $problem_api_value = $this->get_problems_api($problem_api_pram);
+		$problem_api_value = $this->get_api_data($api_url,$problem_api_pram);
 		// view用に連想配列の中身を整える
 		$arrange_notice_data = $this->Evaluate->arrange_notice_info($problem_api_value);
 		if(empty($arrange_notice_data['not_found_flug'])){
