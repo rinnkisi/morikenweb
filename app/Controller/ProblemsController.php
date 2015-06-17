@@ -98,7 +98,10 @@ class ProblemsController extends AppController{
 		if(!empty($problem_id)){
 			// user_idのパラメータは後ほど変更
 			$problem_api_pram = 'kentei_id=1&employ=0&user_id=6&item=100&public_flag=1';
-			$problem_api_value = $this->get_problems_api($problem_api_pram);
+			$api_url = 'problems/index.json';
+			// $problem_api_value = $this->get_problems_api($problem_api_pram);
+			$problem_api_value = $this->get_api_data($api_url,$problem_api_pram);
+
 			$arrange_notice_data = $this->Evaluate->arrange_notice_info($problem_api_value);
 			$evaluate_item = $this->get_evaluateItems_api('kentei_id=1');
 			// view用に連想配列の中身を整える
