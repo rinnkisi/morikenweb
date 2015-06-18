@@ -8,4 +8,8 @@
 		array('controller' => 'problems', 'action' => 'view_problem',$show_data['Problem']['id'],$show_data['Problem']['type']));
 	echo $this->Html->tag('br');
 	endforeach;
+	echo $this->Html->tag('br');
+	echo $this->Html->tag('br');
+	echo $this->Html->link("トップページに戻る",
+		array('controller' => 'problems', 'action' => 'top'));
 ?>

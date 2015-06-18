@@ -70,7 +70,7 @@ class ProblemsController extends AppController {
             //$tmp=$this->Problem->validation_category($record_data);
 
             if(!empty($record_data['category_id'])){//category_idを戻す処理
-                $record_data['category_id'] = $record_data['category_id']-1;
+                $record_data['category_id'] = $record_data['category_id'];
             }
             $url = $this->api_rest("POST","problems/add.json","",$record_data);
             //debug($tmp);
