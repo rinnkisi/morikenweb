@@ -116,16 +116,43 @@ class ProblemsController extends AppController {
         $url = $this->api_rest("GET","problems/index.json",$show_api_pram,array());
         //debug($url);
         $this->set('show_data',$url['response']['Problems']);
-        debug($url['response']['Problems']);
     }
-    function view_problem($id= null){//問題表示画面
+    function view_problem($id= null,$type= null){//問題表示画面
+        debug($type);
         $view_api_pram = "kentei_id=1&item=1&grade=0&public_flag=0&employ=0&id=".$id;
         $url = $this->api_rest("GET","problems/index.json",$view_api_pram,array());
         debug($url);
-        $this->set('view_data',$url['response']['Problems']['0']);
+        $view_data=$url['response']['Problems']['0'];
+        $this->Session->write('type',$type);
+        $this->Session->write('id',$id);
+        $this->Session->write('default_data',$view_data);
+        $this->set('view_data',$view_data);
+        if("1"==$type){
+            $this->render('view_select');
+        }else if("2"==$type){
+            $this->render('view_descriptive');
+        }
     }
-    function updata_problem(){
-
+    function edit_problem(){
+        //編集画面
+        $this->set('kentei_id','1');
+        $category_api_pram = 'kentei_id=1';
+        //カテゴリーAPIを使用,dataに送るのは空の配列
+        $categories = $this->api_rest("GET","categories/index.json",$category_api_pram,array());
+        //カテゴリをわかりやすくするためにモデルで処理、セッション管理
+        $this->Session->write('category_options',$this->Problem->category_sort($categories));
+        $this->Session->write('subcategory_options',$this->Problem->subcategory_sort($categories));
+        $this->set('category_options',$this->Session->read('category_options'));
+        $this->set('subcategory_options',$this->Session->read('subcategory_options'));
+        $default_data = $this->Session->read('default_data');
+        debug($default_data);
+        $this->set('default',$this->Session->read('default_data'));
+        //typeを追加する。１は選択式問題。初期は選択式問題
+        $this->set('type',$this->Session->read('type'));
+        $this->render('edit_select');
+    }
+    function post_problem(){
+        //投稿画面
     }
 }
 ?>

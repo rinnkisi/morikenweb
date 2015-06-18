@@ -12,11 +12,11 @@ echo "[選択肢1]：".$view_data['Problem']['wrong_answer1'].$this->Html->tag('
 echo "[選択肢2]：".$view_data['Problem']['wrong_answer2'].$this->Html->tag('br');
 echo "[選択肢3]：".$view_data['Problem']['wrong_answer3'].$this->Html->tag('br');
 echo $this->Html->tag('br');
-
-
-echo $this->Html->link("戻る",
-		array('controller' => 'problems', 'action' => 'show_problem'));
-echo $this->Html->link("戻る",
-		array('controller' => 'problems', 'action' => 'show_problem'));
+echo $this->Html->link("編集",
+		array('controller' => 'problems', 'action' => 'edit_problem'));
+echo $this->Html->tag('br');
+echo $this->Html->link("投稿する",
+		array('controller' => 'problems', 'action' => 'post_problem'));
+echo $this->Html->tag('br');
 echo $this->Html->link("戻る",
 		array('controller' => 'problems', 'action' => 'show_problem'));
