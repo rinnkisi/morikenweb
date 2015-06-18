@@ -180,6 +180,11 @@ class ProblemsController extends AppController {
         //問題作成確認にapiにて成功のときのレスポンスデータを送っている
         $this->render('edit_selectcheck');
     }
+    function update(){
+        //更新処理及び更新内容表示
+        $url = $this->api_rest("PUT","problems/edit/1.json","",$this->request->data());
+        debug($url);
+    }
     function post_problem(){
         //投稿画面
     }
