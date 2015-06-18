@@ -28,7 +28,7 @@ class ProblemsController extends AppController {
         }
     }
     function check_problem(){
-        //選択問題の確認用ページ
+        //問題の確認用ページ
         $check_data = $this->request->data['problem_data'];
         //セッション書き込み
         $this->Session->write('check_data',$check_data);
@@ -150,6 +150,35 @@ class ProblemsController extends AppController {
         //typeを追加する。１は選択式問題。初期は選択式問題
         $this->set('type',$this->Session->read('type'));
         $this->render('edit_select');
+        //後にフラグ処理
+    }
+    function edit_check(){
+        //選択問題の確認用ページ
+        $check_data = $this->request->data['problem_data'];
+        //セッション書き込み
+        $this->Session->write('check_data',$check_data);
+        $this->set('check_data',$check_data);
+        $category_data=$this->Session->read('category_options');
+        $subcategory_data=$this->Session->read('subcategory_options');
+        //debug($category_data[$check_data['category_id']]);
+        $category_id=$check_data['category_id'];
+        $this->set('category_id',$category_id);
+        //カテゴリが入力されていない場合の条件文
+        if(!empty($category_data[$category_id])){//カテゴリが空でないとき
+            $this->set('category',$category_data[$category_id]);
+            if(!($check_data['subcategory_id'] == '')){//サブカテゴリが空でないとき
+                //debug($subcategory_data[$category_id]);
+                $this->set('subcategory_id',$check_data['subcategory_id']);
+                $this->set('subcategory',$subcategory_data[$category_id][$check_data['subcategory_id']]);
+            }else{
+                $this->set('subcategory',"");
+            }
+        }else{
+            $this->set('category',"");
+            $this->set('subcategory',"");
+        }
+        //問題作成確認にapiにて成功のときのレスポンスデータを送っている
+        $this->render('edit_selectcheck');
     }
     function post_problem(){
         //投稿画面

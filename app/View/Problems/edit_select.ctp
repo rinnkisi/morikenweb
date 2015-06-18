@@ -1,6 +1,6 @@
 <?php
 	//formをcreate
-	echo $this->Form->create('problem_data', array('type'=>'text', 'enctype' => 'multipart/form-data', 'url'=>'/Problems/check_problem'));
+	echo $this->Form->create('problem_data', array('type'=>'text', 'enctype' => 'multipart/form-data', 'url'=>'/Problems/edit_check'));
 	echo $this->Form->hidden('type', array('value'=>"$type"));
 	echo $this->Form->hidden('kentei_id', array('value'=>"$kentei_id"));//初期値は1
 	echo $this->Form->hidden('user_id', array('value'=>'12'));//ユーザーによって変更
