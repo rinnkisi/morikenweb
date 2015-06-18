@@ -31,7 +31,7 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-    public $components = array('DebugKit.Toolbar');
+    public $components = array('DebugKit.Toolbar','Session');
     public $helpers = array(
       'Session',
 //      'Html' => array('className' => 'TwitterBootstrap.BootstrapHtml'),
@@ -63,5 +63,5 @@ class AppController extends Controller {
         $response = json_decode(curl_exec($ch), true); // 第2引数をtrueにすると連想配列で返ってくる
         curl_close($ch);
         return $response;
-    } 
+    }
 }

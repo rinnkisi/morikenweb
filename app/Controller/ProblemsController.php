@@ -114,7 +114,8 @@ class ProblemsController extends AppController{
 			$evaluate_item = $this->get_api_data($api_url,'kentei_id=1');
 			// view用に連想配列の中身を整える
 			$arrange_confirm_data = $this->Evaluate->arrange_confirm_info($arrange_notice_data,$problem_id,$evaluate_item);
-			$this->Session->write('confirm_data',$arrange_confirm_data);
+			$this->Session->write('evaluation_confirm_data',$arrange_confirm_data);
+			$this->Session->write('evaluation_problem_id',$problem_id);
 			$this->set('confirm_data',$arrange_confirm_data);
 		}else{
 			$this->redirect('not_found_data');
@@ -122,10 +123,21 @@ class ProblemsController extends AppController{
 	}
 	// confirm_evaluation()で容認ボタンを押したときの処理
 	public function accept_evaluation($evaluate_id){
-		$confirm_data = $this->Session->read('confirm_data');
+		$confirm_data = $this->Session->read('evaluation_confirm_data');
 		$arrange_accept_data = $this->Evaluate->arrange_judge_info($confirm_data,$evaluate_id);
 		$this->set('accept_data',$arrange_accept_data);
 	}
+	// accept_evaluation()で入力された確認コメントを登録
+	public function add_confirm_comment(){
+		$confirm_comment = $this->request->data;
+		$api_url_pram = 'id='.$confirm_comment['Problems']['evaluate_id'];
+		$api_post_pram['confirm_comment'] = $confirm_comment['Problems']['confirm_comment'];
+		$api_post_pram['confirm_flag'] = 2;
+		$result = $this->put_confirmComments_api($api_url_pram,$api_post_pram);
+
+		$this->set('data',$result);
+	}
+
 
 	// どのAPIメソッドを使うかは$urlで判断する
 	// $api_pramのパラメータでAPIを叩く
@@ -136,6 +148,11 @@ class ProblemsController extends AppController{
 	// パラメータの内容で evaluateComments/add.json API にpostする
 	public function post_evaluateComments_api($api_pram){
 		$api_result = $this->api_rest('POST','evaluateComments/add.json',null,$api_pram);
+		return $api_result;
+	}
+	// パラメータの内容で evaluateComments/add.json API にpostする
+	public function put_confirmComments_api($api_url_pram,$api_post_pram){
+		$api_result = $this->api_rest('PUT','evaluateComments/edit/1.json',$api_url_pram,$api_post_pram);
 		return $api_result;
 	}
 	public function not_found_data(){}

@@ -26,7 +26,25 @@
 		<?php echo $this->html->tag('br') ?>
 		<?php echo "【投稿日】".$comment_value['created'] ?>
 		<?php echo $this->html->tag('br') ?>
-		<?php echo $this->html->tag('br') ?>
+    <?php
+    echo $this->Html->link("容認ボタン",array(
+      'controller' => 'problems',
+      'action' => 'accept_evaluation',
+      $comment_value['evaluate_id']
+      )
+    );
+    ?>
+    <?php echo "&nbsp;" ?>
+    <?php
+    echo $this->Html->link("容認ボタン",array(
+      'controller' => 'problems',
+      'action' => 'deny_evaluation',
+      $comment_value['evaluate_id']
+      )
+    );
+    ?>
+    <?php echo $this->html->tag('br') ?>
+    <?php echo $this->html->tag('br') ?>
 	<?php endforeach ;?>
 	<?php echo $this->html->tag('hr') ?>
 <?php endforeach ;?>
