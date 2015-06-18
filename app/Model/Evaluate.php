@@ -93,6 +93,7 @@
 						foreach($notice_value['EvaluateComment'] as $evaluate_num => $evaluate_value){
 							if($evaluate_value['user_id'] == $list_value){
 								$confirm_data['Evaluate'][$row_num]['evaluator_id'] = $list_value;
+								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['evaluate_id'] = $evaluate_value['id'];
 								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['evaluate_item_id'] = $evaluate_value['evaluate_item_id'];
 								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['evaluate_comment'] = $evaluate_value['evaluate_comment'];
 								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['created'] = $evaluate_value['created'];
@@ -108,6 +109,20 @@
 				}
 			}
 			return $confirm_data;
+		}
+
+		public function arrange_judge_info($confirm_data,$evaluate_id){
+			$arrange_judge_data['Problem'] = $confirm_data['Problem'];
+			// 一致するevaluate_idを検出し、confirm_evaluation()で選んだ評価を格納する
+			foreach($confirm_data['Evaluate'] as $evaluate_data){
+				foreach($evaluate_data['evaluate_data'] as $evaluate_value){
+					if($evaluate_value['evaluate_id'] == $evaluate_id){
+						$arrange_judge_data['Evaluate'] = $evaluate_value;
+					}
+				}
+			}
+			return $arrange_judge_data;
+			// return $confirm_data;
 		}
 	}
 ?>

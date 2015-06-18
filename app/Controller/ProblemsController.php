@@ -52,7 +52,7 @@ class ProblemsController extends AppController{
 			// user_idは、後でログイン機能から受け取る
 			$add_api_pram[$eval_id]['evaluate_item_id'] = $eval_id;
 			$add_api_pram[$eval_id]['problem_id'] = $eval_data['Problem_info']['id'];
-			$add_api_pram[$eval_id]['user_id'] = 12;
+			$add_api_pram[$eval_id]['user_id'] = 7;
 			$add_api_pram[$eval_id]['evaluate_comment'] = $eval_value['comment'];
 			$result[$eval_id] = $this->post_evaluateComments_api($add_api_pram[$eval_id]);
 		}
@@ -114,11 +114,19 @@ class ProblemsController extends AppController{
 			$evaluate_item = $this->get_api_data($api_url,'kentei_id=1');
 			// view用に連想配列の中身を整える
 			$arrange_confirm_data = $this->Evaluate->arrange_confirm_info($arrange_notice_data,$problem_id,$evaluate_item);
+			$this->Session->write('confirm_data',$arrange_confirm_data);
 			$this->set('confirm_data',$arrange_confirm_data);
 		}else{
 			$this->redirect('not_found_data');
 		}
 	}
+	// confirm_evaluation()で容認ボタンを押したときの処理
+	public function accept_evaluation($evaluate_id){
+		$confirm_data = $this->Session->read('confirm_data');
+		$arrange_accept_data = $this->Evaluate->arrange_judge_info($confirm_data,$evaluate_id);
+		$this->set('accept_data',$arrange_accept_data);
+	}
+
 	// どのAPIメソッドを使うかは$urlで判断する
 	// $api_pramのパラメータでAPIを叩く
 	public function get_api_data($url,$api_pram){
