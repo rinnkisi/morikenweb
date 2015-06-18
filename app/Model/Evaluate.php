@@ -97,7 +97,7 @@
 								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['evaluate_item_id'] = $evaluate_value['evaluate_item_id'];
 								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['evaluate_comment'] = $evaluate_value['evaluate_comment'];
 								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['created'] = $evaluate_value['created'];
-								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['confirm_flag'] = $evaluate_value['created'];
+								$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['confirm_flag'] = $evaluate_value['confirm_flag'];
 								foreach($evaluate_item['response']['EvaluateItems'] as $item_value){
 									if($evaluate_value['evaluate_item_id'] == $item_value['EvaluateItem']['id'])
 										$confirm_data['Evaluate'][$row_num]['evaluate_data'][$evaluate_num]['evaluate_item_name'] = $item_value['EvaluateItem']['name'];
