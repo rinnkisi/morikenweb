@@ -130,10 +130,10 @@ class ProblemsController extends AppController{
 	// accept_evaluation()で入力された確認コメントを登録
 	public function add_confirm_comment(){
 		$confirm_comment = $this->request->data;
-		$api_url_pram = 'id='.$confirm_comment['Problems']['evaluate_id'];
-		$api_post_pram['confirm_comment'] = $confirm_comment['Problems']['confirm_comment'];
-		$api_post_pram['confirm_flag'] = 2;
-		$result = $this->put_confirmComments_api($api_url_pram,$api_post_pram);
+		$evaluate_id = $confirm_comment['Problems']['evaluate_id'];
+		$api_pram['confirm_comment'] = $confirm_comment['Problems']['confirm_comment'];
+		$api_pram['confirm_flag'] = 2;
+		$result = $this->put_confirmComments_api($api_pram,$evaluate_id);
 
 		$this->set('data',$result);
 	}
@@ -151,8 +151,8 @@ class ProblemsController extends AppController{
 		return $api_result;
 	}
 	// パラメータの内容で evaluateComments/add.json API にpostする
-	public function put_confirmComments_api($api_url_pram,$api_post_pram){
-		$api_result = $this->api_rest('PUT','evaluateComments/edit/1.json',$api_url_pram,$api_post_pram);
+	public function put_confirmComments_api($api_pram,$evaluate_id){
+		$api_result = $this->api_rest('PUT','evaluateComments/edit/'.$evaluate_id.'.json',null,$api_pram);
 		return $api_result;
 	}
 	public function not_found_data(){}
