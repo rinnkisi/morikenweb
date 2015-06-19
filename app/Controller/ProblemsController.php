@@ -14,6 +14,8 @@ class ProblemsController extends AppController{
 		// // 	$this->redirect('not_found_data');
 		// // }
 		// 	$this->set('test',$problem_api_value);
+		$data = $this->request->data;
+		debug($data);
 	}
 	// ユーザが作問した問題を一覧表示
 	public function show_evaluation_problem(){
@@ -114,8 +116,8 @@ class ProblemsController extends AppController{
 			$evaluate_item = $this->get_api_data($api_url,'kentei_id=1');
 			// view用に連想配列の中身を整える
 			$arrange_confirm_data = $this->Evaluate->arrange_confirm_info($arrange_notice_data,$problem_id,$evaluate_item);
-			$this->Session->write('evaluation_confirm_data',$arrange_confirm_data);
-			$this->Session->write('evaluation_problem_id',$problem_id);
+			$this->Session->write('evaluation.confirm_data',$arrange_confirm_data);
+			$this->Session->write('evaluation.problem_id',$problem_id);
 			$this->set('confirm_data',$arrange_confirm_data);
 		}else{
 			$this->redirect('not_found_data');
@@ -123,22 +125,32 @@ class ProblemsController extends AppController{
 	}
 	// confirm_evaluation()で容認ボタンを押したときの処理
 	public function accept_evaluation($evaluate_id){
-		$confirm_data = $this->Session->read('evaluation_confirm_data');
+		$confirm_data = $this->Session->read('evaluation.confirm_data');
 		$arrange_accept_data = $this->Evaluate->arrange_judge_info($confirm_data,$evaluate_id);
 		$this->set('accept_data',$arrange_accept_data);
 	}
-	// accept_evaluation()で入力された確認コメントを登録
-	public function add_confirm_comment(){
-		$confirm_comment = $this->request->data;
-		$evaluate_id = $confirm_comment['Problems']['evaluate_id'];
-		$api_pram['confirm_comment'] = $confirm_comment['Problems']['confirm_comment'];
-		$api_pram['confirm_flag'] = 2;
-		$result = $this->put_confirmComments_api($api_pram,$evaluate_id);
-
-		$this->set('data',$result);
+	// confirm_evaluation()で否認ボタンを押したときの処理
+	public function deny_evaluation($evaluate_id){
+		$confirm_data = $this->Session->read('evaluation.confirm_data');
+		$arrange_deny_data = $this->Evaluate->arrange_judge_info($confirm_data,$evaluate_id);
+		$this->set('deny_data',$arrange_deny_data);
 	}
-
-
+	// accept_evaluation()/deny_evaluation()で入力された確認コメントを登録
+	public function add_confirm_comment(){
+		$confirm_data = $this->request->data;
+		$evaluate_id = $confirm_data['Problems']['evaluate_id'];
+		$api_pram['confirm_comment'] = $confirm_data['Problems']['confirm_comment'];
+		if(!empty($confirm_data['deny'])){
+			$api_pram['confirm_flag'] = 3;
+		}else if(!empty($confirm_data['accept'])){
+			$api_pram['confirm_flag'] = 2;
+		}
+		$result = $this->put_confirmComments_api($api_pram,$evaluate_id);
+		$this->Session->delete('evaluation.confirm_data');
+		// $this->set('data',$result);
+		$problem_id = $this->Session->read('evaluation.problem_id');
+		$this->redirect(array('action' => 'confirm_evaluation',$problem_id));
+	}
 	// どのAPIメソッドを使うかは$urlで判断する
 	// $api_pramのパラメータでAPIを叩く
 	public function get_api_data($url,$api_pram){

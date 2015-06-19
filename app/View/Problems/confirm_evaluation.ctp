@@ -36,7 +36,7 @@
     ?>
     <?php echo "&nbsp;" ?>
     <?php
-    echo $this->Html->link("容認ボタン",array(
+    echo $this->Html->link("否認ボタン",array(
       'controller' => 'problems',
       'action' => 'deny_evaluation',
       $comment_value['evaluate_id']

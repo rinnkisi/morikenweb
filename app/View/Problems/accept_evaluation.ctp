@@ -39,6 +39,9 @@
     // 'label'	=>
     ));
 ?>
-<?php echo $this->Form->submit('承認'); ?>
+<?php echo $this->Form->submit('承認',array(
+  'name' => 'accept'
+  ));
+?>
 
 <?php debug($accept_data); ?>
