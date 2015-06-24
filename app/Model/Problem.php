@@ -26,11 +26,27 @@ class Problem extends AppModel{
         //debug($url['error']['validation']['Problem']);
         if(!empty($url['error'])){
             foreach ($url['error']['validation']['Problem'] as $key => $value) {
-                $message[] = $value;
+                if($value == "category_idを設定してください")
+                    $value = "カテゴリーを入力してください。";
+                if($value == "sentenceを設定してください")
+                    $value = "問題文を入力してください。";
+                if($value == "right_answerを設定してください")
+                    $value = "正解選択肢を入力してください。";
+                if($value == "descriptionを設定してください")
+                    $value = "解説欄を入力してください。";
+                if($value == "wrong_answer1を設定してください")
+                    $value = "誤答選択肢1を入力してください。";
+                if($value == "wrong_answer2を設定してください")
+                    $value = "誤答選択肢2を入力してください。";
+                if($value == "wrong_answer3を設定してください")
+                    $value = "誤答選択肢3を入力してください。";
+
+                $message[$key] = $value;
+                debug($message);
             }
             return $message;
         }else{
-            return 1;
+            return NULL;
         }
     }
 }
