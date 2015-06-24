@@ -13,9 +13,7 @@ class UsersController extends AppController {
  *
  */
 	function add_user() {
-		debug($this->request->data);
-
-		$url = $this->api_rest("POST","users.json","",$i);
+		$url = $this->api_rest("POST","users.json","",$this->request->data);
 		debug($url);
 	}
 }
