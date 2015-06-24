@@ -8,19 +8,24 @@
 	echo $this->Form->hidden('number', array('value'=>'0'));
 	echo $this->Form->hidden('public_flag', array('value'=>'0'));
 	echo $this->Form->hidden('item', array('value'=>"1"));//itmeの数を送信ここでは1
-	debug($default);
 	//本文
 	echo "[選択式問題作成] *は必須項目です";
 	echo $this->Html->link('記述式問題作成に切り替え',
 		array('controller'=>'Problems','action'=>'make_problem','full_base'=>true,'2')
 	);
+	echo $this->Html->tag('br').$this->Html->tag('br');
+	if(!empty($error_log)){
+		foreach ($error_log as $key => $value) {
+			echo $value.$this->Html->tag('br');
+		}
+	}
 	echo $this->Html->tag('br')."カテゴリ*";
 	echo $this->Form->select('category_id',$category_options,
 		array('default'=>$default['category_id'],'id'=>'category_id','empty'=>'選んでください'));
 	echo "[この投稿で◯ポイント獲得] / サブカテゴリ";
 	//連動プルダウン用
 	echo $this->Form->select('subcategory_id',$subcategory_options,
-		array('default'=>$default['subcategory_id'],'id'=>'subcategory_id','empty'=>'選んでください'));
+		array('id'=>'subcategory_id','empty'=>'選んでください'));
 	echo $this->Html->tag('br')."(カテゴリがわからないときは「その他」を選択してください)".$this->Html->tag('br');
 	echo "問題文* [ 最大500 文字 ]".$this->Html->tag('br');
 	//paraは<p>タグである

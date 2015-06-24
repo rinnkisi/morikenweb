@@ -33,7 +33,7 @@ class Problem extends AppModel{
                 if($value == "right_answerを設定してください")
                     $value = "正解選択肢を入力してください。";
                 if($value == "descriptionを設定してください")
-                    $value = "解説欄を入力してください。";
+                    $value = "解説を入力してください。";
                 if($value == "wrong_answer1を設定してください")
                     $value = "誤答選択肢1を入力してください。";
                 if($value == "wrong_answer2を設定してください")
@@ -42,7 +42,6 @@ class Problem extends AppModel{
                     $value = "誤答選択肢3を入力してください。";
 
                 $message[$key] = $value;
-                debug($message);
             }
             return $message;
         }else{
