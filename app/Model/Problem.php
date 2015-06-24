@@ -40,8 +40,8 @@ class Problem extends AppModel{
                     $value = "誤答選択肢2を入力してください。";
                 if($value == "wrong_answer3を設定してください")
                     $value = "誤答選択肢3を入力してください。";
-
-                $message[$key] = $value;
+                if($value == "subcategory_idを設定してください")
+                    $value = "サブカテゴリを入力してください。";                $message[$key] = $value;
             }
             return $message;
         }else{
