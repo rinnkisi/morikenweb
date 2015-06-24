@@ -6,6 +6,7 @@ class ProblemsController extends AppController{
 	}
 	// ユーザが作問した問題を一覧表示
 	public function show_evaluation_problem(){
+		$this->Session->destroy();
 		// $api_urlは後に定数化
 		$api_url = 'problems/index.json';
 		// 非公開問題
@@ -47,13 +48,18 @@ class ProblemsController extends AppController{
 			if($eval_value['check'] == 1)
 				$result[$eval_id] = $this->post_evaluateComments_api($add_api_pram[$eval_id]);
 		}
-		foreach($result as $evaluate_result_id => $evaluate_result_value){
-			if(!empty($evaluate_result_value['error']['code'])){
-				foreach ($eval_data['Problems'] as $evaluate_id => $evaluate_value){
-					if($evaluate_result_id == $evaluate_id)
-						$error_list[$evaluate_result_id] = $evaluate_value['name'];
+
+		if(!empty($result)){
+			foreach($result as $evaluate_result_id => $evaluate_result_value){
+				if(!empty($evaluate_result_value['error']['code'])){
+					foreach ($eval_data['Problems'] as $evaluate_id => $evaluate_value){
+						if($evaluate_result_id == $evaluate_id)
+							$error_list[$evaluate_result_id] = $evaluate_value['name'];
+					}
 				}
 			}
+		}else{
+			$this->redirect('show_evaluation_problem');
 		}
 		if(!empty($error_list)){
 			$this->Session->write('evaluation.error_list',$error_list);
@@ -81,6 +87,7 @@ class ProblemsController extends AppController{
 	}
 	// 作問者に対しての評価機能
 	public function notice_evaluation(){
+		$this->Session->destroy();
 		// user_idのパラメータは後ほど変更
 		$problem_api_pram = 'kentei_id=1&employ=0&user_id=12&item=100&public_flag=0';
 		// $api_urlは後に定数化
@@ -96,17 +103,14 @@ class ProblemsController extends AppController{
 	}
 	// notice_evaluation()で選択した問題・評価の詳細を見る
 	public function confirm_evaluation($problem_id){
-		if(!$this->Session->check('evaluation.problem_id'))
-			$this->Sesssion->delete('evaluation.problem_id');
 		if(!empty($problem_id)){
-			// user_idのパラメータは後ほど変更
+		  // user_idのパラメータは後ほど変更
 			$problem_api_pram = 'kentei_id=1&employ=0&user_id=12&item=100&public_flag=0';
 			// $api_urlは後に定数化
 			$api_url = 'problems/index.json';
 			$problem_api_value = $this->get_api_data($api_url,$problem_api_pram);
 			// notice_evaluation()で用いたデータを再現
 			$arrange_notice_data = $this->Evaluate->arrange_notice_info($problem_api_value);
-
 			// $api_urlは後に定数化
 			$api_url = 'evaluateItems/index.json';
 			$evaluate_item = $this->get_api_data($api_url,'kentei_id=1');
@@ -122,14 +126,16 @@ class ProblemsController extends AppController{
 	// confirm_evaluation()で容認ボタンを押したときの処理
 	public function accept_evaluation($evaluate_id){
 		$confirm_data = $this->Session->read('evaluation.confirm_data');
-		$arrange_accept_data = $this->Evaluate->arrange_judge_info($confirm_data,$evaluate_id);
-		$this->set('accept_data',$arrange_accept_data);
+		$accept_data['arrange_data'] = $this->Evaluate->arrange_judge_info($confirm_data,$evaluate_id);
+		$this->Session->write('evaluation.confirm_data.selected_data',$accept_data['arrange_data']['Evaluate']);
+		$this->set('accept_data',$accept_data);
 	}
 	// confirm_evaluation()で否認ボタンを押したときの処理
 	public function deny_evaluation($evaluate_id){
 		$confirm_data = $this->Session->read('evaluation.confirm_data');
-		$arrange_deny_data = $this->Evaluate->arrange_judge_info($confirm_data,$evaluate_id);
-		$this->set('deny_data',$arrange_deny_data);
+		$deny_data['arrange_data'] = $this->Evaluate->arrange_judge_info($confirm_data,$evaluate_id);
+		$this->Session->write('evaluation.confirm_data.selected_data',$deny_data['arrange_data']['Evaluate']);
+		$this->set('deny_data',$deny_data);
 	}
 	// accept_evaluation()/deny_evaluation()で入力された確認コメントを登録
 	public function add_confirm_comment(){
@@ -142,10 +148,22 @@ class ProblemsController extends AppController{
 			$api_pram['confirm_flag'] = 2;
 		}
 		$result = $this->put_confirmComments_api($api_pram,$evaluate_id);
-		$this->Session->delete('evaluation.confirm_data');
-		// $this->set('data',$result);
-		$problem_id = $this->Session->read('evaluation.problem_id');
-		$this->redirect(array('action' => 'confirm_evaluation',$problem_id));
+		// APIの結果を使ってバリデート
+		if(empty($result['error']['code'])){
+			$this->Session->delete('evaluation.confirm_data');
+			$problem_id = $this->Session->read('evaluation.problem_id');
+			$this->redirect(array('action' => 'confirm_evaluation',$problem_id));
+		}else{
+			$evaluate_id = $this->Session->read('evaluation.confirm_data.selected_data.evaluate_id');
+			$this->Session->write('evaluation.selected_data.error_flag',1);
+			if(!empty($confirm_data['accept'])){
+				$this->Session->setFlash('承認コメントを入力してください');
+				$this->redirect(array('action' => 'accept_evaluation',$evaluate_id));
+			}elseif(!empty($confirm_data['deny'])){
+				$this->Session->setFlash('否認コメントを入力してください');
+				$this->redirect(array('action' => 'deny_evaluation',$evaluate_id));
+			}
+		}
 	}
 	// どのAPIメソッドを使うかは$urlで判断する
 	// $api_pramのパラメータでAPIを叩く
