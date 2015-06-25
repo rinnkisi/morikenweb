@@ -57,7 +57,7 @@ class ProblemsController extends AppController {
             $this->set('subcategory',"");
         }
         //問題作成確認にapiにて成功のときのレスポンスデータを送っている
-        if("1"== $default_data['type']){//適切なviewをレンダー
+        if("1"== $default_data['type']){
             $this->render('check_select');
         }else{
             $this->render('check_descriptive');
@@ -70,7 +70,6 @@ class ProblemsController extends AppController {
             $category_data=$this->Session->read('category_options');
             $subcategory_data=$this->Session->read('subcategory_options');
             $category_id=$record_data['category_id'];
-            $category_data[$category_id];
             $url = $this->api_rest("POST","problems/add.json","",$record_data);
             $tmp = $this->Problem->validation($url);
             if(!empty($tmp)){
@@ -93,6 +92,5 @@ class ProblemsController extends AppController {
             $this->setAction('make_problem');
         }
     }
-
 }
 ?>
