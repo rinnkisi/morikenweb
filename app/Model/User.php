@@ -2,12 +2,6 @@
 App::uses('AppModel', 'Model');
 class User extends AppModel{
   public $useTable = false;
-
-  public function sameCheck($value , $field_name) {
-      $v1 = array_shift($value);
-      $v2 = $this->data[$this->name][$field_name];
-      return $v1 == $v2;
-  }
   public $validate = array(
     'username' => array(
       array(
@@ -40,4 +34,13 @@ class User extends AppModel{
       )
     ),
   );
+  public function validation($url){
+    //debug($url);
+    if(!empty($url['error'])){
+      if($url['error']['validation']['User']['email']=='email')
+        $message = "メールアドレスを正しく入力してください。";
+        return $message;
+    }
+    return NULL;//成功なら1を返す
+  }
 }

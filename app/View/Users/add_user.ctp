@@ -1,7 +1,10 @@
 <?php
 //ユーザー登録画面
+
 	echo $this->Form->create('User', array('type'=>'text', 'enctype' => 'multipart/form-data', 'url'=>'/Users/add_user'));
 	echo $this->Html->para(null,"名前".$this->Form->text('username'));
+	if(!empty($message))
+	echo $message;
 	echo $this->Html->para(null,"メールアドレス".$this->Form->text('email'));
 	echo $this->Html->para(null,"パスワード".$this->Form->password('password'));
 	echo $this->Form->submit(('この内容で送信する'));

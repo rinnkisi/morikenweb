@@ -33,13 +33,15 @@ class UsersController extends AppController {
 	*  ユーザ登録機能
 	*/
 	function add_user(){
-		debug($this->request->data);
 		$this->set('default',$this->request->data);
 		if(!empty($this->request->data)){
 			$url = $this->api_rest("POST","users.json","",$this->request->data);
-			debug($url);
-		}else{
-			$this->set('default',array());
+			if(empty($this->User->validation($url))){
+				$this->redirect(array('action' => 'login'));
+			}else{
+				$this->set('message',$this->User->validation($url));
+			}
+			//debug($url);
 		}
 	}
 }
