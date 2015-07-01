@@ -13,20 +13,27 @@ class UsersController extends AppController {
 	*  ログイン後のトップページ
 	*/
 	function index(){
-		debug($this->request->data);
-		$url = $this->api_rest("POST","logins.json","",$this->request->data);
-		debug($url);
+		if(!empty($this->Session->read('userdata'))){
+			$userdata =$this->Session->read('userdata');
+			//debug($userdata);
+			$this->set('userdata',$userdata);
+		}
+		$this->redirect(array('action' => 'login'));
 	}
-
 	/*
 	*  ログイン機能
 	*/
-
 	function login(){
-		debug($this->request->data);
+		//debug($this->request->data);
 		if(!empty($this->request->data)){
-			$url = $this->api_rest("POST","users.json","",$this->request->data);
-			debug($url);
+			$url = $this->api_rest("POST","logins.json","",$this->request->data);
+			if(empty($this->User->errorcheck($url))){
+				$this->Session->write('userdata',$url['response']['data']);
+				//ユーザの情報を持ってくる
+				$this->redirect(array('action' => 'index'));
+			}else{
+				$this->set('message',$this->User->errorcheck($url));
+			}
 		}
 	}
 	/*

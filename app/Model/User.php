@@ -29,8 +29,8 @@ class User extends AppModel{
         'message' => 'パスワードは半角英数字にしてください。'
       ),
       array(
-        'rule' => array('between', 6, 32),
-        'message' => 'パスワードは6文字以上32文字以内にしてください。'
+        'rule' => array('between', 2, 32),
+        'message' => 'パスワードは2文字以上32文字以内にしてください。'
       )
     ),
   );
@@ -41,6 +41,12 @@ class User extends AppModel{
         $message = "メールアドレスを正しく入力してください。";
         return $message;
     }
-    return NULL;//成功なら1を返す
+    return NULL;//エラーがないならnullを返す
+  }
+  public function errorcheck($url){
+    if(!empty($url['error'])){
+      return $url['error']['message'];
+    }
+    return NULL;//エラーがないならnullを返す
   }
 }
