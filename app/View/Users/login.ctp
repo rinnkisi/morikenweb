@@ -1,7 +1,9 @@
 <?php
 //ログイントップページ
-
-  echo $this->Form->create('User', array('type'=>'text', 'enctype' => 'multipart/form-data', 'url'=>'/Users/top'));
+  if(!empty($message)){
+    echo $message;
+  }
+  echo $this->Form->create('User', array('type'=>'text', 'enctype' => 'multipart/form-data', 'url'=>'/Users/login'));
   echo $this->Html->para('username',"ユーザ名を入力してください".$this->Form->text('username'));
   echo $this->Html->para('password',"パスワードを入力してください".$this->Form->password('password'));
   echo $this->Form->submit(('ログインする'));
