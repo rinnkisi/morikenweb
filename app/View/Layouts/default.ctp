@@ -26,11 +26,14 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<?php echo $this->fetch('title'); ?>
 	</title>
 	<?php
-		echo $this->Html->css('cake.generic');
 
+		echo $this->Html->meta('icon');
+		echo $this->Html->css('cake.generic');
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
+		echo $this->Html->script('jquery-1.11.3.min.js');
+		echo $this->Html->script('ConnectedSelect.js');
 	?>
 	<link rel="stylesheet" href="../flexslider.css" type="text/css" />
 	<meta charset="utf-8">
@@ -75,9 +78,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			<div class="header_color"></div>
 		</div>
 		<div id="content">
-
 			<?php echo $this->Session->flash(); ?>
-
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer">
@@ -110,6 +111,6 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			</div>
 		</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+
 </body>
 </html>
