@@ -5,6 +5,9 @@ class ProblemsController extends AppController{
     public $components = array('Session');
 	public function index(){
 	}
+		function make_top(){
+
+		}
     function make_problem($type = null){//初期は選択式作問入力
         $this->set('kentei_id','1');
         //Webの場合は１を代入する

@@ -41,13 +41,13 @@
     'type' => 'file',
     'name' => 'image'
 	));
-    echo "タグ(複数タグは半角「/」で区切り 例:盛岡/岩手/川)";
+  echo "タグ(複数タグは半角「/」で区切り 例:盛岡/岩手/川)";
 	echo $this->Form->text('tag',array('default'=>$default['tag']));
 	echo $this->Html->para(null, $this->Html->tag('br')."解説* (メモ、参考URL、文献等)".
 		$this->Form->textarea('description',array('default'=>$default['description'])));
-    echo $this->Form->submit(('この内容で送信する'));
-    echo $this->Form->end();
-    echo $this->Html->tag('br');
+  echo $this->Form->submit(('この内容で送信する'));
+  echo $this->Form->end();
+  echo $this->Html->tag('br');
 	echo $this->Html->link('戻る',
 	array('controller' => 'Problems', 'action' => 'top', 'full_base' => true,"1")
 	);

@@ -35,18 +35,18 @@
 	echo $this->Form->textarea('sentence',array('default'=>$default['sentence']));
 	echo $this->Html->para(null, "解答*".$this->Form->textarea('right_answer',array('default'=>$default['right_answer'])));
 	echo $this->Html->para(null, "その他の解答".$this->Form->textarea('another_answer',array('default'=>$default['another_answer'])));
-    echo "写真を載せる場合は以下から登録 (200kb以下、JPEG および PNG画像)";
-    echo $this->Form->input('',array(
+  echo "写真を載せる場合は以下から登録 (200kb以下、JPEG および PNG画像)";
+  echo $this->Form->input('',array(
     'type' => 'file',
     'name' => 'image'
 	));
-    echo "タグ(複数タグは半角「/」で区切り 例:盛岡/岩手/川)";
+  echo "タグ(複数タグは半角「/」で区切り 例:盛岡/岩手/川)";
 	echo $this->Form->text('tag',array('default'=>$default['tag']));
 	echo $this->Html->para(null, $this->Html->tag('br')."解説* (メモ、参考URL、文献等)".
 		$this->Form->textarea('description',array('default'=>$default['description'])));
-    echo $this->Form->submit(('この内容で送信する'));
-    echo $this->Form->end();
-    echo $this->Html->tag('br');
+  echo $this->Form->submit(('この内容で送信する'));
+  echo $this->Form->end();
+  echo $this->Html->tag('br');
 	echo $this->Html->link('戻る',
 	array('controller' => 'Problems', 'action' => 'top', 'full_base' => true)
 	);
