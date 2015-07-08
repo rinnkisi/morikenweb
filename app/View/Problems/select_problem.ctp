@@ -36,8 +36,8 @@
 	echo $this->Html->para(null, "誤答選択肢１".$this->Form->textarea('wrong_answer1',array('default'=>$default['wrong_answer1'])));
 	echo $this->Html->para(null, "誤答選択肢２".$this->Form->textarea('wrong_answer2',array('default'=>$default['wrong_answer2'])));
 	echo $this->Html->para(null, "誤答選択肢３".$this->Form->textarea('wrong_answer3',array('default'=>$default['wrong_answer3'])));
-    echo "写真を載せる場合は以下から登録 (200kb以下、JPEG および PNG画像)";
-    echo $this->Form->input('',array(
+  echo "写真を載せる場合は以下から登録 (200kb以下、JPEG および PNG画像)";
+  echo $this->Form->input('',array(
     'type' => 'file',
     'name' => 'image'
 	));
