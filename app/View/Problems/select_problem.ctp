@@ -49,7 +49,7 @@
   echo $this->Form->end();
   echo $this->Html->tag('br');
 	echo $this->Html->link('戻る',
-	array('controller' => 'Problems', 'action' => 'top', 'full_base' => true,"1")
+	array('controller' => 'Problems', 'action' => 'make_top', 'full_base' => true)
 	);
 ?>
 <!--

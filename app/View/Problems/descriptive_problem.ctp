@@ -48,7 +48,7 @@
   echo $this->Form->end();
   echo $this->Html->tag('br');
 	echo $this->Html->link('戻る',
-	array('controller' => 'Problems', 'action' => 'top', 'full_base' => true)
+	array('controller' => 'Problems', 'action' => 'make_top', 'full_base' => true)
 	);
 ?>
 <script>//文字数のjavascript
