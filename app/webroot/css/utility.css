@@ -1,0 +1,79 @@
+@charset "utf-8";
+/**
+ *リストに関するviewまわりをする
+ */
+nav#breadcrumbs ol li {
+  display: inline;
+  list-style-type: none;
+}
+nav#breadcrumbs ol li:before {
+  content: " > ";
+}
+nav#breadcrumbs ol li:first-child:before {
+  content:"";
+}
+#sidebar{
+  width:250px;
+  float:left;
+}
+#sidebar ul{
+  margin: 25px;
+  padding: 0;
+  list-style: none;
+}
+#sidebar li{
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+#sidebar li a{
+  display: block;
+  border-left: 8px solid #C97556;
+  background-color: #474655;
+  padding: 3px 10px;
+  text-decoration: none;
+  color: #E1E2CF;
+  width: 150px;
+  margin: 1px 0px;
+  text-align: left;
+  font-size: 14px;
+}
+#sidebar li a:hover{
+  border-left: 8px solid #990033;
+  background-color: #474655;
+}
+#make-content{
+  width:700px;
+  float:left;
+  margin:5px;
+}
+p.content-post{
+  margin:15px;
+}
+#box-select ul{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+#box-select li{
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+#box-select li a{
+  display: block;
+  width: 150px;
+  padding: 3px;
+  margin: 25px;
+  text-decoration: none;
+  border: outset 3px #B45F04;
+  background-color: #B45F04;
+  text-align: center;
+  color: #000000;
+  font-size: 14px;
+  float:left;
+}
+#box-select li a:hover{
+  border: inset 3px #95A38D;
+  background-color: #95A38D;
+}
