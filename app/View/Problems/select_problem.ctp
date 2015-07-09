@@ -1,3 +1,13 @@
+<div id="sidebar">
+  <ul>
+    <li><a href="http://localhost/morikenweb/Problems/make_top">問題を作成する</a></li>
+    <li> <?php echo $this->Html->link('選択式問題',
+    array('controller' => 'Problems', 'action' => 'make_problem', 'full_base' => true,"1"));?></li>
+    <li><?php echo $this->Html->link('一問一答式問題',
+    array('controller' => 'Problems', 'action' => 'make_problem', 'full_base' => true,"2"));?></li>
+  </ul>
+</div>
+<div id="make-content">
 <?php
 	//formをcreate
 	echo $this->Form->create('problem_data', array('type'=>'text', 'enctype' => 'multipart/form-data', 'url'=>'/Problems/check_problem'));
@@ -8,11 +18,8 @@
 	echo $this->Form->hidden('number', array('value'=>'0'));
 	echo $this->Form->hidden('public_flag', array('value'=>'0'));
 	echo $this->Form->hidden('item', array('value'=>"1"));//itmeの数を送信ここでは1
-	//本文
+		//本文
 	echo "[選択式問題作成] *は必須項目です";
-	echo $this->Html->link('記述式問題作成に切り替え',
-		array('controller'=>'Problems','action'=>'make_problem','full_base'=>true,'2')
-	);
 	echo $this->Html->tag('br').$this->Html->tag('br');
 	if(!empty($error_log)){
 		foreach ($error_log as $key => $value) {
@@ -45,13 +52,14 @@
 	echo $this->Form->text('tag',array('default'=>$default['tag']));
 	echo $this->Html->para(null, $this->Html->tag('br')."解説* (メモ、参考URL、文献等)".
 		$this->Form->textarea('description',array('default'=>$default['description'])));
-  echo $this->Form->submit(('この内容で送信する'));
+  echo $this->Form->submit(('問題を投稿'));
   echo $this->Form->end();
   echo $this->Html->tag('br');
 	echo $this->Html->link('戻る',
 	array('controller' => 'Problems', 'action' => 'make_top', 'full_base' => true)
 	);
 ?>
+</div>
 <!--
 	script処理
 !-->
