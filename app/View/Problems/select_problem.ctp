@@ -1,3 +1,16 @@
+<nav id="breadcrumbs">
+  <ol>
+    <li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_top">
+      <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">top</span></a>
+    </li>
+    <li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_top">
+			<a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">問題を作成</span></a>
+    </li>
+		<li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_problem/1">
+			<span itemprop="title">選択式問題</span>
+		</li>
+  </ol>
+</nav>
 <div id="sidebar">
   <ul>
     <li><a href="http://localhost/morikenweb/Problems/make_top">問題を作成する</a></li>
@@ -8,6 +21,14 @@
   </ul>
 </div>
 <div id="make-content">
+	<h2>
+		<ul>
+			<li>
+				選択式問題
+			</li>
+		</ul>
+	</h2>
+	<hr size="5" color="#B45F04">
 <?php
 	//formをcreate
 	echo $this->Form->create('problem_data', array('type'=>'text', 'enctype' => 'multipart/form-data', 'url'=>'/Problems/check_problem'));

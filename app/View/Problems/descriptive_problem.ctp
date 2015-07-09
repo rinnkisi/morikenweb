@@ -1,6 +1,35 @@
+<nav id="breadcrumbs">
+  <ol>
+    <li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_top">
+      <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">top</span></a>
+    </li>
+    <li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_top">
+			<a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">問題を作成</span></a>
+    </li>
+		<li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_problem/2">
+			<span itemprop="title">一問一答式問題</span>
+		</li>
+  </ol>
+</nav>
+<div id="sidebar">
+  <ul>
+    <li><a href="http://localhost/morikenweb/Problems/make_top">問題を作成する</a></li>
+    <li> <?php echo $this->Html->link('選択式問題',
+    array('controller' => 'Problems', 'action' => 'make_problem', 'full_base' => true,"1"));?></li>
+    <li><?php echo $this->Html->link('一問一答式問題',
+    array('controller' => 'Problems', 'action' => 'make_problem', 'full_base' => true,"2"));?></li>
+  </ul>
+</div>
+<div id="make-content">
+	<h2>
+		<ul>
+			<li>
+				一問一答式問題
+			</li>
+		</ul>
+	</h2>
+	<hr size="5" color="#B45F04">
 <?php
-		//jsのライブラリを使用
-
 	//formをcreate
 	echo $this->Form->create('problem_data', array('type'=>'text', 'enctype' => 'multipart/form-data', 'url'=>'/Problems/check_problem'));
 	echo $this->Form->hidden('type', array('value'=>"$type"));
@@ -11,10 +40,7 @@
 	echo $this->Form->hidden('public_flag', array('value'=>'0'));
 	echo $this->Form->hidden('item', array('value'=>"1"));//itmeの数を送信ここでは1
 	//本文
-	echo "[記述式問題作成] *は必須項目です";
-	echo $this->Html->link('選択式問題作成に切り替え',
-		array('controller'=>'Problems','action'=>'make_problem','full_base'=>true,"1")
-	);
+	echo "[一問一答式問題作成] *は必須項目です";
 	echo $this->Html->tag('br').$this->Html->tag('br');
 	if(!empty($error_log)){
 		foreach ($error_log as $key => $value) {
@@ -51,6 +77,7 @@
 	array('controller' => 'Problems', 'action' => 'make_top', 'full_base' => true)
 	);
 ?>
+</div>
 <script>//文字数のjavascript
 $(function(){
 	$("#problem_dataSentence").bind("change keyup",function(){
