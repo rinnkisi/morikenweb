@@ -42,11 +42,9 @@
 		//本文
 	echo "[選択式問題作成] *は必須項目です";
 	echo $this->Html->tag('br').$this->Html->tag('br');
-	if(!empty($error_log)){
-		foreach ($error_log as $key => $value) {
-			echo $value.$this->Html->tag('br');
-		}
-	}
+    if(!empty($error_log['category_id'])){//エラー処理
+        echo "<font color=\"red\">".$error_log['category_id'].$this->Html->tag('br')."</font>";
+    }
 	echo $this->Html->tag('br')."カテゴリ*";
 	echo $this->Form->select('category_id',$category_options,
 		array('default'=>$default['category_id'],'id'=>'category_id','empty'=>'選んでください'));
@@ -55,15 +53,30 @@
 	echo $this->Form->select('subcategory_id',$subcategory_options,
 		array('id'=>'subcategory_id','empty'=>'選んでください'));
 	echo $this->Html->tag('br')."(カテゴリがわからないときは「その他」を選択してください)".$this->Html->tag('br');
+    if(!empty($error_log['sentence'])){//エラー処理
+        echo "<font color=\"red\">".$error_log['sentence'].$this->Html->tag('br')."</font>";
+    }
 	echo "問題文* [ 最大500 文字 ]".$this->Html->tag('br');
 	//paraは<p>タグである
 	echo $this->Html->para(null,'500',array('id' => 'num'));
 	echo $this->Form->textarea('sentence',array('default'=>$default['sentence']));
 	echo $this->Html->tag('br')."選択肢の設定*".$this->Html->tag('br');
+    if(!empty($error_log['right_answer'])){//エラー処理
+        echo "<font color=\"red\">".$error_log['right_answer'].$this->Html->tag('br')."</font>";
+    }
 	echo $this->Html->para(null, "正解選択肢".$this->Form->textarea('right_answer',array('default'=>$default['right_answer'])));
-	echo $this->Html->para(null, "誤答選択肢１".$this->Form->textarea('wrong_answer1',array('default'=>$default['wrong_answer1'])));
-	echo $this->Html->para(null, "誤答選択肢２".$this->Form->textarea('wrong_answer2',array('default'=>$default['wrong_answer2'])));
-	echo $this->Html->para(null, "誤答選択肢３".$this->Form->textarea('wrong_answer3',array('default'=>$default['wrong_answer3'])));
+    if(!empty($error_log['wrong_answer1'])){//エラー処理
+        echo "<font color=\"red\">".$error_log['wrong_answer1'].$this->Html->tag('br')."</font>";
+    }
+    echo $this->Html->para(null, "誤答選択肢１".$this->Form->textarea('wrong_answer1',array('default'=>$default['wrong_answer1'])));
+    if(!empty($error_log['wrong_answer2'])){//エラー処理
+        echo "<font color=\"red\">".$error_log['wrong_answer2'].$this->Html->tag('br')."</font>";
+    }
+    echo $this->Html->para(null, "誤答選択肢２".$this->Form->textarea('wrong_answer2',array('default'=>$default['wrong_answer2'])));
+    if(!empty($error_log['wrong_answer3'])){//エラー処理
+        echo "<font color=\"red\">".$error_log['wrong_answer3'].$this->Html->tag('br')."</font>";
+    }
+    echo $this->Html->para(null, "誤答選択肢３".$this->Form->textarea('wrong_answer3',array('default'=>$default['wrong_answer3'])));
     echo "写真を載せる場合は以下から登録 (200kb以下、JPEG および PNG画像)";
     echo $this->Form->input('',array(
     'type' => 'file',
@@ -71,6 +84,9 @@
 	));
     echo "タグ(複数タグは半角「/」で区切り 例:盛岡/岩手/川)";
     echo $this->Form->text('tag',array('default'=>$default['tag']));
+    if(!empty($error_log['description'])){//エラー処理
+        echo "<font color=\"red\">".$error_log['description'].$this->Html->tag('br')."</font>";
+    }
     echo $this->Html->para(null, $this->Html->tag('br')."解説* (メモ、参考URL、文献等)".
 		$this->Form->textarea('description',array('default'=>$default['description'])));
     echo $this->Form->submit(('問題を投稿'));
