@@ -2,14 +2,14 @@
 <nav id="breadcrumbs">
   <ol>
     <li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_top">
-      <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">top</span></a>
+        <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">top</span></a>
     </li>
     <li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_top">
-			<a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">問題を作成</span></a>
+        <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">問題を作成</span></a>
     </li>
-		<li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_problem/1">
-			<span itemprop="title">選択式問題</span>
-		</li>
+    <li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_problem/1">
+        <span itemprop="title">選択式問題</span>
+	</li>
   </ol>
 </nav>
 <div id="sidebar">
@@ -33,13 +33,12 @@
 	echo "[選択肢４]-".$default_data['wrong_answer3'].$this->Html->tag('br');
 	echo "[タグ]：".$default_data['tag'].$this->Html->tag('br');
 	echo "[解説]：".$default_data['description'].$this->Html->tag('br').$this->Html->tag('br');
-
 	?>
 	<div id="box-select">
 		<ul>
-		<li><?php echo $this->Html->link("編集する", "javascript:history.back();");?></li>
-		<li><?php echo $this->Html->link('登録する',
-		array('controller'=>'Problems','action'=>'record_problem','full_base'=>true));?></li>
+    		<li><?php echo $this->Html->link("編集する", "javascript:history.back();");?></li>
+    		<li><?php echo $this->Html->link('登録する',
+    		array('controller'=>'Problems','action'=>'record_problem','full_base'=>true));?></li>
 		</ul>
 	</div>
 </div>

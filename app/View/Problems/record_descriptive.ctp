@@ -2,14 +2,14 @@
 <nav id="breadcrumbs">
   <ol>
     <li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_top">
-      <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">top</span></a>
+        <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">top</span></a>
     </li>
     <li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_top">
-			<a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">問題を作成</span></a>
+        <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">問題を作成</span></a>
     </li>
-		<li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_problem/2">
+    <li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_problem/2">
 			<span itemprop="title">一問一答式問題</span>
-		</li>
+    </li>
   </ol>
 </nav>
 <div id="sidebar">
@@ -23,15 +23,15 @@
 </div>
 <div id="make-content">
 <?php
-		echo "以下の内容で登録しました<br />";
-		echo "[カテゴリ]：".$category.$this->Html->tag('br');
+    echo "以下の内容で登録しました<br />";
+	echo "[カテゴリ]：".$category.$this->Html->tag('br');
 		//echo "[サブカテゴリ]：".$subcategory.$this->Html->tag('br');
-		echo "[問題文]：".$record_data['sentence'].$this->Html->tag('br');
-		echo "[解答]-".$record_data['right_answer'].$this->Html->tag('br');
-		echo "[その他の解答]-".$record_data['another_answer'].$this->Html->tag('br');
-		echo "[タグ]-".$record_data['tag'].$this->Html->tag('br');
-		echo "[解説]：".$record_data['description'].$this->Html->tag('br').$this->Html->tag('br');
-		echo $this->Html->tag('br').$this->Html->tag('br');
+	echo "[問題文]：".$record_data['sentence'].$this->Html->tag('br');
+	echo "[解答]-".$record_data['right_answer'].$this->Html->tag('br');
+	echo "[その他の解答]-".$record_data['another_answer'].$this->Html->tag('br');
+	echo "[タグ]-".$record_data['tag'].$this->Html->tag('br');
+	echo "[解説]：".$record_data['description'].$this->Html->tag('br').$this->Html->tag('br');
+	echo $this->Html->tag('br').$this->Html->tag('br');
 ?>
 	<div id="box-select">
 		<ul>

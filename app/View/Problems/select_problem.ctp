@@ -1,14 +1,14 @@
 <nav id="breadcrumbs">
   <ol>
     <li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_top">
-      <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">top</span></a>
+        <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">top</span></a>
     </li>
     <li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_top">
-			<a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">問題を作成</span></a>
+        <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">問題を作成</span></a>
     </li>
-		<li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_problem/1">
-			<span itemprop="title">選択式問題</span>
-		</li>
+	<li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_problem/1">
+		<span itemprop="title">選択式問題</span>
+	</li>
   </ol>
 </nav>
 <div id="sidebar">
@@ -64,21 +64,19 @@
 	echo $this->Html->para(null, "誤答選択肢１".$this->Form->textarea('wrong_answer1',array('default'=>$default['wrong_answer1'])));
 	echo $this->Html->para(null, "誤答選択肢２".$this->Form->textarea('wrong_answer2',array('default'=>$default['wrong_answer2'])));
 	echo $this->Html->para(null, "誤答選択肢３".$this->Form->textarea('wrong_answer3',array('default'=>$default['wrong_answer3'])));
-  echo "写真を載せる場合は以下から登録 (200kb以下、JPEG および PNG画像)";
-  echo $this->Form->input('',array(
+    echo "写真を載せる場合は以下から登録 (200kb以下、JPEG および PNG画像)";
+    echo $this->Form->input('',array(
     'type' => 'file',
     'name' => 'image'
 	));
-  echo "タグ(複数タグは半角「/」で区切り 例:盛岡/岩手/川)";
-	echo $this->Form->text('tag',array('default'=>$default['tag']));
-	echo $this->Html->para(null, $this->Html->tag('br')."解説* (メモ、参考URL、文献等)".
+    echo "タグ(複数タグは半角「/」で区切り 例:盛岡/岩手/川)";
+    echo $this->Form->text('tag',array('default'=>$default['tag']));
+    echo $this->Html->para(null, $this->Html->tag('br')."解説* (メモ、参考URL、文献等)".
 		$this->Form->textarea('description',array('default'=>$default['description'])));
-  echo $this->Form->submit(('問題を投稿'));
-  echo $this->Form->end();
-  echo $this->Html->tag('br');
-	echo $this->Html->link('戻る',
-	array('controller' => 'Problems', 'action' => 'make_top', 'full_base' => true)
-	);
+    echo $this->Form->submit(('問題を投稿'));
+    echo $this->Form->end();
+    echo $this->Html->tag('br');
+    echo $this->Html->link('戻る',array('controller' => 'Problems', 'action' => 'make_top', 'full_base' => true));
 ?>
 </div>
 <!--
@@ -95,5 +93,5 @@ $(function(){
 </script>
 <script type="text/javascript">
 //条件付きプルダウン用のライブラリ
-ConnectedSelect(['category_id','subcategory_id']);
+    ConnectedSelect(['category_id','subcategory_id']);
 </script>

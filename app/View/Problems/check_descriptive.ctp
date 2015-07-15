@@ -2,14 +2,14 @@
 <nav id="breadcrumbs">
   <ol>
     <li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_top">
-      <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">top</span></a>
+        <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">top</span></a>
     </li>
     <li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_top">
-			<a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">問題を作成</span></a>
+        <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">問題を作成</span></a>
     </li>
-		<li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_problem/2">
-			<span itemprop="title">一問一答式問題</span>
-		</li>
+	<li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_problem/2">
+		<span itemprop="title">一問一答式問題</span>
+	</li>
   </ol>
 </nav>
 <div id="sidebar">
@@ -34,9 +34,9 @@
 ?>
 	<div id="box-select">
 		<ul>
-		<li><?php echo $this->Html->link("編集する", "javascript:history.back();");?></li>
-		<li><?php echo $this->Html->link('登録する',
-		array('controller'=>'Problems','action'=>'record_problem','full_base'=>true,"2"));?></li>
+            <li><?php echo $this->Html->link("編集する", "javascript:history.back();");?></li>
+            <li><?php echo $this->Html->link('登録する',
+            array('controller'=>'Problems','action'=>'record_problem','full_base'=>true,"2"));?></li>
 		</ul>
 	</div>
 </div>

@@ -1,14 +1,14 @@
 <nav id="breadcrumbs">
   <ol>
     <li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_top">
-      <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">top</span></a>
+        <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">top</span></a>
     </li>
     <li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_top">
-			<a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">問題を作成</span></a>
+        <a itemprop="url" href="http://localhost/morikenweb/Problems/make_top"><span itemprop="title">問題を作成</span></a>
     </li>
-		<li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_problem/2">
-			<span itemprop="title">一問一答式問題</span>
-		</li>
+	<li itemscope="itemscope" itemtype="http://localhost/morikenweb/Problems/make_problem/2">
+		<span itemprop="title">一問一答式問題</span>
+	</li>
   </ol>
 </nav>
 <div id="sidebar">
@@ -49,11 +49,11 @@
 	}
 	echo $this->Html->tag('br').$this->Html->tag('br')."カテゴリ*";
 	echo $this->Form->select('category_id',$category_options,
-		array('default'=>$default['category_id'],'id'=>'category_id','empty'=>'選んでください'));
+    array('default'=>$default['category_id'],'id'=>'category_id','empty'=>'選んでください'));
 	echo "[この投稿で◯ポイント獲得] / サブカテゴリ";
 	//連動プルダウン用
 	echo $this->Form->select('subcategory_id',$subcategory_options,
-		array('id'=>'subcategory_id','empty'=>'選んでください'));
+	array('id'=>'subcategory_id','empty'=>'選んでください'));
 	echo $this->Html->tag('br')."(カテゴリがわからないときは「その他」を選択してください)".$this->Html->tag('br');
 	echo "問題文* [ 最大500 文字 ]".$this->Html->tag('br');
 	//paraは<p>タグである
@@ -61,21 +61,17 @@
 	echo $this->Form->textarea('sentence',array('default'=>$default['sentence']));
 	echo $this->Html->para(null, "解答*".$this->Form->textarea('right_answer',array('default'=>$default['right_answer'])));
 	echo $this->Html->para(null, "その他の解答".$this->Form->textarea('another_answer',array('default'=>$default['another_answer'])));
-  echo "写真を載せる場合は以下から登録 (200kb以下、JPEG および PNG画像)";
-  echo $this->Form->input('',array(
-    'type' => 'file',
-    'name' => 'image'
-	));
-  echo "タグ(複数タグは半角「/」で区切り 例:盛岡/岩手/川)";
+    echo "写真を載せる場合は以下から登録 (200kb以下、JPEG および PNG画像)";
+    echo $this->Form->input('',array('type' => 'file','name' => 'image'));
+    echo "タグ(複数タグは半角「/」で区切り 例:盛岡/岩手/川)";
 	echo $this->Form->text('tag',array('default'=>$default['tag']));
 	echo $this->Html->para(null, $this->Html->tag('br')."解説* (メモ、参考URL、文献等)".
 		$this->Form->textarea('description',array('default'=>$default['description'])));
-  echo $this->Form->submit(('この内容で送信する'));
-  echo $this->Form->end();
-  echo $this->Html->tag('br');
+    echo $this->Form->submit(('この内容で送信する'));
+    echo $this->Form->end();
+    echo $this->Html->tag('br');
 	echo $this->Html->link('戻る',
-	array('controller' => 'Problems', 'action' => 'make_top', 'full_base' => true)
-	);
+	array('controller' => 'Problems', 'action' => 'make_top', 'full_base' => true));
 ?>
 </div>
 <script>//文字数のjavascript
@@ -89,5 +85,5 @@ $(function(){
 </script>
 <script type="text/javascript">
 //条件付きプルダウン用のライブラリ
-ConnectedSelect(['category_id','subcategory_id']);
+    ConnectedSelect(['category_id','subcategory_id']);
 </script>
