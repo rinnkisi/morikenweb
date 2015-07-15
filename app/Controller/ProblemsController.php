@@ -74,9 +74,9 @@ class ProblemsController extends AppController{
     function record_problem($type=NULL){
         if($this->Session->check('default_select') or $this->Session->check('default_descriptive')){
 			if($type==2){
-				$record_data=$this->Session->read('default_descriptive');
-			}else{
-				$record_data=$this->Session->read('default_select');
+				$record_data = $this->Session->read('default_descriptive');
+			}else if($type==1 or $type==NULL){
+				$record_data = $this->Session->read('default_select');
 			}
             $category_data = $this->Session->read('category_options');
             $subcategory_data = $this->Session->read('subcategory_options');
