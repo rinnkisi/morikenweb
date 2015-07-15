@@ -6,14 +6,14 @@ class ProblemsController extends AppController{
 	public function index(){
 	}
 	function make_top(){
-		$this->Session->delete('default_data');
+		$this->Session->delete('default_select');
+		$this->Session->delete('default_descriptive');
 	}
     function make_problem($type = null){//初期は選択式作問入力
         $this->set('kentei_id','1');
         //Webの場合は１を代入する
         $category_api_pram = 'kentei_id=1';
         //api_rest($method, $uri, $query = null, $data = null)
-        $this->request->data = $this->Session->read('default_data');
         //カテゴリーAPIを使用,dataに送るのは空の配列
         $categories = $this->api_rest("GET","categories/index.json",$category_api_pram,array());
         //カテゴリをわかりやすくするためにモデルで処理、セッション管理
@@ -21,17 +21,17 @@ class ProblemsController extends AppController{
         $this->Session->write('subcategory_options',$this->Problem->subcategory_sort($categories));
         $this->set('category_options',$this->Session->read('category_options'));
         $this->set('subcategory_options',$this->Session->read('subcategory_options'));
-        $default_data = $this->Session->read('default_data');
-        $this->set('default',$this->Session->read('default_data'));
         //typeを追加する。１は選択式問題。初期は選択式問題
         $this->set('type',$this->Session->read('type'));
 
         //typeを追加する。１は選択式問題。初期は選択式問題
         if($type == 1 || $type == null){
+			$this->set('default',$this->Session->read('default_select'));
             $this->Session->write('type','1');
             $this->set('type','1');
             $this->render('select_problem');
         }else{
+			$this->set('default',$this->Session->read('default_descriptive'));
             $this->Session->write('type',$type);
             $this->set('type',$type);
             $this->render('descriptive_problem');
@@ -40,9 +40,6 @@ class ProblemsController extends AppController{
     function check_problem(){
         //問題の確認用ページ
         $default_data = $this->request->data['problem_data'];
-        //セッション書き込み
-        $this->Session->write('default_data',$default_data);
-        $this->set('default_data',$default_data);
         $category_data=$this->Session->read('category_options');
         $subcategory_data=$this->Session->read('subcategory_options');
         $category_id=$default_data['category_id'];
@@ -63,18 +60,27 @@ class ProblemsController extends AppController{
         }
         //問題作成確認にapiにて成功のときのレスポンスデータを送っている
         if("1"== $default_data['type']){
+			//セッション書き込み
+	        $this->Session->write('default_select',$default_data);
+	        $this->set('default_data',$default_data);
             $this->render('check_select');
         }else{
+			//セッション書き込み
+	        $this->Session->write('default_descriptive',$default_data);
+	        $this->set('default_data',$default_data);
             $this->render('check_descriptive');
         }
     }
     function record_problem($type=NULL){
-        if($this->Session->check('default_data')){
-            $record_data=$this->Session->read('default_data');
-            $this->set('record_data',$record_data);
-            $category_data=$this->Session->read('category_options');
-            $subcategory_data=$this->Session->read('subcategory_options');
-            $category_id=$record_data['category_id'];
+        if($this->Session->check('default_select') or $this->Session->check('default_descriptive')){
+			if($type==2){
+				$record_data=$this->Session->read('default_descriptive');
+			}else{
+				$record_data=$this->Session->read('default_select');
+			}
+            $category_data = $this->Session->read('category_options');
+            $subcategory_data = $this->Session->read('subcategory_options');
+            $category_id = $record_data['category_id'];
             $url = $this->api_rest("POST","problems/add.json","",$record_data);
             $tmp = $this->Problem->validation($url);
             if(!empty($tmp)){
@@ -82,14 +88,16 @@ class ProblemsController extends AppController{
                 $this->setAction('make_problem',$type);
             }else{
                 if($type==2){
+		            $this->set('record_data',$record_data);
                     $this->set('category',$category_data[$category_id]);
                     $this->render('record_descriptive');
-                    $this->Session->delete('default_data');
+                    $this->Session->delete('default_descriptive');
                     //セッションの破棄
                 }else{
+		            $this->set('record_data',$record_data);
                     $this->set('category',$category_data[$category_id]);
                     $this->render('record_select');
-                    $this->Session->delete('default_data');
+                    $this->Session->delete('default_select');
                     //セッションの破棄
                 }
             }
