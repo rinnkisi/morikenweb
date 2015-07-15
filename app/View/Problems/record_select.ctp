@@ -33,11 +33,7 @@
 	echo "[選択肢４]-".$record_data['wrong_answer3'].$this->Html->tag('br');
 	//echo "[タグ]：".$record_data['tag'].$this->Html->tag('br');
 	echo "[解説]：".$record_data['description'].$this->Html->tag('br');
-	echo $this->Html->link('選択式問題作成ページに戻る',
-    array('controller'=>'Problems','action'=>'make_problem','full_base'=>true,"1"));
-	echo $this->Html->tag('br');
-	echo $this->Html->link('トップページに戻る',
-	array('controller'=>'Problems','action'=>'top','full_base'=>true));
+    echo $this->Html->tag('br').$this->Html->tag('br');
 ?>
     <div id="box-select">
     	<ul>
