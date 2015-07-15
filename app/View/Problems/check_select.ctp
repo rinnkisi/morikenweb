@@ -36,9 +36,10 @@
 	?>
 	<div id="box-select">
 		<ul>
-    		<li><?php echo $this->Html->link("編集する", "javascript:history.back();");?></li>
+    		<li><?php echo $this->Html->link('編集する',
+            array('controller'=>'Problems','action'=>'make_problem','full_base'=>true,"1"));?></li>
     		<li><?php echo $this->Html->link('登録する',
-    		array('controller'=>'Problems','action'=>'record_problem','full_base'=>true));?></li>
+    		array('controller'=>'Problems','action'=>'record_problem','full_base'=>true,"1"));?></li>
 		</ul>
 	</div>
 </div>
