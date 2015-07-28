@@ -17,20 +17,22 @@ class UsersController extends AppController {
 			$userdata =$this->Session->read('userdata');
 			//debug($userdata);
 			$this->set('userdata',$userdata);
+		}else{
+			$this->redirect(array('action' => 'login'));
 		}
-		$this->redirect(array('action' => 'login'));
+		$this->Session->delete('userdata');
 	}
 	/*
 	*  ログイン機能
 	*/
 	function login(){
 		//debug($this->request->data);
-		if(!empty($this->request->data)){
+		if(!empty($this->request->data)){//値がtrue
 			$url = $this->api_rest("POST","logins.json","",$this->request->data);
-			if(empty($this->User->errorcheck($url))){
+			if(empty($this->User->errorcheck($url))){//エラーがないときにindexに
 				$this->Session->write('userdata',$url['response']['data']);
 				//ユーザの情報を持ってくる
-				$this->redirect(array('action' => 'index'));
+				$this->redirect('index');
 			}else{
 				$this->set('message',$this->User->errorcheck($url));
 			}
