@@ -87,10 +87,19 @@ Cache::config('default', array('engine' => 'File'));
  *
  * ));
  */
+CakePlugin::load('DebugKit');
+
+CakePlugin::load('Opauth', array('routes' => true, 'bootstrap' => true));
+
 Configure::write('Dispatcher.filters', array(
 	'AssetDispatcher',
 	'CacheDispatcher'
 ));
+Configure::write('Opauth.Strategy.Twitter', array(
+	'key'    => 'OlBDOB7Y2IPNCe8ogTjddvWdv',
+	'secret' => 'VgDpbuasA11M3L9IItbXwQfnRRmMtPGxMaTdlibMkwCYkFhkbt'
+));
+Configure::write('Opauth.path','/morikenweb/auth/');
 
 /**
  * Configures default file logging options
@@ -106,4 +115,3 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
-CakePlugin::load('DebugKit');

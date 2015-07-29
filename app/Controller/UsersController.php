@@ -5,6 +5,7 @@
  * @property User $User
  * @property PaginatorComponent $Paginator
  */
+
 App::uses('AppController', 'Controller');
 class UsersController extends AppController {
 	public $name = 'Users'; //クラス名
@@ -52,4 +53,13 @@ class UsersController extends AppController {
 			//debug($url);
 		}
 	}
+	public function opauthComplete(){
+		debug($this->data);
+	}
+	public function beforeFilter() {
+    if($this->params['action'] == 'opauthComplete') {
+        $this->Security->csrfCheck = false;
+        $this->Security->validatePost = false;
+    }
+  }
 }
