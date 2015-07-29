@@ -57,9 +57,9 @@ class UsersController extends AppController {
 		debug($this->data);
 	}
 	public function beforeFilter() {
-    if($this->params['action'] == 'opauthComplete') {
-        $this->Security->csrfCheck = false;
-        $this->Security->validatePost = false;
-    }
-  }
+		if($this->params['action'] == 'opauthComplete') {
+			$this->Security->csrfCheck = false;
+			$this->Security->validatePost = false;
+		}
+	}
 }
