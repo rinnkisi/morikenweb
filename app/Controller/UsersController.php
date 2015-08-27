@@ -120,7 +120,6 @@ class UsersController extends AppController {
 			'access_token' => $facebook->getAccessToken(), //access_token入手
 			'message' => $postData,
 			'name' => "test",
-			'link' => "https://twitter.com/rinnkisi",
 			'description' => "test",
 		);
 		$facebook->api('/me/feed', 'POST', $attachment);
