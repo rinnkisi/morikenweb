@@ -272,5 +272,24 @@ class ProblemsController extends AppController{
 		return $api_result;
 	}
 	public function not_found_data(){}
+
+	public function answer_true_false(){
+		$api_url = 'problems/index.json';//
+		$api_pram = 'kentei_id=1&item=1&public_flag=1';		
+		$obj = $this->get_api_data($api_url,$api_pram);
+		$this->set('data',$obj);
+		$this->Session->write('read_count', 0);
+	}
+	public function check_answer_true_false(){
+		$score = $this->Session->read('score');
+		$right_answer = $this->request->data['answer']['right_answer'];
+		$user_answer = $this->request->data['answer']['user_answer'];
+		$random_number = $this->request->data['answer']['random_number'];
+		$this->set('score', $score);
+		$this->set('right_answer', $right_answer);
+		$this->set('user_answer', $user_answer);
+		$this->set('random_number', $random_number);
+
+	}
 }
 ?>
