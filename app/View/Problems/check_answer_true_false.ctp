@@ -1,14 +1,12 @@
-<?php echo 'check_test';
-
+<?php
 	echo $right_answer;
 	echo $user_answer;
-	echo $random_number;
+	echo $random;
+	echo $message;
 
-	if($random_number == 1 && $user_answer == true){
-		
-	}
 
-	if($random_number != 1 && $user_answer == false){
-
-	} 
+	//正解の場合
+	
+	debug($score);
+	debug($show_count);
 
