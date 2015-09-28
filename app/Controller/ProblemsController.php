@@ -278,7 +278,7 @@ class ProblemsController extends AppController{
 
 	public function top_true_false(){
 		$score = 0;
-		$show_count = 0;
+		$show_count = 1;
 		$this->Session->write('score', $score); //◯×問題の得点
 		$this->Session->write('show_count', $show_count); //問題表示ページを表示した回数
 
@@ -290,45 +290,43 @@ class ProblemsController extends AppController{
 		$obj = $this->get_api_data($api_url, $api_pram);
 
 		$show_count = $this->Session->read('show_count');
-		$show_count++;
-		$this->Session->write('show_count', $show_count); 
-		$score = $this->Session->read('score');
 
+		$random = mt_rand(0, 3);
+
+		$this->set('random', $random);
 		$this->set('data', $obj);
-		$this->set('score', $score);
 		$this->set('show_count', $show_count);
-		debug($score);
 	}
 
 	public function check_answer_true_false(){
 		$score = $this->Session->read('score');
 		$show_count = $this->Session->read('show_count');
+		$show_count++;
+		$this->Session->write('show_count', $show_count); 
 
-		if($show_count < 10){
-			$right_answer = $this->request->data['answer']['right_answer'];
-			$user_answer = $this->request->data['answer']['user_answer'];
-			$random = $this->request->data['answer']['random'];
+		$right_answer = $this->request->data['answer']['right_answer'];
+		$user_answer = $this->request->data['answer']['user_answer'];
+		$random = $this->request->data['answer']['random'];
 
-			if(($random == 0 && $user_answer == 'true') || ($random != 0 && $user_answer == 'false')){
+		if(($random == 0 && $user_answer == 'true') || ($random != 0 && $user_answer == 'false')){
 		//scoreに１を加える
-				$score++;
-				$this->Session->write('score', $score);
-				$score = $this->Session->read('score');
-				$this->redirect(array('action' => 'answer_problem_true_false'));
-			}else{
-				$this->redirect(array('action' => 'answer_problem_true_false'));
-			}
-
+			$score++;
+			$this->Session->write('score', $score);
 		}
 
-		if($show_count >= 10 ){
+		if($show_count <= 10){
+			$this->redirect(array('action' => 'answer_problem_true_false'));
+		}
+		if($show_count > 10 ){
 			$this->redirect(array('action' => 'show_result_true_false'));
 		}
 	}
 
 	public function show_result_true_false(){
 		$score = $this->Session->read('score');
-		$this->set('score', $score); 
+		$show_count = $this->Session->read('show_count');
+		$this->set('score', $score);
+		$this->set('show_count', $show_count);
 	}
 }
 ?>

@@ -1,13 +1,10 @@
 	<h3>◯×問題</h3>
 	<?php
 
-	$random = mt_rand(0, 3);
-	echo '得点：'.$score.$this->Html->tag('br');
-	var_dump($score);
-	var_dump($show_count);
+
 
 	foreach ($data['response']['Problems'] as $key => $data):
-		echo "[".$show_count."] ";
+	echo "[".$show_count."] ";
 	echo '問題文：'.$data['Problem']['sentence'].$this->Html->tag('br');
 	echo '乱数：'.$random.$this->Html->tag('br');
 
