@@ -281,13 +281,15 @@ class ProblemsController extends AppController{
 		$show_count = 1;
 		$this->Session->write('score', $score); //◯×問題の得点
 		$this->Session->write('show_count', $show_count); //問題表示ページを表示した回数
+		$this->Session->write('wrong_problem', null); //間違った問題;
 
 	}
 
-	public function answer_problem_true_false(){
+	public function answer_true_false(){
 		$api_url = 'problems/index.json'; //apiで過去問取得
 		$api_pram = 'kentei_id=1&item=1&public_flag=1';
-		$obj = $this->get_api_data($api_url, $api_pram);
+		$obj = $this->api_rest('GET',$api_url,$api_pram,array());
+
 
 		$show_count = $this->Session->read('show_count');
 
@@ -299,23 +301,44 @@ class ProblemsController extends AppController{
 	}
 
 	public function check_answer_true_false(){
-		$score = $this->Session->read('score');
 		$show_count = $this->Session->read('show_count');
-		$show_count++;
-		$this->Session->write('show_count', $show_count); 
+		$score = $this->Session->read('score');
+		$wrong_problem = $this->Session->read('wrong_problem');
 
+		$show_count++;
+		$this->Session->write('show_count', $show_count);
+
+		$problem_sentence = $this->request->data['answer']['sentence'];
 		$right_answer = $this->request->data['answer']['right_answer'];
 		$user_answer = $this->request->data['answer']['user_answer'];
+		$showed_answer = $this->request->data['answer']['showed_answer'];
 		$random = $this->request->data['answer']['random'];
+		$check;
 
 		if(($random == 0 && $user_answer == 'true') || ($random != 0 && $user_answer == 'false')){
 		//scoreに１を加える
 			$score++;
 			$this->Session->write('score', $score);
+			$check = 'right';
+		}else{
+			$check = 'wrong';
 		}
+		
+		$wrong_problem[$show_count - 1]['check'] = $check;
+		$wrong_problem[$show_count - 1]['showed_answer'] = $showed_answer;
+		$wrong_problem[$show_count - 1]['right_answer'] = $right_answer;
+		$wrong_problem[$show_count - 1]['problem_sentence'] = $problem_sentence;
+		if($user_answer == 'true'){
+			$wrong_problem[$show_count - 1]['user_answer'] = '◯';
+		}
+		if($user_answer == 'false'){
+			$wrong_problem[$show_count - 1]['user_answer'] = '×';
+		}
+		$this->Session->write('wrong_problem', $wrong_problem);
 
+		
 		if($show_count <= 10){
-			$this->redirect(array('action' => 'answer_problem_true_false'));
+			$this->redirect(array('action' => 'answer_true_false'));
 		}
 		if($show_count > 10 ){
 			$this->redirect(array('action' => 'show_result_true_false'));
@@ -325,8 +348,14 @@ class ProblemsController extends AppController{
 	public function show_result_true_false(){
 		$score = $this->Session->read('score');
 		$show_count = $this->Session->read('show_count');
+		$wrong_problem = $this->Session->read('wrong_problem');
 		$this->set('score', $score);
 		$this->set('show_count', $show_count);
+		$this->set('wrong_problem', $wrong_problem);
+
+		$this->Session->delete('score');
+		$this->Session->delete('show_count');
+		$this->Session->delete('wrong_problem');
 	}
 }
 ?>
