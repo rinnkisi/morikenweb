@@ -345,13 +345,11 @@ class ProblemsController extends AppController{
         $show_count++;
         $this->Session->write('show_count', $show_count);
 
-        
-        if($show_count <= 10){
-            $this->redirect(array('action' => 'answer_true_false'));
-        }
         if($show_count > 10 ){
             $this->redirect(array('action' => 'show_result_true_false'));
         }
+
+        $this->redirect(array('action' => 'answer_true_false'));
     }
 
     public function show_result_true_false(){
