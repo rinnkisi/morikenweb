@@ -332,11 +332,15 @@ class ProblemsController extends AppController{
         $problem[$show_count]['user_answer'] = $this->request->data['answer']['user_answer'];
         $random = $this->request->data['answer']['random'];
 
-        if(($random == 0 && $problem[$show_count]['user_answer'] == '◯') || ($random != 0 && $problem[$show_count]['user_answer'] == '×')){
-        //scoreに１を加える
-            $score++;
+        if($random == 0 && $problem[$show_count]['user_answer'] == '◯'){
+            $score++; //正解数に１追加
             $this->Session->write('score', $score);
             $problem[$show_count]['answer_flag'] = 1;
+            if($random != 0 && $problem[$show_count]['user_answer'] == '×'){
+                $score++;
+                $this->Session->write('score', $score);
+                $problem[$show_count]['answer_flag'] = 1;
+            }
         }else{
             $problem[$show_count]['answer_flag'] = 0;
         }
