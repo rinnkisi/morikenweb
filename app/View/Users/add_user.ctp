@@ -11,4 +11,3 @@
 	echo $this->Html->tag('br');
 	echo $this->Html->link('戻る',
 		array('controller' => 'users', 'action' => 'login', 'full_base' => true));
-?>

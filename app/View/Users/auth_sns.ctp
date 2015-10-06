@@ -8,6 +8,4 @@ echo $this->Html->tag('br');
 if(!empty($facebook_id)){
     echo $this->Html->link("facebook接続を解除",array('controller'=>'users','action'=>'sns_auth_delete',$facebook_id));
 }
-echo $this->Html->link("facebook接続　",array('action'=>'facebook'));
-
-?>
+echo $this->Html->link("facebook接続",array('action'=>'facebook'));
