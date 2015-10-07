@@ -75,10 +75,14 @@ class UsersController extends AppController {
 		$this->set('twitter_id',$this->Session->read('twitter_id'));
 		$this->set('facebook_id',$this->Session->read('facebook_id'));
 	}
-	public function sns_auth_delete($id){
-		if($id = $this->Session->read('twitter_id')){
+	public function sns_auth_delete($id = 0)
+	{
+		if($id == $this->Session->read('twitter_id'))
+		{
 			$this->Session->delete('twitter_id');
-		}else if($id = $this->Session->read('facebook_id')){
+		}
+		else if($id == $this->Session->read('facebook_id'))
+		{
 			$this->Session->delete('facebook_id');
 		}
 		$this->redirect('auth_sns');
@@ -96,19 +100,28 @@ class UsersController extends AppController {
 		$this->autoRender = false;
 		$this->facebook = $this->createFacebook();
 		$user = $this->facebook->getUser();//ユーザ情報取得
-		if($user){//認証後
+		//認証後
+		if(!empty($user))
+		{
 			$me = $this->facebook->api('/me','GET',array('locale'=>'ja_JP'));//ユーザ情報を日本語で取得
-			    $this->Session->write('mydata',$me);//fbデータをセッションに保存
-				$this->Session->write('facebook_id',$me['id']);
-		    $this->redirect('showdata');
-		}else{//認証前
+			$this->Session->write('mydata',$me);//fbデータをセッションに保存
+			$this->Session->write('facebook_id',$me['id']);
+			$this->redirect('showdata');
+		}
+		else//認証前
+		{
 			$url = $this->facebook->getLoginUrl(array(
-			'scope' => 'email'
-			,'canvas' => 1,'fbconnect' => 0));
+				'scope' => 'email',
+				'canvas' => 1,
+				'fbconnect' => 0
+			));
+			//facebookのフラグたて
+			$this->Session->write('facebook_id', "1");
 			$this->redirect($url);
 		}
 	}
-	private function createFacebook() {//appID, secretを記述
+	//appID, secretを記述, facebookインスタンスの作成
+	private function createFacebook() {
 		return new Facebook(array(
 			'appId' => '643426722484966',
 			'secret' => '1adc65747236d169586f49a38eda716d'
