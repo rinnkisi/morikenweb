@@ -58,7 +58,7 @@ class UsersController extends AppController {
 	public function opauthComplete(){
 		//debug($this->request->data['auth']['uid']);
 		$this->Session->write('twitter_id',$this->request->data['auth']['uid']);
-		$this->redirect(array('controller'=>'users','action' => 'auth_sns'));
+		$this->redirect(array('controller'=>'users','action' => 'setting'));
 	}
 	/*
 	public function beforeFilter() {
@@ -69,9 +69,7 @@ class UsersController extends AppController {
 	}
 	//
 	*/
-	public function auth_sns(){
-		debug($this->Session->read('twitter_id'));
-		debug($this->Session->read('facebook_id'));
+	public function setting(){
 		$this->set('twitter_id',$this->Session->read('twitter_id'));
 		$this->set('facebook_id',$this->Session->read('facebook_id'));
 	}
@@ -85,7 +83,7 @@ class UsersController extends AppController {
 		{
 			$this->Session->delete('facebook_id');
 		}
-		$this->redirect('auth_sns');
+		$this->redirect('setting');
 		//$this->Session->delete('userdata');
 	}
 	public function showdata(){//トップページ
@@ -94,7 +92,7 @@ class UsersController extends AppController {
 		//$myFbData_kana = $this->Session->read('fbdata_kana'); //フリガナ
 		//pr($myFbData_kana); //フリガナデータ表示
 		//debug($myFbData);//表示
-		$this->redirect('auth_sns');
+		$this->redirect('setting');
 	}
 	public function facebook(){//facebookの認証処理部分
 		$this->autoRender = false;
@@ -116,7 +114,6 @@ class UsersController extends AppController {
 				'fbconnect' => 0
 			));
 			//facebookのフラグたて
-			$this->Session->write('facebook_id', "1");
 			$this->redirect($url);
 		}
 	}
