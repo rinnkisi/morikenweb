@@ -1,11 +1,14 @@
-<div style = "float:left;">
+
+<div class = "setting-margin">
 <?php
     echo $this->Html->image("users/settingPartitionV.png", array('alt' => '縦線'));
 ?>
 </div>
-<div class = "setting-right" style = "background:black; margin-top:100px">
+<div class = "setting-right">
 <?php
+    echo $this->Html->tag('br');
     echo $this->Html->image("users/plugTwitter.png", array('alt' => 'Twitter連携')). $this->Html->tag('br');
+    echo $this->Html->tag('br');
     if(!empty($twitter_id))
     {
         echo $this->Html->image("users/connect.png", array('alt' => 'Twitter連携'));
@@ -17,8 +20,9 @@
         echo $this->Html->link("Twitterに接続", array('controller' => 'auth', 'action' => 'twitter'));
     }
     echo $this->Html->tag('br'). $this->Html->image("users/settingPartitionH.png", array('alt' => '横線'));
-    echo $this->Html->tag('br'). $this->Html->image("users/plugFacebook.png", array('alt' => 'Facebook連携'));
     echo $this->Html->tag('br');
+    echo $this->Html->tag('br'). $this->Html->image("users/plugFacebook.png", array('alt' => 'Facebook連携'));
+    echo $this->Html->tag('br'). $this->Html->tag('br');
     if(!empty($facebook_id))
     {
         echo $this->Html->image("users/connect.png", array('alt' => 'Facebook連携'));
@@ -29,5 +33,6 @@
         echo $this->Html->image("users/disconnect.png", array('alt' => 'Facebook連携'));
         echo $this->Html->link("Facebookに接続", array('action' => 'facebook'));
     }
+        echo $this->Html->tag('br'). $this->Html->tag('br');
 ?>
 </div>
