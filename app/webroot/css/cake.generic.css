@@ -1041,3 +1041,12 @@ pre {
 #url-rewriting-warning {
 	display:none;
 }
+
+.setting-margin {
+	float:left;
+	margin-left:500px;
+}
+.setting-right {
+	background:black;
+}
+.

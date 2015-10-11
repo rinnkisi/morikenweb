@@ -1,10 +1,10 @@
 
-<div style = "float:left; margin-left:500px;">
+<div class = "setting-margin">
 <?php
     echo $this->Html->image("users/settingPartitionV.png", array('alt' => '縦線'));
 ?>
 </div>
-<div class = "setting-right" style = "background:black;">
+<div class = "setting-right">
 <?php
     echo $this->Html->tag('br');
     echo $this->Html->image("users/plugTwitter.png", array('alt' => 'Twitter連携')). $this->Html->tag('br');
