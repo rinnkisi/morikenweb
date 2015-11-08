@@ -20,7 +20,7 @@
     else
     {
         echo $this->Html->image("users/disconnect.png", array('alt' => 'Twitter連携'));
-        echo $this->Html->link("Twitterに接続", array('controller' => 'auth', 'action' => 'twitter'));
+        echo $this->Html->link("Twitterに接続", array('controller' => 'users', 'action' => 'twitter_auth'));
     }
 ?>
     </p>

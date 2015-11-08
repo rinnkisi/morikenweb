@@ -48,6 +48,12 @@ class AppController extends Controller {
  * @param $data data for push to api or null
  * @return $response response data from api
  */
+    protected static $CONSUMER_KEY = 'OlBDOB7Y2IPNCe8ogTjddvWdv';
+    protected static $CONSUMER_SECRET = 'VgDpbuasA11M3L9IItbXwQfnRRmMtPGxMaTdlibMkwCYkFhkbt';
+    //protected static $ACCESS_TOKEN = '551643156-z6liDmuHwhsLWDgI1wyvdnQ3vA9lNFDjZie5s3df';
+    //protected static $ACCESS_TOKEN_SECRET = '1zeIjZHN2xrBdxGKORew9bOMbjgQoQr3v48CVbDfsEVYB';
+    protected static $TWITTER_API = 'https://api.twitter.com/1.1/statuses/update.json';
+
     public function api_rest($method, $uri, $query = null, $data = null){
         $ch = curl_init();
         $basic_url = "http://sakumon.jp/app/LK_API/";
