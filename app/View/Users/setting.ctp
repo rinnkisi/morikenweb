@@ -16,6 +16,9 @@
     {
         echo $this->Html->image("users/connect.png", array('alt' => 'Twitter連携'));
         echo $this->Html->link("Twitter接続を解除", array('controller' => 'users', 'action' => 'sns_auth_delete', $twitter_id));
+        echo $this->Form->create('User', array('type' => 'post', 'controller' => 'User', 'action' => 'twitter_post'));
+        echo $this->Form->text('User.text');
+        echo $this->Form->submit('送信');
     }
     else
     {
