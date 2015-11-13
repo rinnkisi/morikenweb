@@ -73,7 +73,8 @@ class UsersController extends AppController {
 	/*
 	twitterにpostします。
 	*/
-	public function twitter_auth(){
+	public function twitter_auth()
+	{
 		$this->autoRender = false;
 		$this->autoLayout = false;
 		$twitter = new TwitterOAuth(
@@ -84,38 +85,47 @@ class UsersController extends AppController {
 			array('oauth_callback' => 'http://rinnkisi-no-macbook-air.local/morikenweb/users/setting')
 		);
 		$url = $twitter->url('oauth/authorize', array('oauth_token' => $request_token['oauth_token']));
-		$this->Session->write('twitter', $request_token);
-		$this->redirect($url);
-	}
-	public function twitter_post($post = null){
-		$this->autoRender = false;
-		$this->autoLayout = false;
-		// 投稿する文言
-		$postMsg = "テストだぴょん";
-		$ACCESS = $this->Session->read('twitter');
+		$this->Session->write('request_token', $request_token);
 		//debug($ACCESS);
 		// OAuthオブジェクト生成
+		$this->redirect($url);
+	}
+	public function twitter_access($verifier = null)
+	{
+		$ACCESS = $this->Session->read('request_token');
 		$toa = new TwitterOAuth(
 			parent::$CONSUMER_KEY, parent::$CONSUMER_SECRET, $ACCESS['oauth_token'], $ACCESS['oauth_token_secret']
 		);
-		$access_token = $toa->oauth("oauth/access_token", array("oauth_verifier" => $this->Session->read('verify')));
+		$this->Session->write('verify', $verifier);
+		$access_token = $toa->oauth("oauth/access_token", array("oauth_verifier" => $verifier));
+		// アクセストークンを保存する
 		$this->Session->write('a_token', $access_token);
+		return $access_token['user_id'];
+	}
+	public function twitter_post()
+	{
+		$this->autoRender = false;
+		$this->autoLayout = false;
+		// 投稿する文言
+		$postMsg = $this->request->data['User']['text'];
+		$access_token = $this->Session->read('a_token');
 		//投稿
 		$toa_post = new TwitterOAuth(
 			parent::$CONSUMER_KEY, parent::$CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']
 		);
-		$res = $toa_post->OAuthRequest(parent::$TWITTER_API, "POST", array("status"=>"$postMsg"));
+		$res = $toa_post->OAuthRequest(parent::$TWITTER_API, "POST", array("status" => "$postMsg"));
 		// レスポンス表示
 		//var_dump($res);
 		$this->redirect('setting');
 	}
 	public function setting(){
-		if(!empty($_GET['oauth_token'])){
-			$this->Session->write('token',$_GET['oauth_token']);
-			$this->Session->write('verify',$_GET['oauth_verifier']);
+		if(!empty($_GET['oauth_token']))
+		{
+			$this->Session->write('twitter_id', self::twitter_access($_GET['oauth_verifier']));
 		}
-		$this->set('twitter_id',$this->Session->read('twitter_id'));
-		$this->set('facebook_id',$this->Session->read('facebook_id'));
+		debug($this->Session->read('request_token'));
+		$this->set('twitter_id', $this->Session->read('twitter_id'));
+		$this->set('facebook_id', $this->Session->read('facebook_id'));
 	}
 	public function sns_auth_delete($id = 0)
 	{
