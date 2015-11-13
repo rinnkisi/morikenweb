@@ -73,7 +73,8 @@ class UsersController extends AppController {
 	/*
 	twitterにpostします。
 	*/
-	public function twitter_auth(){
+	public function twitter_auth()
+	{
 		$this->autoRender = false;
 		$this->autoLayout = false;
 		$twitter = new TwitterOAuth(
@@ -87,11 +88,12 @@ class UsersController extends AppController {
 		$this->Session->write('twitter', $request_token);
 		$this->redirect($url);
 	}
-	public function twitter_post($post = null){
+	public function twitter_post($post = null)
+	{
 		$this->autoRender = false;
 		$this->autoLayout = false;
 		// 投稿する文言
-		$postMsg = "テストだぴょん";
+		$postMsg = "テストです";
 		$ACCESS = $this->Session->read('twitter');
 		//debug($ACCESS);
 		// OAuthオブジェクト生成
@@ -110,11 +112,13 @@ class UsersController extends AppController {
 		$this->redirect('setting');
 	}
 	public function setting(){
-		if(!empty($_GET['oauth_token'])){
-			$this->Session->write('token',$_GET['oauth_token']);
+		if(!empty($_GET['oauth_token']))
+		{
 			$this->Session->write('verify',$_GET['oauth_verifier']);
 		}
-		$this->set('twitter_id',$this->Session->read('twitter_id'));
+		debug($this->Session->read('twitter'));
+		debug($this->Session->read('a_token'));
+		$this->set('twitter_id',$this->Session->read('twitter'));
 		$this->set('facebook_id',$this->Session->read('facebook_id'));
 	}
 	public function sns_auth_delete($id = 0)
