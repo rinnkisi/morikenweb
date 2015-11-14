@@ -140,12 +140,12 @@ class UsersController extends AppController {
 		$this->redirect('setting');
 		//$this->Session->delete('userdata');
 	}
+
 	public function showdata(){//トップページ
 		$facebook = $this->createFacebook(); //セッション切れ対策 (?)
 		$myFbData = $this->Session->read('mydata');//facebookのデータ
 		//$myFbData_kana = $this->Session->read('fbdata_kana'); //フリガナ
-		//pr($myFbData_kana); //フリガナデータ表示
-		//debug($myFbData);//表示
+		$this->fbpost("hello world");
 		$this->redirect('setting');
 	}
 	public function facebook(){//facebookの認証処理部分
@@ -180,10 +180,12 @@ class UsersController extends AppController {
 	}
 	public function fbpost($postData) {//facebookのwallにpostする処理
 		$facebook = $this->createFacebook();
+		/* テスト用にアクセストークンを変更 */
 		$attachment = array(
-			'access_token' => $facebook->getAccessToken(), //access_token入手
+			'access_token' =>CAAJJMXU7kuYBABk7viGjwdTZAoqpJWNIOpaQTF2vrICZAbEIbNUSjyOmJGp7MuXbajN5X0X3JSaEuRXkPt0H4ZCSCnvCQZBn7kinG5BmZCmpFy8V8zyvJiCWf6g4qdOoI13UeMFc246hBmqCi4cKTeuTxZC7jIVWPZCOJezJaeK8PZBryzDF8rfQkGyB21ZAZBm8QDMBfo61pIC1bJyQLRGtvo, //access_token入手
 			'message' => $postData,
 			'name' => "test",
+			'link' => "http://twitter.com/rinnkisi",
 			'description' => "test",
 		);
 		$facebook->api('/me/feed', 'POST', $attachment);
