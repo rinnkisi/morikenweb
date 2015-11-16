@@ -123,7 +123,7 @@ class UsersController extends AppController {
 		{
 			$this->Session->write('twitter_id', self::twitter_access($_GET['oauth_verifier']));
 		}
-		debug($this->Session->read('request_token'));
+		// debug($this->Session->read('request_token'));
 		$this->set('twitter_id', $this->Session->read('twitter_id'));
 		$this->set('facebook_id', $this->Session->read('facebook_id'));
 	}
